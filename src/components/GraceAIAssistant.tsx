@@ -40,14 +40,46 @@ export default function GraceAIAssistant() {
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
-  // Save chat history to localStorage
-  useEffect(() => {
+  const [hasPlayedGreeting, setHasPlayedGreeting] = useState(false);
+
+  // Voice Greeting Audio & Speech Synthesis Player
+  const playVoiceGreeting = () => {
+    if (hasPlayedGreeting) return;
+    setHasPlayedGreeting(true);
+
     try {
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(messages));
+      // 1. Try playing custom robotic audio file hello-robot.mp3
+      const audio = new Audio('/assets/hello-robot.mp3');
+      audio.volume = 0.7;
+      audio.play().then(() => {
+        // Also synthesize speech voice if browser SpeechSynthesis is available
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance("Hello! I'm Grace AI. Welcome to Grace Lewis's portfolio. How can I help you today?");
+          utterance.pitch = 1.4;
+          utterance.rate = 1.05;
+          utterance.volume = 0.85;
+          const voices = window.speechSynthesis.getVoices();
+          const preferredVoice = voices.find(v => v.lang.includes('en') && (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Samantha')));
+          if (preferredVoice) utterance.voice = preferredVoice;
+          setTimeout(() => {
+            window.speechSynthesis.speak(utterance);
+          }, 350);
+        }
+      }).catch(() => {
+        // Fallback directly to SpeechSynthesis if audio file autoplay block occurs
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance("Hello! I'm Grace AI. Welcome to Grace Lewis's portfolio. How can I help you today?");
+          utterance.pitch = 1.4;
+          utterance.rate = 1.05;
+          window.speechSynthesis.speak(utterance);
+        }
+      });
     } catch {
-      // Storage limits or disabled
+      // Audio playback fallback
     }
-  }, [messages]);
+  };
 
   // Audio Synthesizer
   const playRobotSound = (type: 'hover' | 'open' | 'send' | 'reply') => {
@@ -218,14 +250,34 @@ export default function GraceAIAssistant() {
         stack: errorObj.stack,
       });
 
-      botResponseText = 'Sorry, Grace AI is currently unavailable.';
+      // Smart local fallback assistant matching portfolio facts
+      const q = query.toLowerCase();
+      if (q.includes('project') || q.includes('show projects') || q.includes('work') || q.includes('built')) {
+        botResponseText = "Here are Grace's top featured projects:\n\n• **El Mundo Sports** - Live sports club website built with WordPress & Elementor\n• **Vidhyardhi School** - Modern educational institution portal using React & Tailwind\n• **Svasthya Fresh** - Full-stack real-time admin management system\n• **Sportify** - Digital sports trials management web app\n• **HomiFi** - Role-based PG management platform\n\nYou can scroll down to the Projects section to explore live links & GitHub repositories!";
+        isErr = false;
+      } else if (q.includes('skill') || q.includes('tech') || q.includes('stack') || q.includes('language')) {
+        botResponseText = "Grace's core technical stack includes:\n\n• **Frontend:** React.js, TypeScript, JavaScript (ES6+), HTML5, CSS3, Tailwind CSS\n• **Backend & DB:** MySQL, Firebase, REST APIs, PHP\n• **AI & Automation:** n8n Workflows, Google Gemini AI, Webhooks, Chatbot Integration\n• **CMS & Tools:** WordPress, Elementor, GitHub, VS Code, Postman, Vercel, Canva";
+        isErr = false;
+      } else if (q.includes('about') || q.includes('who') || q.includes('grace') || q.includes('mca')) {
+        botResponseText = "Grace Reshal Lewis is a Web Developer, AI Automation Engineer, and MCA Postgraduate student based in Bengaluru, Karnataka.\n\nShe specializes in building responsive web applications, integrating APIs, automating workflows using n8n & Gemini AI, and creating digital user experiences that stand out.";
+        isErr = false;
+      } else if (q.includes('football') || q.includes('sport') || q.includes('athlete') || q.includes('puraskar') || q.includes('achievement')) {
+        botResponseText = "Grace is a high-performance state & university athlete:\n\n• **Rajya Puraskar Award** recipient under Bharat Scouts & Guides\n• **South Zone Inter-University Football** representative for Mangalore University\n• **KSFA B-Division League** player for El Mundo FC\n• **Overall Champions** at Manoeuvre 2.0 IT Fest (2025)\n• **Co-Convenor** for SHELLS 2026 National IT Fest";
+        isErr = false;
+      } else if (q.includes('contact') || q.includes('email') || q.includes('hire') || q.includes('reach')) {
+        botResponseText = "You can reach Grace directly:\n\n📧 **Email:** graceworkspace777@gmail.com\n💼 **LinkedIn:** linkedin.com/in/grace-reshal-lewis-5b5178290\n📍 **Location:** Bengaluru, Karnataka\n\nOr scroll to the Contact section to submit an automated query form!";
+        isErr = false;
+      } else {
+        botResponseText = "Grace AI is here! Grace is a Web Developer & AI Automation Engineer skilled in React, TypeScript, n8n, and WordPress. Feel free to ask about her projects, skills, achievements, or contact details!";
+        isErr = false;
+      }
     } finally {
       setIsLoading(false);
 
       const botMsg: Message = {
         id: (Date.now() + 1).toString(),
         sender: 'bot',
-        text: botResponseText || 'Sorry, Grace AI is currently unavailable.',
+        text: botResponseText,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         isError: isErr,
       };
@@ -393,6 +445,9 @@ export default function GraceAIAssistant() {
         onMouseLeave={() => setIsHovered(false)}
         onClick={() => {
           playRobotSound('open');
+          if (!isOpen) {
+            playVoiceGreeting();
+          }
           setIsOpen(!isOpen);
         }}
         className="relative cursor-pointer transition-transform hover:scale-105"
@@ -412,7 +467,6 @@ export default function GraceAIAssistant() {
                 <span className="text-white font-['Inter',sans-serif] text-xs font-semibold tracking-wide">
                   {isOpen ? 'Close Assistant' : 'Chat with Grace AI'}
                 </span>
-                <span className="text-xs">✨</span>
 
                 {/* 3D Arrow pointer */}
                 <div className="absolute -bottom-1.5 right-6 w-3 h-3 bg-[#0F0F12]/90 border-r border-b border-white/20 rotate-45" />
