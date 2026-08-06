@@ -1,15 +1,71 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Linkedin, Send } from 'lucide-react';
+import { Mail, Linkedin, Send, Workflow, CheckCircle2, AlertCircle, ArrowRight } from 'lucide-react';
 import { profile } from '../data/cinematicProfile';
 
-export default function CinematicContact() {
-  const [submitted, setSubmitted] = useState(false);
+const N8N_CONTACT_WEBHOOK_URL = 'https://n8n.srv965596.hstgr.cloud/webhook/grace-contact';
 
-  const handleSubmit = (e: React.FormEvent) => {
+export default function CinematicContact() {
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [statusMsg, setStatusMsg] = useState('');
+
+  const validateEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
+    const name = formData.name.trim();
+    const email = formData.email.trim();
+    const message = formData.message.trim();
+
+    if (!name || !email || !message) {
+      setStatus('error');
+      setStatusMsg('Please fill in all fields.');
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setStatus('error');
+      setStatusMsg('Please enter a valid email address.');
+      return;
+    }
+
+    setStatus('submitting');
+    setStatusMsg('Sending message...');
+
+    try {
+      const response = await fetch(N8N_CONTACT_WEBHOOK_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json, text/plain, */*',
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          message: message,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      setStatus('success');
+      setStatusMsg('Message sent successfully.');
+      setFormData({ name: '', email: '', message: '' });
+    } catch (err: unknown) {
+      console.error('[Contact Webhook Error]', err);
+      setStatus('error');
+      setStatusMsg('Failed to send message. Please try again.');
+    } finally {
+      setTimeout(() => {
+        setStatus('idle');
+        setStatusMsg('');
+      }, 7000);
+    }
   };
 
   return (
@@ -22,21 +78,38 @@ export default function CinematicContact() {
         <div className="flex items-center gap-3 mb-6">
           <div className="w-2 h-2 rounded-full bg-[#FFFFFF]" />
           <span className="font-['Inter',sans-serif] text-[14px] uppercase tracking-[0.3em] text-[#BFBFBF]">
-            05 / CONTACT
+            06 / CONTACT & AUTOMATION
           </span>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           <div className="lg:col-span-6 space-y-6">
             <h2 className="font-['Bebas_Neue',sans-serif] font-bold text-[48px] sm:text-[72px] lg:text-[96px] text-[#FFFFFF] tracking-[0.05em] leading-none uppercase">
               LET'S WORK TOGETHER
             </h2>
 
             <p className="font-['Inter',sans-serif] text-base text-[#BFBFBF] font-light leading-relaxed max-w-md">
-              Available for full-stack development, WordPress engineering, and digital marketing inquiries.
+              Available for AI automation architecture, full-stack web applications, and digital engineering inquiries.
             </p>
 
-            <div className="flex flex-wrap gap-4 pt-4">
+            {/* Workflow Pipeline Diagram Card */}
+            <div className="p-6 rounded-2xl bg-[#0D0D0D] border border-white/10 space-y-3">
+              <div className="flex items-center gap-2 text-xs font-mono text-emerald-400 uppercase tracking-wider">
+                <Workflow size={14} />
+                <span>Contact Workflow Engine</span>
+              </div>
+              <div className="flex items-center gap-2 text-[11px] font-mono text-white/60 flex-wrap">
+                <span>Contact Form</span>
+                <ArrowRight size={12} className="text-white/30" />
+                <span>n8n Webhook</span>
+                <ArrowRight size={12} className="text-white/30" />
+                <span>Google Sheets</span>
+                <ArrowRight size={12} className="text-white/30" />
+                <span>Auto-Reply Email</span>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-4 pt-2">
               <a
                 href={`mailto:${profile.email}`}
                 className="flex items-center gap-3 px-6 py-3 rounded-full border border-[#FFFFFF]/30 bg-transparent text-[#FFFFFF] hover:bg-[#FFFFFF] hover:text-[#000000] transition-all duration-300 font-['Inter',sans-serif] text-xs font-semibold tracking-widest uppercase"
@@ -64,8 +137,11 @@ export default function CinematicContact() {
                 <input
                   type="text"
                   required
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="Your Name"
-                  className="w-full px-5 py-3 rounded-xl bg-[#000000] border border-[#FFFFFF]/15 text-[#FFFFFF] placeholder:text-[#BFBFBF]/40 focus:outline-none focus:border-[#FFFFFF] transition-colors text-sm"
+                  disabled={status === 'submitting'}
+                  className="w-full px-5 py-3 rounded-xl bg-[#000000] border border-[#FFFFFF]/15 text-[#FFFFFF] placeholder:text-[#BFBFBF]/40 focus:outline-none focus:border-[#FFFFFF] transition-colors text-sm disabled:opacity-50"
                 />
               </div>
 
@@ -74,33 +150,55 @@ export default function CinematicContact() {
                 <input
                   type="email"
                   required
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="Your Email"
-                  className="w-full px-5 py-3 rounded-xl bg-[#000000] border border-[#FFFFFF]/15 text-[#FFFFFF] placeholder:text-[#BFBFBF]/40 focus:outline-none focus:border-[#FFFFFF] transition-colors text-sm"
+                  disabled={status === 'submitting'}
+                  className="w-full px-5 py-3 rounded-xl bg-[#000000] border border-[#FFFFFF]/15 text-[#FFFFFF] placeholder:text-[#BFBFBF]/40 focus:outline-none focus:border-[#FFFFFF] transition-colors text-sm disabled:opacity-50"
                 />
               </div>
 
               <div>
                 <label className="block text-[12px] font-mono uppercase tracking-widest text-[#BFBFBF] mb-2">Message</label>
                 <textarea
-                  rows={3}
+                  rows={4}
                   required
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder="Your Message..."
-                  className="w-full px-5 py-3 rounded-xl bg-[#000000] border border-[#FFFFFF]/15 text-[#FFFFFF] placeholder:text-[#BFBFBF]/40 focus:outline-none focus:border-[#FFFFFF] transition-colors text-sm"
+                  disabled={status === 'submitting'}
+                  className="w-full px-5 py-3 rounded-xl bg-[#000000] border border-[#FFFFFF]/15 text-[#FFFFFF] placeholder:text-[#BFBFBF]/40 focus:outline-none focus:border-[#FFFFFF] transition-colors text-sm disabled:opacity-50"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3.5 rounded-full bg-[#FFFFFF] text-[#000000] font-['Inter',sans-serif] font-bold text-xs uppercase tracking-widest hover:bg-[#BFBFBF] transition-colors flex items-center justify-center gap-2"
+                disabled={status === 'submitting'}
+                className="w-full py-3.5 rounded-full bg-[#FFFFFF] text-[#000000] font-['Inter',sans-serif] font-bold text-xs uppercase tracking-widest hover:bg-[#BFBFBF] transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
               >
-                <span>SEND MESSAGE</span>
+                <span>{status === 'submitting' ? 'SENDING...' : 'SEND MESSAGE'}</span>
                 <Send size={14} />
               </button>
 
-              {submitted && (
-                <p className="text-xs font-mono text-center text-[#FFFFFF]">
-                  ✓ Message sent successfully.
-                </p>
+              {statusMsg && (
+                <div
+                  className={`p-3 rounded-xl border flex items-start gap-2 text-xs font-mono ${
+                    status === 'success'
+                      ? 'bg-emerald-950/30 border-emerald-500/30 text-emerald-400'
+                      : status === 'error'
+                      ? 'bg-red-950/30 border-red-500/30 text-red-400'
+                      : 'bg-white/5 border-white/10 text-white/80'
+                  }`}
+                >
+                  {status === 'success' ? (
+                    <CheckCircle2 size={16} className="shrink-0 mt-0.5" />
+                  ) : status === 'error' ? (
+                    <AlertCircle size={16} className="shrink-0 mt-0.5" />
+                  ) : (
+                    <span className="w-2 h-2 rounded-full bg-white animate-pulse mt-1.5 shrink-0" />
+                  )}
+                  <span>{statusMsg}</span>
+                </div>
               )}
             </form>
           </div>

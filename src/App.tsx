@@ -4,6 +4,7 @@ import CinematicAbout from './components/CinematicAbout';
 import CinematicSkills from './components/CinematicSkills';
 import Achievements from './components/Achievements';
 import CinematicProjects from './components/CinematicProjects';
+import CinematicAIAutomation from './components/CinematicAIAutomation';
 import CinematicExperience from './components/CinematicExperience';
 import CinematicContact from './components/CinematicContact';
 import GraceAIAssistant from './components/GraceAIAssistant';
@@ -19,6 +20,7 @@ export default function App() {
         <CinematicSkills />
         <Achievements />
         <CinematicProjects />
+        <CinematicAIAutomation />
         <CinematicExperience />
         <CinematicContact />
       </main>

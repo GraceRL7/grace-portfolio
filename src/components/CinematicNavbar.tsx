@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Download } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { profile } from '../data/cinematicProfile';
 
 export default function CinematicNavbar() {
@@ -12,7 +12,7 @@ export default function CinematicNavbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
 
-      const sections = ['hero', 'about', 'skills', 'projects', 'experience', 'contact'];
+      const sections = ['hero', 'about', 'skills', 'projects', 'automation', 'experience', 'contact'];
       const scrollPos = window.scrollY + 200;
 
       for (const section of sections) {
@@ -37,6 +37,7 @@ export default function CinematicNavbar() {
     { name: 'ABOUT', href: '#about', id: 'about' },
     { name: 'SKILLS', href: '#skills', id: 'skills' },
     { name: 'PROJECTS', href: '#projects', id: 'projects' },
+    { name: 'AI AUTOMATION', href: '#automation', id: 'automation' },
     { name: 'EXPERIENCE', href: '#experience', id: 'experience' },
     { name: 'CONTACT', href: '#contact', id: 'contact' },
   ];
@@ -53,19 +54,17 @@ export default function CinematicNavbar() {
       }`}
     >
       <div className="w-full max-w-[1400px] mx-auto px-6 sm:px-12 flex items-center justify-between">
-        
-        {/* NO LOGO / NO BRAND ICON - EMPTY LEFT SPACER */}
         <div className="w-20 hidden md:block" />
 
         {/* CENTERED NAVIGATION LINKS */}
-        <nav className="hidden md:flex items-center gap-10 mx-auto">
+        <nav className="hidden md:flex items-center gap-8 lg:gap-10 mx-auto">
           {navLinks.map((link) => {
             const isActive = activeSection === link.id;
             return (
               <a
                 key={link.name}
                 href={link.href}
-                className={`font-['Inter',sans-serif] text-[14px] font-medium tracking-[0.25em] transition-colors duration-300 relative py-1 ${
+                className={`font-['Inter',sans-serif] text-[13px] lg:text-[14px] font-medium tracking-[0.2em] transition-colors duration-300 relative py-1 ${
                   isActive ? 'text-[#FFFFFF]' : 'text-[#BFBFBF] hover:text-[#FFFFFF]'
                 }`}
               >
@@ -87,7 +86,7 @@ export default function CinematicNavbar() {
           <a
             href={profile.resumeFile}
             download
-            className="group relative inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-[#FFFFFF]/30 text-[14px] font-['Inter',sans-serif] font-medium tracking-[0.25em] text-[#FFFFFF] transition-all duration-300 hover:bg-[#FFFFFF] hover:text-[#000000] hover:scale-[1.03]"
+            className="group relative inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-[#FFFFFF]/30 text-[14px] font-['Inter',sans-serif] font-medium tracking-[0.2em] text-[#FFFFFF] transition-all duration-300 hover:bg-[#FFFFFF] hover:text-[#000000] hover:scale-[1.03]"
           >
             <span>RESUME</span>
           </a>
@@ -112,13 +111,13 @@ export default function CinematicNavbar() {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-[#000000]/95 backdrop-blur-[20px] border-b border-[#FFFFFF]/10 px-6 py-8 w-full"
           >
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-5">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className="font-['Inter',sans-serif] text-sm font-medium tracking-[0.25em] text-[#BFBFBF] hover:text-[#FFFFFF] py-2 border-b border-[#FFFFFF]/10"
+                  className="font-['Inter',sans-serif] text-sm font-medium tracking-[0.2em] text-[#BFBFBF] hover:text-[#FFFFFF] py-2 border-b border-[#FFFFFF]/10"
                 >
                   {link.name}
                 </a>
@@ -127,7 +126,7 @@ export default function CinematicNavbar() {
                 href={profile.resumeFile}
                 download
                 onClick={() => setMenuOpen(false)}
-                className="mt-4 w-full py-3 rounded-full bg-[#FFFFFF] text-[#000000] text-center font-['Inter',sans-serif] font-bold text-xs tracking-[0.25em]"
+                className="mt-4 w-full py-3 rounded-full bg-[#FFFFFF] text-[#000000] text-center font-['Inter',sans-serif] font-bold text-xs tracking-[0.2em]"
               >
                 RESUME
               </a>
