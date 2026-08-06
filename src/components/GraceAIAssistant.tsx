@@ -15,7 +15,7 @@ const INITIAL_MESSAGES: Message[] = [
   {
     id: '1',
     sender: 'bot',
-    text: "Welcome 👋\n\nI'm Grace AI — an autonomous portfolio assistant powered by n8n workflows & Gemini AI.\n\nAsk me about Grace's full-stack applications, AI automation pipelines, skills, or football journey.",
+    text: "Welcome 👋\n\nI'm Grace AI — an autonomous portfolio assistant powered by n8n workflows & Gemini AI.\n\nAsk me about Grace's full-stack applications, AI automation pipelines, skills, or experience.",
     timestamp: 'Just now',
   },
 ];
@@ -231,14 +231,33 @@ export default function GraceAIAssistant() {
       }
 
       // Extract response string directly from n8n webhook response
-      if (typeof data === 'string') {
+      if (typeof data === 'string' && data.trim()) {
         botResponseText = data;
-      } else if (data.output || data.response || data.message || data.text) {
-        botResponseText = data.output || data.response || data.message || data.text;
-      } else if (Array.isArray(data) && data[0]) {
-        botResponseText = data[0].output || data[0].response || data[0].message || data[0].text || (typeof data[0] === 'string' ? data[0] : JSON.stringify(data[0]));
-      } else {
-        botResponseText = typeof data === 'object' ? JSON.stringify(data) : String(data);
+      } else if (typeof data === 'object' && data !== null) {
+        botResponseText = data.output || data.response || data.message || data.text || '';
+        if (!botResponseText && Array.isArray(data) && data[0]) {
+          botResponseText = data[0].output || data[0].response || data[0].message || data[0].text || (typeof data[0] === 'string' ? data[0] : '');
+        }
+      }
+
+      // If webhook returned empty or non-text object, use local intelligent response engine
+      if (!botResponseText || !botResponseText.trim()) {
+        const q = query.toLowerCase();
+        if (q.includes('project') || q.includes('show projects') || q.includes('work') || q.includes('built')) {
+          botResponseText = "Here are Grace's top featured projects:\n\n• **El Mundo Sports** - Live sports club website built with WordPress & Elementor\n• **Vidhyardhi School** - Modern educational institution portal using React & Tailwind\n• **Svasthya Fresh** - Full-stack real-time admin management system\n• **Sportify** - Digital sports trials management web app\n• **HomiFi** - Role-based PG management platform\n\nYou can scroll down to the Projects section to explore live links & GitHub repositories!";
+        } else if (q.includes('skill') || q.includes('tech') || q.includes('stack') || q.includes('language')) {
+          botResponseText = "Grace's core technical stack includes:\n\n• **Frontend:** React.js, TypeScript, JavaScript (ES6+), HTML5, CSS3, Tailwind CSS\n• **Backend & DB:** MySQL, Firebase, REST APIs, PHP\n• **AI & Automation:** n8n Workflows, Google Gemini AI, Webhooks, Chatbot Integration\n• **CMS & Tools:** WordPress, Elementor, GitHub, VS Code, Postman, Vercel, Canva";
+        } else if (q.includes('ai') || q.includes('automation') || q.includes('n8n') || q.includes('workflow') || q.includes('gemini')) {
+          botResponseText = "Grace specializes in AI & Workflow Automation:\n\n⚡ **n8n Automation Pipelines:** Engineered end-to-end autonomous business workflows.\n🤖 **Google Gemini AI Integration:** Built smart prompt-based AI assistants and automated query handling.\n🔗 **Webhooks & APIs:** Connected frontend UIs to backend microservices, Google Sheets, Gmail API, and hostinger VPS webhooks.\n💼 **Experience:** AI Automation Intern at Jivrus Technologies.";
+        } else if (q.includes('about') || q.includes('who') || q.includes('grace') || q.includes('mca')) {
+          botResponseText = "Grace Reshal Lewis is a Web Developer, AI Automation Engineer, and MCA Postgraduate student based in Bengaluru, Karnataka.\n\nShe specializes in building responsive web applications, integrating APIs, automating workflows using n8n & Gemini AI, and creating digital user experiences that stand out.";
+        } else if (q.includes('football') || q.includes('sport') || q.includes('athlete') || q.includes('puraskar') || q.includes('achievement')) {
+          botResponseText = "Grace is a high-performance state & university athlete:\n\n• **Rajya Puraskar Award** recipient under Bharat Scouts & Guides\n• **South Zone Inter-University Football** representative for Mangalore University\n• **KSFA B-Division League** player for El Mundo FC\n• **Overall Champions** at Manoeuvre 2.0 IT Fest (2025)\n• **Co-Convenor** for SHELLS 2026 National IT Fest";
+        } else if (q.includes('contact') || q.includes('email') || q.includes('hire') || q.includes('reach')) {
+          botResponseText = "You can reach Grace directly:\n\n📧 **Email:** graceworkspace777@gmail.com\n💼 **LinkedIn:** linkedin.com/in/grace-reshal-lewis-5b5178290\n📍 **Location:** Bengaluru, Karnataka\n\nOr scroll to the Contact section to submit an automated query form!";
+        } else {
+          botResponseText = "Grace AI is here! Grace is a Web Developer & AI Automation Engineer skilled in React, TypeScript, n8n, and WordPress. Feel free to ask about her projects, skills, achievements, or contact details!";
+        }
       }
     } catch (err: unknown) {
       isErr = true;
@@ -255,14 +274,17 @@ export default function GraceAIAssistant() {
       if (q.includes('project') || q.includes('show projects') || q.includes('work') || q.includes('built')) {
         botResponseText = "Here are Grace's top featured projects:\n\n• **El Mundo Sports** - Live sports club website built with WordPress & Elementor\n• **Vidhyardhi School** - Modern educational institution portal using React & Tailwind\n• **Svasthya Fresh** - Full-stack real-time admin management system\n• **Sportify** - Digital sports trials management web app\n• **HomiFi** - Role-based PG management platform\n\nYou can scroll down to the Projects section to explore live links & GitHub repositories!";
         isErr = false;
+      } else if (q.includes('ai') || q.includes('automation') || q.includes('n8n') || q.includes('workflow') || q.includes('gemini')) {
+        botResponseText = "Grace specializes in AI & Workflow Automation:\n\n⚡ **n8n Automation Pipelines:** Engineered end-to-end autonomous business workflows.\n🤖 **Google Gemini AI Integration:** Built smart prompt-based AI assistants and automated query handling.\n🔗 **Webhooks & APIs:** Connected frontend UIs to backend microservices, Google Sheets, Gmail API, and hostinger VPS webhooks.\n💼 **Experience:** AI Automation Intern at Jivrus Technologies.";
+        isErr = false;
       } else if (q.includes('skill') || q.includes('tech') || q.includes('stack') || q.includes('language')) {
         botResponseText = "Grace's core technical stack includes:\n\n• **Frontend:** React.js, TypeScript, JavaScript (ES6+), HTML5, CSS3, Tailwind CSS\n• **Backend & DB:** MySQL, Firebase, REST APIs, PHP\n• **AI & Automation:** n8n Workflows, Google Gemini AI, Webhooks, Chatbot Integration\n• **CMS & Tools:** WordPress, Elementor, GitHub, VS Code, Postman, Vercel, Canva";
         isErr = false;
       } else if (q.includes('about') || q.includes('who') || q.includes('grace') || q.includes('mca')) {
         botResponseText = "Grace Reshal Lewis is a Web Developer, AI Automation Engineer, and MCA Postgraduate student based in Bengaluru, Karnataka.\n\nShe specializes in building responsive web applications, integrating APIs, automating workflows using n8n & Gemini AI, and creating digital user experiences that stand out.";
         isErr = false;
-      } else if (q.includes('football') || q.includes('sport') || q.includes('athlete') || q.includes('puraskar') || q.includes('achievement')) {
-        botResponseText = "Grace is a high-performance state & university athlete:\n\n• **Rajya Puraskar Award** recipient under Bharat Scouts & Guides\n• **South Zone Inter-University Football** representative for Mangalore University\n• **KSFA B-Division League** player for El Mundo FC\n• **Overall Champions** at Manoeuvre 2.0 IT Fest (2025)\n• **Co-Convenor** for SHELLS 2026 National IT Fest";
+      } else if (q.includes('award') || q.includes('puraskar') || q.includes('achievement') || q.includes('honor')) {
+        botResponseText = "Grace has received several notable honors & leadership achievements:\n\n• **Rajya Puraskar Award** recipient under Bharat Scouts & Guides\n• **Overall Champions** at Manoeuvre 2.0 IT Fest (2025)\n• **Co-Convenor** for SHELLS 2026 National IT Fest\n• **Event Head** for Videography & Photography at Manoeuvre 3.0";
         isErr = false;
       } else if (q.includes('contact') || q.includes('email') || q.includes('hire') || q.includes('reach')) {
         botResponseText = "You can reach Grace directly:\n\n📧 **Email:** graceworkspace777@gmail.com\n💼 **LinkedIn:** linkedin.com/in/grace-reshal-lewis-5b5178290\n📍 **Location:** Bengaluru, Karnataka\n\nOr scroll to the Contact section to submit an automated query form!";
@@ -290,8 +312,9 @@ export default function GraceAIAssistant() {
   const quickActionChips = [
     'Tell me about Grace',
     'Show Projects',
+    'AI Automation',
     'Skills & Technologies',
-    'Football Journey',
+    'Achievements & Honors',
     'Contact Grace',
   ];
 
