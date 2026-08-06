@@ -102,10 +102,10 @@ export default function CinematicHero() {
             className="w-full flex flex-col items-center gap-4 sm:gap-6 z-30 pt-auto mt-auto pointer-events-auto px-4"
           >
             {/* Action Buttons */}
-            <div className="flex flex-col xs:flex-row items-center justify-center gap-3 sm:gap-4 w-full xs:w-auto">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-full">
               <a
                 href="#projects"
-                className="group relative inline-flex items-center justify-center gap-2 sm:gap-2.5 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full border border-[#FFFFFF] bg-transparent text-[#FFFFFF] font-['Inter',sans-serif] text-[11px] sm:text-xs font-semibold tracking-[0.15em] sm:tracking-[0.2em] uppercase transition-all duration-300 hover:bg-[#FFFFFF] hover:text-[#000000] hover:scale-[1.03] w-full xs:w-auto"
+                className="group relative inline-flex items-center justify-center gap-2 sm:gap-2.5 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full border border-[#FFFFFF] bg-transparent text-[#FFFFFF] font-['Inter',sans-serif] text-[11px] sm:text-xs font-semibold tracking-[0.15em] sm:tracking-[0.2em] uppercase transition-all duration-300 hover:bg-[#FFFFFF] hover:text-[#000000] hover:scale-[1.03] whitespace-nowrap"
               >
                 <span>VIEW PROJECTS</span>
                 <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
@@ -114,7 +114,7 @@ export default function CinematicHero() {
               <a
                 href={profile.resumeFile}
                 download
-                className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full border border-[#FFFFFF]/40 bg-transparent text-[#FFFFFF] font-['Inter',sans-serif] text-[11px] sm:text-xs font-semibold tracking-[0.15em] sm:tracking-[0.2em] uppercase transition-all duration-300 hover:bg-[#FFFFFF] hover:text-[#000000] hover:scale-[1.03] w-full xs:w-auto"
+                className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full border border-[#FFFFFF]/40 bg-transparent text-[#FFFFFF] font-['Inter',sans-serif] text-[11px] sm:text-xs font-semibold tracking-[0.15em] sm:tracking-[0.2em] uppercase transition-all duration-300 hover:bg-[#FFFFFF] hover:text-[#000000] hover:scale-[1.03] whitespace-nowrap"
               >
                 <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#BFBFBF]" />
                 <span>DOWNLOAD RESUME</span>
