@@ -401,35 +401,21 @@ export default function GraceAIAssistant() {
         <AnimatePresence>
           {isHovered && (
             <motion.div
-              initial={{ opacity: 0, y: 10, scale: 0.85 }}
+              initial={{ opacity: 0, y: 10, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 8, scale: 0.85 }}
+              exit={{ opacity: 0, y: 8, scale: 0.9 }}
               transition={{ type: 'spring', stiffness: 450, damping: 25 }}
-              className="absolute -top-16 right-0 z-30 pointer-events-none filter drop-shadow-[0_12px_25px_rgba(0,0,0,0.8)]"
+              className="absolute -top-14 right-2 z-30 pointer-events-none whitespace-nowrap"
             >
-              <div className="relative w-[175px] h-[75px] flex items-center justify-center">
-                <svg
-                  viewBox="0 0 200 90"
-                  className="absolute inset-0 w-full h-full text-white fill-current overflow-visible"
-                >
-                  {/* Fluffy Cartoon Cloud Body with Curved Tail */}
-                  <path
-                    d="M 45 60
-                       C 25 60, 15 46, 22 32
-                       C 18 18, 32 8, 50 12
-                       C 62 3, 90 2, 105 11
-                       C 120 0, 150 0, 165 11
-                       C 182 6, 196 20, 192 34
-                       C 202 48, 188 62, 170 62
-                       L 145 62
-                       C 142 72, 134 82, 122 86
-                       C 130 76, 134 68, 130 62
-                       L 45 62 Z"
-                  />
-                </svg>
-                <span className="relative z-10 text-black font-['Inter',sans-serif] text-[11px] font-extrabold tracking-tight text-center pb-2.5 px-3">
-                  {isOpen ? 'Bye for now! 👋' : 'Hi! Chat with me ✨'}
+              <div className="relative px-4 py-2 rounded-2xl bg-[#0F0F12]/90 border border-white/20 backdrop-blur-xl shadow-[0_12px_30px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.3)] flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34d399]" />
+                <span className="text-white font-['Inter',sans-serif] text-xs font-semibold tracking-wide">
+                  {isOpen ? 'Close Assistant' : 'Chat with Grace AI'}
                 </span>
+                <span className="text-xs">✨</span>
+
+                {/* 3D Arrow pointer */}
+                <div className="absolute -bottom-1.5 right-6 w-3 h-3 bg-[#0F0F12]/90 border-r border-b border-white/20 rotate-45" />
               </div>
             </motion.div>
           )}
