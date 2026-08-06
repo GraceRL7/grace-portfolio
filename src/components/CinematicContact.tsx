@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Linkedin, Send, Workflow, CheckCircle2, AlertCircle, ArrowRight } from 'lucide-react';
+import { Mail, Linkedin, Instagram, Send, Workflow, CheckCircle2, AlertCircle, ArrowRight } from 'lucide-react';
 import { profile } from '../data/cinematicProfile';
 
 const N8N_CONTACT_WEBHOOK_URL = 'https://n8n.srv965596.hstgr.cloud/webhook/grace-contact';
@@ -126,6 +126,16 @@ export default function CinematicContact() {
               >
                 <Linkedin size={16} />
                 <span>LINKEDIN</span>
+              </a>
+
+              <a
+                href={profile.instagram}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-3 px-6 py-3 rounded-full border border-[#FFFFFF]/30 bg-transparent text-[#FFFFFF] hover:bg-[#FFFFFF] hover:text-[#000000] transition-all duration-300 font-['Inter',sans-serif] text-xs font-semibold tracking-widest uppercase"
+              >
+                <Instagram size={16} />
+                <span>INSTAGRAM</span>
               </a>
             </div>
           </div>

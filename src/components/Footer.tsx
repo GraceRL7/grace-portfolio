@@ -12,6 +12,9 @@ export default function Footer() {
           <a href={profile.github} target="_blank" rel="noreferrer" className="hover:text-accent transition-colors">
             GitHub
           </a>
+          <a href={profile.instagram} target="_blank" rel="noreferrer" className="hover:text-accent transition-colors">
+            Instagram (@grace_captures__)
+          </a>
           <a href={`mailto:${profile.email}`} className="hover:text-accent transition-colors">
             Email
           </a>

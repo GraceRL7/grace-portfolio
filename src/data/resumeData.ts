@@ -10,6 +10,8 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/grace-reshal-lewis-5b5178290/',
   linkedinLabel: 'linkedin.com/in/grace-reshal-lewis-5b5178290',
   github: 'https://github.com/', // update with real handle
+  instagram: 'https://www.instagram.com/grace_captures__?igsh=MWM5YzhzNjhoeWNlcg%3D%3D&utm_source=qr',
+  instagramLabel: 'instagram.com/grace_captures__',
   resumeFile: '/assets/Grace_Reshal_Lewis_Resume.pdf',
   portrait: '/assets/grace-portrait.png',
   summary:

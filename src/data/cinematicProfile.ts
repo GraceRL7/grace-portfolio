@@ -8,5 +8,6 @@ export const profile = {
   email: 'graceworkspace777@gmail.com',
   linkedin: 'https://www.linkedin.com/in/grace-reshal-lewis-5b5178290/',
   github: 'https://github.com/',
+  instagram: 'https://www.instagram.com/grace_captures__?igsh=MWM5YzhzNjhoeWNlcg%3D%3D&utm_source=qr',
   location: 'Bengaluru, Karnataka',
 };

@@ -12,7 +12,7 @@ export default function CinematicNavbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
 
-      const sections = ['hero', 'about', 'skills', 'projects', 'automation', 'experience', 'contact'];
+      const sections = ['hero', 'about', 'skills', 'hobbies', 'achievements', 'projects', 'automation', 'experience', 'contact'];
       const scrollPos = window.scrollY + 200;
 
       for (const section of sections) {
