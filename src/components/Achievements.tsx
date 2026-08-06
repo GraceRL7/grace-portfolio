@@ -103,34 +103,34 @@ export default function Achievements() {
   return (
     <section
       id="achievements"
-      className="relative w-full py-32 bg-[#000000] text-[#FFFFFF] px-6 sm:px-12 border-t border-[#FFFFFF]/10 z-20 overflow-hidden"
+      className="relative w-full py-16 sm:py-24 lg:py-32 bg-[#000000] text-[#FFFFFF] px-4 sm:px-8 lg:px-12 border-t border-[#FFFFFF]/10 z-20 overflow-hidden"
     >
       <div className="w-full max-w-[1400px] mx-auto">
         {/* Section Label & Title */}
-        <div className="flex items-center gap-3 mb-6">
+        <div className="flex items-center gap-3 mb-4 sm:mb-6">
           <div className="w-2 h-2 rounded-full bg-[#FFFFFF]" />
-          <span className="font-['Inter',sans-serif] text-[14px] uppercase tracking-[0.3em] text-[#BFBFBF]">
+          <span className="font-['Inter',sans-serif] text-[12px] sm:text-[14px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[#BFBFBF]">
             02 / ACHIEVEMENTS & HONORS
           </span>
         </div>
 
-        <div className="mb-14">
-          <h2 className="font-['Bebas_Neue',sans-serif] font-bold text-[48px] sm:text-[72px] lg:text-[96px] text-[#FFFFFF] tracking-[0.05em] leading-none uppercase mb-4">
+        <div className="mb-8 sm:mb-14">
+          <h2 className="font-['Bebas_Neue',sans-serif] font-bold text-[36px] xs:text-[48px] sm:text-[72px] lg:text-[96px] text-[#FFFFFF] tracking-[0.03em] sm:tracking-[0.05em] leading-none uppercase mb-2 sm:mb-4">
             MILESTONES THAT SHAPED MY JOURNEY
           </h2>
-          <p className="font-['Inter',sans-serif] text-base sm:text-lg text-[#BFBFBF] font-light max-w-2xl">
+          <p className="font-['Inter',sans-serif] text-sm sm:text-base lg:text-lg text-[#BFBFBF] font-light max-w-2xl">
             A visual showcase of official awards, athletic championships, and leadership roles.
           </p>
         </div>
 
         {/* Horizontal Carousel Track */}
-        <div className="flex items-center gap-8 overflow-x-auto pb-10 pt-2 no-scrollbar scroll-smooth">
+        <div className="flex items-center gap-4 sm:gap-8 overflow-x-auto pb-6 sm:pb-10 pt-2 no-scrollbar scroll-smooth">
           {achievementData.map((item) => (
             <motion.div
               key={item.id}
               onClick={() => setSelectedAchievement(item)}
               whileHover={{ y: -8 }}
-              className="group relative w-[300px] sm:w-[380px] lg:w-[420px] h-[480px] rounded-3xl overflow-hidden bg-[#111111] border border-white/15 cursor-pointer shadow-2xl shrink-0 transition-all duration-300 hover:border-white hover:shadow-[0_10px_40px_rgba(255,255,255,0.15)] flex flex-col justify-between"
+              className="group relative w-[260px] xs:w-[300px] sm:w-[380px] lg:w-[420px] h-[400px] sm:h-[480px] rounded-2xl sm:rounded-3xl overflow-hidden bg-[#111111] border border-white/15 cursor-pointer shadow-2xl shrink-0 transition-all duration-300 hover:border-white hover:shadow-[0_10px_40px_rgba(255,255,255,0.15)] flex flex-col justify-between"
             >
               {/* Photo Background with 105% Zoom on Hover */}
               <img

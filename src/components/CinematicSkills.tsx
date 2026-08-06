@@ -108,23 +108,23 @@ export default function CinematicSkills() {
   return (
     <section
       id="skills"
-      className="relative w-full min-h-screen py-32 bg-[#000000] text-[#FFFFFF] flex flex-col justify-center px-6 sm:px-12 border-t border-[#FFFFFF]/10 z-20"
+      className="relative w-full min-h-screen py-16 sm:py-24 lg:py-32 bg-[#000000] text-[#FFFFFF] flex flex-col justify-center px-4 sm:px-8 lg:px-12 border-t border-[#FFFFFF]/10 z-20"
     >
       <div className="w-full max-w-[1400px] mx-auto">
         {/* Section Label */}
-        <div className="flex items-center gap-3 mb-6">
+        <div className="flex items-center gap-3 mb-4 sm:mb-6">
           <div className="w-2 h-2 rounded-full bg-[#FFFFFF]" />
-          <span className="font-['Inter',sans-serif] text-[14px] uppercase tracking-[0.3em] text-[#BFBFBF]">
+          <span className="font-['Inter',sans-serif] text-[12px] sm:text-[14px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[#BFBFBF]">
             02 / SKILLS & TECHNOLOGIES
           </span>
         </div>
 
         {/* Section Heading */}
-        <h2 className="font-['Bebas_Neue',sans-serif] font-bold text-[48px] sm:text-[72px] lg:text-[96px] text-[#FFFFFF] tracking-[0.05em] leading-none uppercase mb-12">
+        <h2 className="font-['Bebas_Neue',sans-serif] font-bold text-[36px] xs:text-[48px] sm:text-[72px] lg:text-[96px] text-[#FFFFFF] tracking-[0.03em] sm:tracking-[0.05em] leading-none uppercase mb-8 sm:mb-12">
           TECHNICAL EXPERTISE
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           {skillCategories.map((cat, i) => (
             <motion.div
               key={cat.category}
@@ -132,7 +132,7 @@ export default function CinematicSkills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="p-8 rounded-3xl bg-[#111111]/80 border border-[#FFFFFF]/15 backdrop-blur-[20px] hover:border-[#FFFFFF]/40 transition-all duration-300 shadow-2xl flex flex-col justify-start"
+              className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#111111]/80 border border-[#FFFFFF]/15 backdrop-blur-[20px] hover:border-[#FFFFFF]/40 transition-all duration-300 shadow-2xl flex flex-col justify-start"
             >
               {/* Bebas Neue Heading with thin divider */}
               <h3 className="font-['Bebas_Neue',sans-serif] text-[28px] font-normal tracking-[0.18em] uppercase text-[#FFFFFF] border-b border-[#FFFFFF]/[0.08] pb-[20px] mb-[28px]">

@@ -75,23 +75,23 @@ export default function CinematicHobbies() {
   return (
     <section
       id="hobbies"
-      className="relative w-full py-32 bg-[#000000] text-[#FFFFFF] px-6 sm:px-12 border-t border-[#FFFFFF]/10 z-20 overflow-hidden"
+      className="relative w-full py-16 sm:py-24 lg:py-32 bg-[#000000] text-[#FFFFFF] px-4 sm:px-8 lg:px-12 border-t border-[#FFFFFF]/10 z-20 overflow-hidden"
     >
       <div className="w-full max-w-[1400px] mx-auto">
         {/* Section Label */}
-        <div className="flex items-center gap-3 mb-6">
+        <div className="flex items-center gap-3 mb-4 sm:mb-6">
           <div className="w-2 h-2 rounded-full bg-[#FFFFFF]" />
-          <span className="font-['Inter',sans-serif] text-[14px] uppercase tracking-[0.3em] text-[#BFBFBF]">
+          <span className="font-['Inter',sans-serif] text-[12px] sm:text-[14px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[#BFBFBF]">
             05 / HOBBIES & CREATIVE PURSUITS
           </span>
         </div>
 
-        <div className="mb-14 flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div className="mb-8 sm:mb-14 flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6">
           <div>
-            <h2 className="font-['Bebas_Neue',sans-serif] font-bold text-[48px] sm:text-[72px] lg:text-[96px] text-[#FFFFFF] tracking-[0.05em] leading-none uppercase mb-4">
+            <h2 className="font-['Bebas_Neue',sans-serif] font-bold text-[36px] xs:text-[48px] sm:text-[72px] lg:text-[96px] text-[#FFFFFF] tracking-[0.03em] sm:tracking-[0.05em] leading-none uppercase mb-2 sm:mb-4">
               BEYOND CODE & AUTOMATION
             </h2>
-            <p className="font-['Inter',sans-serif] text-base sm:text-lg text-[#BFBFBF] font-light max-w-2xl">
+            <p className="font-['Inter',sans-serif] text-sm sm:text-base lg:text-lg text-[#BFBFBF] font-light max-w-2xl">
               Creative arts, music, visual editing, and athletic passions that fuel my discipline and design thinking.
             </p>
           </div>

@@ -244,16 +244,16 @@ export default function GraceAIAssistant() {
   ];
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex items-end gap-4 pointer-events-auto font-['Inter',sans-serif]">
-      {/* Slide-Out Luxury Glass Panel */}
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end">
+      {/* Interactive Cyber Chat Drawer */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="w-[90vw] sm:w-[400px] h-[580px] rounded-3xl bg-[#080808]/95 border border-white/20 backdrop-blur-2xl shadow-[0_25px_60px_rgba(0,0,0,0.9)] flex flex-col overflow-hidden text-white relative"
+            exit={{ opacity: 0, y: 30, scale: 0.95 }}
+            transition={{ type: 'spring', stiffness: 350, damping: 28 }}
+            className="w-[calc(100vw-32px)] sm:w-[380px] md:w-[420px] max-h-[80vh] sm:max-h-[85vh] h-[550px] mb-4 bg-black/95 border border-white/20 rounded-3xl backdrop-blur-2xl shadow-2xl flex flex-col overflow-hidden text-white font-sans"
           >
             {/* Header */}
             <div className="p-4 sm:p-5 border-b border-white/10 flex items-center justify-between bg-black/90">
