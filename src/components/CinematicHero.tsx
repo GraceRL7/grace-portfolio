@@ -41,6 +41,20 @@ export default function CinematicHero() {
       {/* Pinned Sticky 100vh Viewport */}
       <div className="sticky top-0 w-full h-screen overflow-hidden flex flex-col justify-between items-center bg-[#000000]">
 
+        {/* TACTUS VIDEO BACKGROUND & GRADIENT OVERLAY */}
+        <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
+          <video
+            autoPlay
+            playsInline
+            loop
+            muted
+            className="hero-video-bg"
+          >
+            <source src="https://assets.codepen.io/319606/tactus-waves-hero-sm.mp4" type="video/mp4" />
+          </video>
+          <div className="gradient-overlay-bottom" />
+        </div>
+
         {/* 1. SOFT SPOTLIGHT FROM TOP CENTER */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] sm:w-[1000px] h-[550px] pointer-events-none z-10">
           <div className="w-full h-full bg-radial-gradient from-[#FFFFFF]/25 via-[#FFFFFF]/5 to-transparent blur-[90px]" />
@@ -51,47 +65,34 @@ export default function CinematicHero() {
         <ParticleBackground />
 
         {/* Radial Glow directly behind portrait photo */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#FFFFFF]/5 blur-[120px] rounded-full pointer-events-none z-0" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#00BCD4]/10 blur-[120px] rounded-full pointer-events-none z-0" />
 
-        {/* 2. SUBTLE HERO BREATHING COMPOSITION */}
+        {/* 2. HERO COMPOSITION */}
         <motion.div
           animate={{ scale: [1, 1.015, 1] }}
           transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
           className="relative z-20 w-full h-full max-w-[1400px] mx-auto px-4 sm:px-6 flex flex-col justify-between items-center pt-20 sm:pt-24 pb-6 sm:pb-8"
         >
-          {/* PERFECTLY CENTERED TRANSFORM-ORIGIN CENTER TYPOGRAPHY GROWTH */}
-          <div className="text-center pt-2 sm:pt-6 z-30 flex flex-col items-center justify-center w-full px-2">
+          {/* GIANT EXTRA TALL TEXT BEHIND IMAGE LAYER (z-5) */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-5 text-center overflow-hidden w-full px-2">
             <motion.div
               style={{ scale: nameScale, opacity: nameOpacity }}
               className="origin-center text-center flex items-center justify-center w-full"
             >
-              <h1 className="font-['Bebas_Neue',sans-serif] font-bold text-[28px] xs:text-[36px] sm:text-[48px] md:text-[64px] text-[#FFFFFF] tracking-[0.15em] sm:tracking-[0.25em] uppercase text-center leading-tight sm:leading-none drop-shadow-lg max-w-[95vw] sm:max-w-[90vw] mx-auto">
+              <h1 className="font-['Antonio',sans-serif] font-black text-[6.8vw] sm:text-[7vw] lg:text-[7.2vw] text-[#FFFFFF] tracking-[0.02em] uppercase text-center leading-none whitespace-nowrap drop-shadow-[0_15px_40px_rgba(0,0,0,0.95)] scale-y-[1.65] transform select-none w-full max-w-[100vw]">
                 GRACE RESHAL LEWIS
               </h1>
             </motion.div>
-
-            {/* PROFESSIONAL TITLE */}
-            <motion.p
-              style={{ opacity: overlayOpacity }}
-              className="mt-2 sm:mt-4 font-['Inter',sans-serif] text-[11px] xs:text-[13px] sm:text-[16px] font-normal tracking-[0.15em] sm:tracking-[0.3em] text-[#BFBFBF]/70 uppercase text-center flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap px-2"
-            >
-              <span>MCA GRADUATE</span>
-              <span className="text-[#808080]">•</span>
-              <span>WEB DEVELOPER</span>
-              <span className="text-[#808080]">•</span>
-              <span>AI AUTOMATION</span>
-              <span className="text-[#808080]">•</span>
-              <span>DIGITAL MARKETING</span>
-            </motion.p>
           </div>
 
-          {/* CENTERED TRANSPARENT PNG PHOTO */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10 pt-12 sm:pt-16">
+
+          {/* CENTERED TRANSPARENT PNG PHOTO LAYER (z-20 in front of text) */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20 pt-8 sm:pt-12">
             <motion.div style={{ y: imageY }} className="relative flex items-center justify-center px-4">
               <img
                 src={graceImg}
                 alt="Grace Reshal Lewis"
-                className="w-[220px] xs:w-[260px] sm:w-[380px] md:w-[460px] lg:w-[520px] max-h-[55vh] sm:max-h-none h-auto object-contain filter contrast-[1.06] brightness-[0.96] drop-shadow-[0_20px_50px_rgba(0,0,0,0.9)]"
+                className="w-[240px] xs:w-[280px] sm:w-[400px] md:w-[480px] lg:w-[540px] max-h-[65vh] sm:max-h-none h-auto object-contain filter contrast-[1.08] brightness-[0.98] drop-shadow-[0_25px_60px_rgba(0,0,0,0.95)]"
               />
             </motion.div>
           </div>

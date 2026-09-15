@@ -47,11 +47,10 @@ export default function CinematicNavbar() {
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 h-[70px] sm:h-[80px] flex items-center transition-all duration-500 ${
-        scrolled || menuOpen
+      className={`fixed top-0 left-0 right-0 z-50 h-[70px] sm:h-[80px] flex items-center transition-all duration-500 ${scrolled || menuOpen
           ? 'bg-[#000000]/95 backdrop-blur-[20px] border-b border-[#FFFFFF]/10 shadow-2xl'
           : 'bg-transparent border-b border-transparent'
-      }`}
+        }`}
     >
       <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12 flex items-center justify-between">
         <div className="w-20 hidden lg:block" />
@@ -69,15 +68,24 @@ export default function CinematicNavbar() {
               <a
                 key={link.name}
                 href={link.href}
-                className={`font-['Inter',sans-serif] text-[12px] xl:text-[14px] font-medium tracking-[0.15em] xl:tracking-[0.2em] transition-colors duration-300 relative py-1 ${
-                  isActive ? 'text-[#FFFFFF]' : 'text-[#BFBFBF] hover:text-[#FFFFFF]'
+                onClick={(e) => {
+                  if (window.innerWidth >= 1024) {
+                    const el = document.getElementById(link.id);
+                    if (el) {
+                      e.preventDefault();
+                      el.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+                    }
+                  }
+                }}
+                className={`font-['Inter',sans-serif] text-[12px] xl:text-[14px] font-semibold tracking-[0.15em] xl:tracking-[0.2em] transition-all duration-300 relative py-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] ${
+                  isActive ? 'text-[#FFFFFF] opacity-100' : 'text-[#FFFFFF] opacity-90 hover:opacity-100'
                 }`}
               >
                 {link.name}
                 {isActive && (
                   <motion.span
                     layoutId="activeUnderline"
-                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#FFFFFF] rounded-full"
+                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#FFFFFF] rounded-full shadow-[0_0_8px_rgba(255,255,255,0.8)]"
                     transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                   />
                 )}
@@ -124,9 +132,8 @@ export default function CinematicNavbar() {
                     key={link.name}
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
-                    className={`font-['Inter',sans-serif] text-sm font-medium tracking-[0.2em] py-2.5 px-3 rounded-lg border-b border-[#FFFFFF]/10 transition-colors flex items-center justify-between ${
-                      isActive ? 'text-[#FFFFFF] bg-[#FFFFFF]/10 font-semibold' : 'text-[#BFBFBF] hover:text-[#FFFFFF]'
-                    }`}
+                    className={`font-['Inter',sans-serif] text-sm font-medium tracking-[0.2em] py-2.5 px-3 rounded-lg border-b border-[#FFFFFF]/10 transition-colors flex items-center justify-between ${isActive ? 'text-[#FFFFFF] bg-[#FFFFFF]/10 font-semibold' : 'text-[#BFBFBF] hover:text-[#FFFFFF]'
+                      }`}
                   >
                     <span>{link.name}</span>
                     {isActive && <span className="w-1.5 h-1.5 rounded-full bg-[#FFFFFF]" />}

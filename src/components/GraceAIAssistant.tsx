@@ -324,11 +324,36 @@ export default function GraceAIAssistant() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 30, scale: 0.95 }}
-            transition={{ type: 'spring', stiffness: 350, damping: 28 }}
-            className="w-[calc(100vw-32px)] sm:w-[380px] md:w-[420px] max-h-[80vh] sm:max-h-[85vh] h-[550px] mb-4 bg-black/95 border border-white/20 rounded-3xl backdrop-blur-2xl shadow-2xl flex flex-col overflow-hidden text-white font-sans"
+            initial={{ 
+              opacity: 0, 
+              scale: 0, 
+              x: 140, 
+              y: 220, 
+              borderRadius: '9999px',
+              transformOrigin: 'bottom right'
+            }}
+            animate={{ 
+              opacity: 1, 
+              scale: 1, 
+              x: 0, 
+              y: 0, 
+              borderRadius: '24px',
+              transition: {
+                type: 'spring',
+                stiffness: 300,
+                damping: 24,
+                mass: 0.8
+              }
+            }}
+            exit={{ 
+              opacity: 0, 
+              scale: 0.1, 
+              x: 140, 
+              y: 220, 
+              borderRadius: '9999px',
+              transition: { duration: 0.25, ease: 'easeIn' }
+            }}
+            className="w-[calc(100vw-32px)] sm:w-[380px] md:w-[420px] max-h-[80vh] sm:max-h-[85vh] h-[550px] mb-4 bg-black/95 border border-white/20 rounded-3xl backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.9),0_0_40px_rgba(255,255,255,0.08)] flex flex-col overflow-hidden text-white font-sans origin-bottom-right"
           >
             {/* Header */}
             <div className="p-4 sm:p-5 border-b border-white/10 flex items-center justify-between bg-black/90">
