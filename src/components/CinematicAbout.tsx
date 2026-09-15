@@ -1,30 +1,6 @@
 import { motion } from 'framer-motion';
-import { Layout, Sparkles, Cpu, Lightbulb } from 'lucide-react';
 
 export default function CinematicAbout() {
-  const cards = [
-    {
-      label: 'ROLE',
-      value: 'Frontend Developer',
-      icon: Layout,
-    },
-    {
-      label: 'FOCUS',
-      value: 'Web & UI Experiences',
-      icon: Sparkles,
-    },
-    {
-      label: 'INTEREST',
-      value: 'AI Automation',
-      icon: Cpu,
-    },
-    {
-      label: 'APPROACH',
-      value: 'Creative Problem Solving',
-      icon: Lightbulb,
-    },
-  ];
-
   return (
     <section
       id="about"
@@ -65,10 +41,10 @@ export default function CinematicAbout() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="p-6 sm:p-10 lg:p-12 rounded-2xl sm:rounded-3xl bg-[#111111]/70 border border-[#FFFFFF]/15 backdrop-blur-[20px] shadow-2xl grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center"
+          className="p-6 sm:p-10 lg:p-12 rounded-2xl sm:rounded-3xl bg-[#111111]/70 border border-[#FFFFFF]/15 backdrop-blur-[20px] shadow-2xl"
         >
-          {/* Left Column: Clean Personal Story */}
-          <div className="lg:col-span-7 space-y-4 sm:space-y-6">
+          {/* Personal Story Text */}
+          <div className="max-w-4xl space-y-4 sm:space-y-6">
             <p className="font-['Inter',sans-serif] text-base sm:text-lg lg:text-xl text-[#FFFFFF] font-medium leading-relaxed">
               Hey, I'm Grace.
             </p>
@@ -84,27 +60,6 @@ export default function CinematicAbout() {
             <p className="font-['Inter',sans-serif] text-sm sm:text-base lg:text-lg text-[#FFFFFF]/90 font-medium italic leading-relaxed pt-2">
               For me, great digital products aren't just functional — they're memorable.
             </p>
-          </div>
-
-          {/* Right Column: Highlight Cards */}
-          <div className="lg:col-span-5 grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-4">
-            {cards.map((card) => {
-              const Icon = card.icon;
-              return (
-                <div
-                  key={card.label}
-                  className="p-5 sm:p-6 rounded-xl sm:rounded-2xl bg-[#000000] border border-[#FFFFFF]/10 transition-all duration-300 hover:border-[#FFFFFF]/40 hover:-translate-y-1 group"
-                >
-                  <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-[#FFFFFF] mb-2 sm:mb-3 transition-transform duration-300 group-hover:scale-110" />
-                  <p className="text-[10px] sm:text-[11px] font-mono text-[#BFBFBF] uppercase tracking-widest mb-1">
-                    {card.label}
-                  </p>
-                  <p className="text-sm sm:text-base font-bold text-[#FFFFFF] leading-snug">
-                    {card.value}
-                  </p>
-                </div>
-              );
-            })}
           </div>
         </motion.div>
       </div>
