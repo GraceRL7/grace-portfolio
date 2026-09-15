@@ -77,29 +77,32 @@ export default function CinematicExperience() {
               {/* Timeline Indicator Point */}
               <div className="absolute -left-[31px] sm:-left-[47px] top-2.5 w-3.5 h-3.5 rounded-full bg-[#000000] border-2 border-[#FFFFFF] group-hover:bg-[#FFFFFF] transition-colors duration-300" />
 
-              {/* Minimal Luxury Card with Full White Hover Effect */}
-              <div className="group/card p-6 sm:p-8 rounded-3xl bg-[#111111]/80 border border-[#FFFFFF]/15 backdrop-blur-[20px] transition-all duration-500 hover:bg-[#FFFFFF] hover:text-[#000000] hover:border-[#FFFFFF] hover:-translate-y-1.5 shadow-2xl">
+              {/* 3D Metallic Glass Card with Shimmer & Silver Glow Hover Effect */}
+              <div className="relative group/card p-6 sm:p-8 rounded-3xl bg-[#111111]/80 border border-[#FFFFFF]/15 backdrop-blur-[20px] transition-all duration-500 hover:border-[#FFFFFF]/60 hover:bg-[#161619] hover:shadow-[0_15px_40px_rgba(255,255,255,0.12)] hover:-translate-y-1.5 overflow-hidden">
+                {/* Shimmer Light Line Sweep Effect on Hover */}
+                <div className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-700 pointer-events-none bg-[linear-gradient(115deg,transparent_20%,rgba(255,255,255,0.12)_45%,rgba(255,255,255,0.28)_50%,rgba(255,255,255,0.12)_55%,transparent_80%)] translate-x-[-100%] group-hover/card:translate-x-[100%] transition-transform duration-1000 ease-in-out" />
+
                 <div className="flex flex-wrap items-baseline justify-between gap-3 mb-3">
-                  <h3 className="font-['Bebas_Neue',sans-serif] text-[32px] tracking-[0.05em] text-[#FFFFFF] group-hover/card:text-[#000000] transition-colors duration-300">
+                  <h3 className="font-['Bebas_Neue',sans-serif] text-[32px] tracking-[0.05em] text-[#FFFFFF] group-hover/card:text-white transition-colors duration-300">
                     {exp.role}
                   </h3>
-                  <span className="font-mono text-xs px-3 py-1 rounded-full border border-white/20 bg-white/5 text-[#BFBFBF] group-hover/card:bg-black/10 group-hover/card:border-black/30 group-hover/card:text-[#000000] transition-all duration-300">
+                  <span className="font-mono text-xs px-3 py-1 rounded-full border border-white/20 bg-white/5 text-[#BFBFBF] group-hover/card:border-white/50 group-hover/card:text-white group-hover/card:bg-white/10 transition-all duration-300">
                     {exp.period}
                   </span>
                 </div>
 
                 {/* Highlighted Company Badge & Title */}
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-white/10 border border-white/20 text-[#FFFFFF] group-hover/card:bg-black/10 group-hover/card:border-black/30 group-hover/card:text-[#000000] transition-all duration-300 mb-6">
-                  <Building2 className="w-3.5 h-3.5 text-white group-hover/card:text-black shrink-0 transition-colors" />
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-white/10 border border-white/20 text-[#FFFFFF] group-hover/card:border-white/50 group-hover/card:bg-white/20 transition-all duration-300 mb-6">
+                  <Building2 className="w-3.5 h-3.5 text-white shrink-0" />
                   <span className="font-mono text-xs sm:text-sm font-semibold uppercase tracking-wider">
                     {exp.company}
                   </span>
                 </div>
 
-                <ul className="space-y-3 font-['Inter',sans-serif] text-sm text-[#FFFFFF]/80 group-hover/card:text-[#000000]/90 font-light leading-relaxed transition-colors duration-300">
+                <ul className="space-y-3 font-['Inter',sans-serif] text-sm text-[#FFFFFF]/80 group-hover/card:text-white font-light leading-relaxed transition-colors duration-300">
                   {exp.contributions.map((point, idx) => (
                     <li key={idx} className="flex items-start gap-3">
-                      <span className="text-[#FFFFFF]/40 group-hover/card:text-[#000000]/60 mt-1 font-bold">•</span>
+                      <span className="text-[#FFFFFF]/40 group-hover/card:text-white/80 mt-1 font-bold">•</span>
                       <span>{point}</span>
                     </li>
                   ))}
