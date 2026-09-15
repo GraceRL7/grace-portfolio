@@ -205,45 +205,47 @@ export default function CinematicHobbies() {
             <ChevronRight strokeWidth={1} className="w-9 h-9 sm:w-12 sm:h-12 group-hover:scale-125 transition-transform" />
           </button>
 
-          {/* Active Card Text Anchor Container at Container Center */}
-          {HOBBIES_LIST[activeIndex] && (
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-[135px] sm:translate-y-[165px] lg:translate-y-[180px] z-30 w-[280px] xs:w-[320px] sm:w-[440px] md:w-[500px] text-center flex flex-col items-center justify-center pointer-events-none">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={HOBBIES_LIST[activeIndex].id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.25 }}
-                  className="flex flex-col items-center justify-center"
-                >
-                  {/* Title sitting ~24px below active image */}
-                  <h3 className={`font-['Caveat',cursive] text-3xl sm:text-5xl font-bold tracking-wide capitalize mb-1 sm:mb-2 ${
-                    isBeach ? 'text-[#00838F]' : 'text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]'
-                  }`}>
-                    {HOBBIES_LIST[activeIndex].title}
-                  </h3>
+          {/* Inner Stage Wrapper shifted slightly left on desktop (-40px to -50px) */}
+          <div className="relative w-full h-full flex items-center justify-center -translate-x-0 md:-translate-x-12">
+            {/* Active Card Text Anchor Container at Container Center */}
+            {HOBBIES_LIST[activeIndex] && (
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-[135px] sm:translate-y-[165px] lg:translate-y-[180px] z-30 w-[280px] xs:w-[320px] sm:w-[440px] md:w-[500px] text-center flex flex-col items-center justify-center pointer-events-none">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={HOBBIES_LIST[activeIndex].id}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.25 }}
+                    className="flex flex-col items-center justify-center"
+                  >
+                    {/* Title sitting ~24px below active image */}
+                    <h3 className={`font-['Caveat',cursive] text-3xl sm:text-5xl font-bold tracking-wide capitalize mb-1 sm:mb-2 ${
+                      isBeach ? 'text-[#00838F]' : 'text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]'
+                    }`}>
+                      {HOBBIES_LIST[activeIndex].title}
+                    </h3>
 
-                  {/* Description sitting ~10px below title */}
-                  <p className={`font-['Inter',sans-serif] text-xs sm:text-sm font-light max-w-md leading-relaxed px-2 ${
-                    isBeach ? 'text-[#4A5B66]' : 'text-[#BFBFBF]'
-                  }`}>
-                    {HOBBIES_LIST[activeIndex].description}
-                  </p>
+                    {/* Description sitting ~10px below title */}
+                    <p className={`font-['Inter',sans-serif] text-xs sm:text-sm font-light max-w-md leading-relaxed px-2 ${
+                      isBeach ? 'text-[#4A5B66]' : 'text-[#BFBFBF]'
+                    }`}>
+                      {HOBBIES_LIST[activeIndex].description}
+                    </p>
 
-                  {/* Scroll Indicator Prompt */}
-                  <div className={`mt-3 flex items-center gap-2 text-[10px] font-mono tracking-widest uppercase ${
-                    isBeach ? 'text-[#00838F]/70' : 'text-white/40'
-                  }`}>
-                    <Mouse className="w-3.5 h-3.5 animate-bounce" />
-                    <span>SCROLL TO ROTATE ({activeIndex + 1} / {total})</span>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          )}
+                    {/* Scroll Indicator Prompt */}
+                    <div className={`mt-3 flex items-center gap-2 text-[10px] font-mono tracking-widest uppercase ${
+                      isBeach ? 'text-[#00838F]/70' : 'text-white/40'
+                    }`}>
+                      <Mouse className="w-3.5 h-3.5 animate-bounce" />
+                      <span>SCROLL TO ROTATE ({activeIndex + 1} / {total})</span>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            )}
 
-          {/* Orbiting Cards */}
+            {/* Orbiting Cards */}
           {HOBBIES_LIST.map((hobby, index) => {
             // Endless circular index diff offset calculation
             let diff = (index - activeIndex + total) % total;
@@ -333,6 +335,7 @@ export default function CinematicHobbies() {
               </motion.div>
             );
           })}
+          </div>
         </div>
       </div>
     </section>
