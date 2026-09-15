@@ -100,9 +100,13 @@ export default function CinematicNavbar() {
           <a
             href={profile.resumeFile}
             download
-            className="group relative inline-flex items-center gap-2 px-5 sm:px-6 py-2 sm:py-2.5 rounded-full border border-[#FFFFFF]/30 text-[12px] sm:text-[14px] font-['Inter',sans-serif] font-medium tracking-[0.15em] sm:tracking-[0.2em] text-[#FFFFFF] transition-all duration-300 hover:bg-[#FFFFFF] hover:text-[#000000] hover:scale-[1.03]"
+            className="galaxy-btn group !px-5 !py-2 !text-[11px]"
           >
-            <span>RESUME</span>
+            <span className="galaxy-spark" />
+            <span className="galaxy-backdrop" />
+            <span className="galaxy-text">
+              <span>RESUME ↗</span>
+            </span>
           </a>
         </div>
 

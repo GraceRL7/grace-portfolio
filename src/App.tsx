@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react';
 import CinematicNavbar from './components/CinematicNavbar';
 import CinematicHero from './components/CinematicHero';
 import CinematicAbout from './components/CinematicAbout';
@@ -32,52 +31,9 @@ export default function App() {
 
       <GraceAIAssistant />
 
-      {/* Custom Difference Blend Cursor */}
-      <CustomCursor />
-
       <footer className="bg-black border-t border-white/10 py-10 px-6 text-center text-xs font-mono text-[#BDBDBD]">
         <p>© 2026 GRACE RESHAL LEWIS. All rights reserved.</p>
       </footer>
     </div>
   );
-}
-
-function CustomCursor() {
-  const cursorRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const cursor = cursorRef.current;
-    if (!cursor) return;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      cursor.style.top = `${e.clientY}px`;
-      cursor.style.left = `${e.clientX}px`;
-      cursor.style.opacity = '1';
-    };
-
-    const handleMouseLeave = () => {
-      cursor.style.opacity = '0';
-    };
-
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement | null;
-      if (target && target.closest('a, button, input, [role="button"]')) {
-        cursor.classList.add('custom-cursor--hover');
-      } else {
-        cursor.classList.remove('custom-cursor--hover');
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseleave', handleMouseLeave);
-    window.addEventListener('mouseover', handleMouseOver);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseleave', handleMouseLeave);
-      window.removeEventListener('mouseover', handleMouseOver);
-    };
-  }, []);
-
-  return <div ref={cursorRef} className="custom-cursor hidden md:block" />;
 }

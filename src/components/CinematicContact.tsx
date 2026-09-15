@@ -184,10 +184,18 @@ export default function CinematicContact() {
               <button
                 type="submit"
                 disabled={status === 'submitting'}
-                className="w-full py-3.5 rounded-full bg-[#FFFFFF] text-[#000000] font-['Inter',sans-serif] font-bold text-xs uppercase tracking-widest hover:bg-[#BFBFBF] transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+                className="galaxy-btn w-full !py-3.5 group"
               >
-                <span>{status === 'submitting' ? 'SENDING...' : 'SEND MESSAGE'}</span>
-                <Send size={14} />
+                <span className="galaxy-spark" />
+                <span className="galaxy-backdrop" />
+                <span className="galaxy-container">
+                  <span className="galaxy-star galaxy-star--static" style={{ top: '30%', left: '20%', '--duration': 10, '--delay': 1, '--size': 2 } as React.CSSProperties} />
+                  <span className="galaxy-star galaxy-star--static" style={{ top: '70%', left: '80%', '--duration': 14, '--delay': 3, '--size': 3 } as React.CSSProperties} />
+                </span>
+                <span className="galaxy-text">
+                  <span>{status === 'submitting' ? 'SENDING...' : 'SEND MESSAGE ↗'}</span>
+                  <Send size={14} />
+                </span>
               </button>
 
               {statusMsg && (

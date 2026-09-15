@@ -125,10 +125,18 @@ export default function CinematicHero() {
               <a
                 href={profile.resumeFile}
                 download
-                className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full border border-[#FFFFFF]/40 bg-transparent text-[#FFFFFF] font-['Inter',sans-serif] text-[11px] sm:text-xs font-semibold tracking-[0.15em] sm:tracking-[0.2em] uppercase transition-all duration-300 hover:bg-[#FFFFFF] hover:text-[#000000] hover:scale-[1.03] whitespace-nowrap"
+                className="galaxy-btn group"
               >
-                <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#BFBFBF]" />
-                <span>DOWNLOAD RESUME</span>
+                <span className="galaxy-spark" />
+                <span className="galaxy-backdrop" />
+                <span className="galaxy-container">
+                  <span className="galaxy-star galaxy-star--static" style={{ top: '25%', left: '30%', '--duration': 14, '--delay': 1, '--size': 2 } as React.CSSProperties} />
+                  <span className="galaxy-star galaxy-star--static" style={{ top: '65%', left: '80%', '--duration': 16, '--delay': 3, '--size': 3 } as React.CSSProperties} />
+                </span>
+                <span className="galaxy-text">
+                  <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  <span>DOWNLOAD RESUME</span>
+                </span>
               </a>
             </div>
 
