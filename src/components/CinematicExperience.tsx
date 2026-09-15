@@ -77,29 +77,29 @@ export default function CinematicExperience() {
               {/* Timeline Indicator Point */}
               <div className="absolute -left-[31px] sm:-left-[47px] top-2.5 w-3.5 h-3.5 rounded-full bg-[#000000] border-2 border-[#FFFFFF] group-hover:bg-[#FFFFFF] transition-colors duration-300" />
 
-              {/* Minimal Luxury Card */}
-              <div className="p-8 rounded-3xl bg-[#111111]/80 border border-[#FFFFFF]/15 backdrop-blur-[20px] transition-all duration-300 hover:border-[#FFFFFF]/40 hover:-translate-y-1 shadow-2xl">
+              {/* Minimal Luxury Card with Full White Hover Effect */}
+              <div className="group/card p-6 sm:p-8 rounded-3xl bg-[#111111]/80 border border-[#FFFFFF]/15 backdrop-blur-[20px] transition-all duration-500 hover:bg-[#FFFFFF] hover:text-[#000000] hover:border-[#FFFFFF] hover:-translate-y-1.5 shadow-2xl">
                 <div className="flex flex-wrap items-baseline justify-between gap-3 mb-3">
-                  <h3 className="font-['Bebas_Neue',sans-serif] text-[32px] tracking-[0.05em] text-[#FFFFFF]">
+                  <h3 className="font-['Bebas_Neue',sans-serif] text-[32px] tracking-[0.05em] text-[#FFFFFF] group-hover/card:text-[#000000] transition-colors duration-300">
                     {exp.role}
                   </h3>
-                  <span className="font-mono text-xs px-3 py-1 rounded-full border border-white/20 bg-white/5 text-[#BFBFBF]">
+                  <span className="font-mono text-xs px-3 py-1 rounded-full border border-white/20 bg-white/5 text-[#BFBFBF] group-hover/card:bg-black/10 group-hover/card:border-black/30 group-hover/card:text-[#000000] transition-all duration-300">
                     {exp.period}
                   </span>
                 </div>
 
                 {/* Highlighted Company Badge & Title */}
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-white/10 border border-white/20 text-[#FFFFFF] mb-6">
-                  <Building2 className="w-3.5 h-3.5 text-white shrink-0" />
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-white/10 border border-white/20 text-[#FFFFFF] group-hover/card:bg-black/10 group-hover/card:border-black/30 group-hover/card:text-[#000000] transition-all duration-300 mb-6">
+                  <Building2 className="w-3.5 h-3.5 text-white group-hover/card:text-black shrink-0 transition-colors" />
                   <span className="font-mono text-xs sm:text-sm font-semibold uppercase tracking-wider">
                     {exp.company}
                   </span>
                 </div>
 
-                <ul className="space-y-3 font-['Inter',sans-serif] text-sm text-[#FFFFFF]/80 font-light leading-relaxed">
+                <ul className="space-y-3 font-['Inter',sans-serif] text-sm text-[#FFFFFF]/80 group-hover/card:text-[#000000]/90 font-light leading-relaxed transition-colors duration-300">
                   {exp.contributions.map((point, idx) => (
                     <li key={idx} className="flex items-start gap-3">
-                      <span className="text-[#FFFFFF]/40 mt-1">•</span>
+                      <span className="text-[#FFFFFF]/40 group-hover/card:text-[#000000]/60 mt-1 font-bold">•</span>
                       <span>{point}</span>
                     </li>
                   ))}
