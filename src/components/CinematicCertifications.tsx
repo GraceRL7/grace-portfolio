@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, ExternalLink, X, Eye, Maximize2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ExternalLink, X, Maximize2 } from 'lucide-react';
 import { certificateList, CertificateItem } from '../data/certificatesData';
 
 export default function CinematicCertifications() {
@@ -200,28 +200,23 @@ export default function CinematicCertifications() {
                     <div className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-700 pointer-events-none bg-[linear-gradient(115deg,transparent_20%,rgba(255,255,255,0.15)_45%,rgba(255,255,255,0.35)_50%,rgba(255,255,255,0.15)_55%,transparent_80%)] translate-x-[-100%] group-hover/card:translate-x-[100%] transition-transform duration-1000 ease-in-out" />
 
                     {/* TOP PREVIEW IMAGE CONTAINER */}
-                    <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-[#050505] border border-white/10 mb-4 group-hover/card:border-white/30 transition-colors">
+                    <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-[#050505] border border-white/10 mb-4 group-hover/card:border-white/40 transition-colors">
                       <img
                         src={cert.image}
                         alt={cert.title}
                         loading="lazy"
-                        className={`w-full h-full object-cover transition-all duration-700 ease-out ${
+                        className={`w-full h-full object-cover transition-all duration-500 ease-out ${
                           isTouchActive
-                            ? 'filter-none scale-105'
-                            : 'grayscale group-hover/card:grayscale-0 group-hover/card:scale-105 opacity-90 group-hover/card:opacity-100'
+                            ? 'filter-none scale-[1.02]'
+                            : 'grayscale opacity-85 group-hover/card:grayscale-0 group-hover/card:opacity-100 group-hover/card:scale-[1.03]'
                         }`}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 opacity-60 group-hover/card:opacity-30 transition-opacity" />
 
-                      {/* Expand Eye Hover Icon */}
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 bg-black/40 backdrop-blur-[2px]">
-                        <div className="w-12 h-12 rounded-full bg-white/20 border border-white/50 backdrop-blur-md flex items-center justify-center text-white transform scale-90 group-hover/card:scale-100 transition-transform">
-                          <Eye className="w-6 h-6" />
-                        </div>
-                      </div>
+                      {/* Subtle Gradient Shadow At Bottom for Readability */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 opacity-70 group-hover/card:opacity-20 transition-opacity pointer-events-none" />
 
                       {/* Category Tag */}
-                      <div className="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md bg-black/70 border border-white/20 backdrop-blur-md text-[10px] sm:text-[11px] font-mono tracking-wider text-white/90 uppercase">
+                      <div className="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md bg-black/80 border border-white/20 backdrop-blur-md text-[10px] font-mono tracking-widest text-white/90 uppercase z-10 shadow-md">
                         {cert.category}
                       </div>
                     </div>
