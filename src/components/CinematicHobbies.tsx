@@ -281,12 +281,6 @@ export default function CinematicHobbies() {
                       loading="eager"
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
-
-                    {/* Category pill on card */}
-                    <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-black/80 border border-white/20 text-[9px] sm:text-[10px] font-mono tracking-widest text-white/90 uppercase">
-                      {hobby.category}
-                    </span>
                   </div>
                 </div>
               </motion.div>
