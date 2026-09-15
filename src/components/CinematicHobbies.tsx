@@ -126,19 +126,39 @@ export default function CinematicHobbies() {
     setActiveIndex((prev) => (prev - 1 + total) % total);
   };
 
-  // Wheel scroll handler to continuously rotate circular cards endless loop
+  // Wheel scroll handler supporting both vertical (deltaY) and horizontal (deltaX / trackpad swipe)
   const handleWheel = (e: React.WheelEvent) => {
-    if (e.deltaY > 30) {
+    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+    if (delta > 20) {
       handleNext();
-    } else if (e.deltaY < -30) {
+    } else if (delta < -20) {
       handlePrev();
     }
   };
 
-  // Calculate position on arc for each card with wide spacing (25 degrees)
-  const radius = isMobile ? 420 : 720;
-  const arcCenterY = isMobile ? 360 : 580;
-  const angleStep = isMobile ? 26 : 25; // Extra spacing between cards
+  // Touch swipe support for mobile/trackpad horizontal gesture
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diffX = touchStartX - touchEndX;
+    if (diffX > 40) {
+      handleNext();
+    } else if (diffX < -40) {
+      handlePrev();
+    }
+    setTouchStartX(null);
+  };
+
+  // Calculate position on arc so card sits exactly centered in stage viewport
+  const radius = isMobile ? 380 : 650;
+  const arcCenterY = isMobile ? 420 : 680;
+  const angleStep = isMobile ? 26 : 24;
 
   const activeHobby = HOBBIES_LIST[activeIndex];
 
@@ -147,6 +167,8 @@ export default function CinematicHobbies() {
       ref={containerRef}
       id="hobbies"
       onWheel={handleWheel}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
       className="relative w-full min-h-screen py-16 sm:py-24 bg-[#000000] text-[#FFFFFF] z-20 flex flex-col justify-between overflow-hidden"
     >
       {/* Viewport Container */}
@@ -171,7 +193,7 @@ export default function CinematicHobbies() {
         </div>
 
         {/* CIRCULAR STAGE CAROUSEL WITH ULTRA-THIN SIDE NAVIGATION ARROWS */}
-        <div className="relative w-full min-h-[380px] sm:min-h-[460px] flex-grow flex items-center justify-center my-4 sm:my-8 overflow-hidden">
+        <div className="relative w-full min-h-[420px] sm:min-h-[500px] flex-grow flex items-center justify-center my-4 sm:my-8 overflow-hidden">
           
           {/* Ultra-thin Left Side Navigation Arrow */}
           <button
@@ -197,7 +219,7 @@ export default function CinematicHobbies() {
             if (diff > total / 2) diff -= total;
             if (diff < -total / 2) diff += total;
 
-            // Compute circular arc angles with 25 deg spacing
+            // Compute circular arc angles
             const cardAngle = diff * angleStep; // in degrees
             const rad = (cardAngle - 90) * (Math.PI / 180);
             
@@ -210,7 +232,7 @@ export default function CinematicHobbies() {
             const isVisible = absDiff <= 4;
             if (!isVisible) return null;
 
-            const scale = absDiff === 0 ? 1.12 : Math.max(0.65, 0.95 - absDiff * 0.12);
+            const scale = absDiff === 0 ? 1.15 : Math.max(0.65, 0.95 - absDiff * 0.12);
             const opacity = absDiff === 0 ? 1 : Math.max(0.15, 0.8 - absDiff * 0.22);
             const grayscale = absDiff === 0 ? 0 : 1;
             const blur = absDiff === 0 ? 0 : Math.min(6, absDiff * 2);
@@ -232,7 +254,7 @@ export default function CinematicHobbies() {
                   stiffness: 280,
                   damping: 28,
                 }}
-                className="absolute top-[42%] left-1/2 -translate-x-1/2 -translate-y-1/2 origin-center pointer-events-auto cursor-pointer"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 origin-center pointer-events-auto cursor-pointer"
               >
                 <div
                   style={{
