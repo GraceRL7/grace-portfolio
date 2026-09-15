@@ -49,9 +49,21 @@ export interface CertificateItem {
   pdfUrl: string;
   description: string;
   category: string;
+  youtubeUrl?: string;
 }
 
 export const certificateList: CertificateItem[] = [
+  {
+    id: '1st-place-short-film',
+    title: '1st Place Winner — Directed, Shot & Edited Short Film / Video Production',
+    issuer: 'Inter-Collegiate Film Festival & Competition',
+    year: '2025',
+    image: eventHeadImg,
+    pdfUrl: 'https://youtu.be/n8D0tpW85XQ?si=9RwUiiAT0lvri-3x',
+    youtubeUrl: 'https://www.youtube.com/embed/n8D0tpW85XQ?autoplay=1&rel=0',
+    description: 'Secured 1st Place overall in national video production. Directed, filmed, and edited the winning video project featuring cinematic storytelling, multi-track audio sync, and color grading.',
+    category: '1st Place Award & Video Production',
+  },
   {
     id: 'oracle-ai',
     title: 'Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate',

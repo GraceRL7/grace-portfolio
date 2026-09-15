@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, ExternalLink, X, Maximize2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ExternalLink, X, Maximize2, Play } from 'lucide-react';
 import { certificateList, CertificateItem } from '../data/certificatesData';
 
 export default function CinematicCertifications() {
@@ -91,7 +91,7 @@ export default function CinematicCertifications() {
             >
               <div className="w-2 h-2 rounded-full bg-[#FFFFFF]" />
               <span className="font-['Inter',sans-serif] text-[12px] sm:text-[14px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[#BFBFBF]">
-                05 / MY CERTIFICATIONS
+                05 / MY CERTIFICATIONS & HONORS
               </span>
             </motion.div>
 
@@ -102,7 +102,7 @@ export default function CinematicCertifications() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="font-['Antonio',sans-serif] text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-[0.03em] leading-none mb-3 text-[#FFFFFF]"
             >
-              MY CERTIFICATIONS
+              MY CERTIFICATIONS & AWARDS
             </motion.h2>
 
             <motion.p
@@ -112,7 +112,7 @@ export default function CinematicCertifications() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="font-['Inter',sans-serif] text-base sm:text-xl font-light tracking-wide text-[#CCCCCC]"
             >
-              Proof of continuous learning.
+              Proof of continuous learning, competitive achievements, and award-winning creative direction.
             </motion.p>
           </div>
 
@@ -125,7 +125,7 @@ export default function CinematicCertifications() {
             className="hidden lg:flex items-center gap-6 border-l border-white/20 pl-8 py-2 max-w-[420px]"
           >
             <p className="font-['Inter',sans-serif] text-sm text-white/70 leading-relaxed italic">
-              "Each certificate represents a step in my journey to learn, grow and create meaningful impact."
+              "Each certificate & award represents a step in my journey to learn, grow and create meaningful impact."
             </p>
             <span className="font-serif italic text-2xl text-white/40 whitespace-nowrap select-none">
               Better Everyday
@@ -212,6 +212,15 @@ export default function CinematicCertifications() {
                         }`}
                       />
 
+                      {/* Play Button Overlay for Video Items */}
+                      {cert.youtubeUrl && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover/card:bg-black/20 transition-colors z-20">
+                          <div className="w-12 h-12 rounded-full bg-white/90 border border-white text-black flex items-center justify-center shadow-xl group-hover/card:scale-110 transition-transform">
+                            <Play className="w-5 h-5 fill-black ml-0.5" />
+                          </div>
+                        </div>
+                      )}
+
                       {/* Subtle Gradient Shadow At Bottom for Readability */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 opacity-70 group-hover/card:opacity-20 transition-opacity pointer-events-none" />
 
@@ -237,10 +246,10 @@ export default function CinematicCertifications() {
                       {/* VIEW CERTIFICATE FOOTER TRIGGER */}
                       <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-medium text-white/70 group-hover/card:text-white transition-colors">
                         <span className="tracking-wider uppercase text-[11px] font-mono group-hover/card:translate-x-1 transition-transform">
-                          View Certificate
+                          {cert.youtubeUrl ? 'PLAY VIDEO PROJECT' : 'VIEW CERTIFICATE'}
                         </span>
                         <div className="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center text-white group-hover/card:bg-white group-hover/card:text-black transition-all">
-                          <Maximize2 className="w-3.5 h-3.5" />
+                          {cert.youtubeUrl ? <Play className="w-3.5 h-3.5 fill-current" /> : <Maximize2 className="w-3.5 h-3.5" />}
                         </div>
                       </div>
                     </div>
@@ -303,13 +312,25 @@ export default function CinematicCertifications() {
                 <X className="w-5 h-5" />
               </button>
 
-              {/* Modal Left Image Container */}
-              <div className="w-full md:w-3/5 bg-black/80 p-4 sm:p-6 flex items-center justify-center border-b md:border-b-0 md:border-r border-white/10 max-h-[50vh] md:max-h-none overflow-hidden">
-                <img
-                  src={selectedCert.image}
-                  alt={selectedCert.title}
-                  className="max-h-full max-w-full object-contain rounded-lg shadow-2xl border border-white/10"
-                />
+              {/* Modal Left Image Container or Video Player */}
+              <div className="w-full md:w-3/5 bg-black/90 p-4 sm:p-6 flex items-center justify-center border-b md:border-b-0 md:border-r border-white/10 max-h-[55vh] md:max-h-none overflow-hidden">
+                {selectedCert.youtubeUrl ? (
+                  <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-white/20 shadow-2xl">
+                    <iframe
+                      src={selectedCert.youtubeUrl}
+                      title={selectedCert.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      className="w-full h-full border-0"
+                    />
+                  </div>
+                ) : (
+                  <img
+                    src={selectedCert.image}
+                    alt={selectedCert.title}
+                    className="max-h-full max-w-full object-contain rounded-lg shadow-2xl border border-white/10"
+                  />
+                )}
               </div>
 
               {/* Modal Right Info Container */}
@@ -338,7 +359,7 @@ export default function CinematicCertifications() {
                     rel="noopener noreferrer"
                     className="w-full py-3.5 px-5 rounded-xl bg-white text-black font-semibold text-sm flex items-center justify-center gap-2 hover:bg-white/90 transition-colors shadow-lg group/btn"
                   >
-                    <span>VIEW FULL CERTIFICATE</span>
+                    <span>{selectedCert.youtubeUrl ? 'OPEN ON YOUTUBE' : 'VIEW FULL CERTIFICATE'}</span>
                     <ExternalLink className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
                   </a>
                   <button
