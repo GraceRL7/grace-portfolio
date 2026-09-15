@@ -4,6 +4,7 @@ export type ThemeMode = 'night' | 'beach';
 
 interface ThemeContextType {
   theme: ThemeMode;
+  isWaving: boolean;
   toggleTheme: () => void;
   setTheme: (theme: ThemeMode) => void;
 }
@@ -21,6 +22,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     return 'night';
   });
 
+  const [isWaving, setIsWaving] = useState(false);
+
   useEffect(() => {
     const root = document.documentElement;
     root.classList.remove('theme-night', 'theme-beach');
@@ -30,15 +33,33 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, [theme]);
 
   const toggleTheme = () => {
-    setThemeState((prev) => (prev === 'night' ? 'beach' : 'night'));
+    if (isWaving) return;
+    setIsWaving(true);
+
+    // Delay the theme state switch by 350ms so the ocean waves sweep down first
+    setTimeout(() => {
+      setThemeState((prev) => (prev === 'night' ? 'beach' : 'night'));
+    }, 350);
+
+    // Clear wave overlay after animation completes (1200ms)
+    setTimeout(() => {
+      setIsWaving(false);
+    }, 1200);
   };
 
   const setTheme = (newTheme: ThemeMode) => {
-    setThemeState(newTheme);
+    if (newTheme === theme) return;
+    setIsWaving(true);
+    setTimeout(() => {
+      setThemeState(newTheme);
+    }, 350);
+    setTimeout(() => {
+      setIsWaving(false);
+    }, 1200);
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, isWaving, toggleTheme, setTheme }}>
       {children}
     </ThemeContext.Provider>
   );

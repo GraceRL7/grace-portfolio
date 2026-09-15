@@ -8,6 +8,7 @@ import CinematicCertifications from './components/CinematicCertifications';
 import CinematicHobbies from './components/CinematicHobbies';
 import CinematicContact from './components/CinematicContact';
 import GraceAIAssistant from './components/GraceAIAssistant';
+import OceanWaveTransition from './components/OceanWaveTransition';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 
 function PortfolioContent() {
@@ -16,8 +17,11 @@ function PortfolioContent() {
 
   return (
     <div className={`font-body antialiased transition-colors duration-1000 ${
-      isBeach ? 'bg-[#FAF6F0] text-[#1C242B]' : 'bg-black text-white selection:bg-white selection:text-black'
+      isBeach ? 'bg-[#FAF8F5] text-[#121E24]' : 'bg-black text-white selection:bg-white selection:text-black'
     }`}>
+      {/* Ocean Wave Sweep Overlay when toggling themes */}
+      <OceanWaveTransition />
+
       <CinematicNavbar />
 
       <main className="relative">
@@ -34,7 +38,7 @@ function PortfolioContent() {
       <GraceAIAssistant />
 
       <footer className={`border-t py-10 px-6 text-center text-xs font-mono transition-colors duration-1000 ${
-        isBeach ? 'bg-[#F3ECE1] border-[#7A4A21]/15 text-[#5C5349]' : 'bg-black border-white/10 text-[#BDBDBD]'
+        isBeach ? 'bg-[#F0F7F9] border-[#0097A7]/15 text-[#4A5B66]' : 'bg-black border-white/10 text-[#BDBDBD]'
       }`}>
         <p>© 2026 GRACE RESHAL LEWIS. All rights reserved.</p>
       </footer>
