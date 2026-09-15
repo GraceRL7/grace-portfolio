@@ -9,9 +9,10 @@ export default function CinematicExperience() {
       period: 'Aug 2024 – May 2025',
       contributions: [
         'Developed and maintained the official El Mundo Sports website using WordPress and Elementor.',
-        'Designed responsive pages and improved user experience across all devices.',
-        'Managed content updates, performance optimization, and website enhancements.',
-        'Collaborated with stakeholders to implement business and marketing requirements.',
+        'Configured search engine optimization (SEO), meta titles, meta descriptions, and search keyphrases using All in One SEO to boost organic search visibility.',
+        'Designed responsive pages, custom forms (Forminator), and interactive UI elements for optimal user experience across all devices.',
+        'Applied backend performance optimization, speed enhancements, content updates, and regular website security updates.',
+        'Collaborated with stakeholders to execute digital marketing and online brand visibility strategies.',
       ],
     },
     {
