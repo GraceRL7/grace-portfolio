@@ -180,8 +180,8 @@ export default function CinematicHobbies() {
           </p>
         </div>
 
-        {/* COMPACT SHALLOW ARC CAROUSEL STAGE */}
-        <div className="relative w-full h-[500px] sm:h-[580px] lg:h-[620px] flex items-center justify-center my-2 sm:my-4">
+        {/* COMPACT SHALLOW ARC CAROUSEL STAGE (Shifted 500px left) */}
+        <div className="relative w-full h-[500px] sm:h-[580px] lg:h-[620px] flex items-center justify-center my-2 sm:my-4 -translate-x-0 md:-translate-x-[500px]">
 
           {/* Ultra-thin Left Side Navigation Arrow */}
           <button
