@@ -180,14 +180,14 @@ export default function CinematicHobbies() {
           </p>
         </div>
 
-        {/* COMPACT SHALLOW ARC CAROUSEL STAGE (Shifted 20px left) */}
-        <div className="relative w-full h-[500px] sm:h-[580px] lg:h-[620px] flex items-center justify-center my-2 sm:my-4 -translate-x-0 md:-translate-x-[20px]">
+        {/* PROPER FIXED SEMICIRCLE CAROUSEL STAGE (Shifted 100px left) */}
+        <div className="relative w-full h-[380px] sm:h-[440px] lg:h-[480px] flex items-center justify-center my-2 sm:my-4 -translate-x-0 md:-translate-x-[100px]">
 
           {/* Ultra-thin Left Side Navigation Arrow */}
           <button
             onClick={handlePrev}
             aria-label="Previous Hobby"
-            className={`absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-40 p-3 sm:p-4 transition-colors focus-visible:outline-none group cursor-pointer ${
+            className={`absolute left-2 sm:left-6 translate-x-[150px] top-1/2 -translate-y-1/2 z-40 p-3 sm:p-4 transition-colors focus-visible:outline-none group cursor-pointer ${
               isBeach ? 'text-[#7A4A21]/50 hover:text-[#00ACC1]' : 'text-white/50 hover:text-white'
             }`}
           >
@@ -205,45 +205,7 @@ export default function CinematicHobbies() {
             <ChevronRight strokeWidth={1} className="w-9 h-9 sm:w-12 sm:h-12 group-hover:scale-125 transition-transform" />
           </button>
 
-          {/* ACTIVE CONTENT BLOCK - PERFECTLY CENTERED ON PAGE DIRECTLY BENEATH ACTIVE CARD */}
-          {HOBBIES_LIST[activeIndex] && (
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-[160px] sm:translate-y-[195px] lg:translate-y-[215px] z-30 w-[280px] xs:w-[320px] sm:w-[440px] md:w-[500px] text-center flex flex-col items-center justify-center pointer-events-none">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={HOBBIES_LIST[activeIndex].id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.25 }}
-                  className="flex flex-col items-center justify-center"
-                >
-                  {/* Title sitting ~20-25px below active image */}
-                  <h3 className={`font-['Caveat',cursive] text-3xl sm:text-5xl font-bold tracking-wide capitalize mb-1 sm:mb-2 ${
-                    isBeach ? 'text-[#00838F]' : 'text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]'
-                  }`}>
-                    {HOBBIES_LIST[activeIndex].title}
-                  </h3>
-
-                  {/* Description sitting ~8-12px below title */}
-                  <p className={`font-['Inter',sans-serif] text-xs sm:text-sm font-light max-w-md leading-relaxed px-2 ${
-                    isBeach ? 'text-[#4A5B66]' : 'text-[#BFBFBF]'
-                  }`}>
-                    {HOBBIES_LIST[activeIndex].description}
-                  </p>
-
-                  {/* Scroll Indicator Prompt */}
-                  <div className={`mt-3 flex items-center gap-2 text-[10px] font-mono tracking-widest uppercase ${
-                    isBeach ? 'text-[#00838F]/70' : 'text-white/40'
-                  }`}>
-                    <Mouse className="w-3.5 h-3.5 animate-bounce" />
-                    <span>SCROLL TO ROTATE ({activeIndex + 1} / {total})</span>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          )}
-
-          {/* SHALLOW ARC ORBITING CARDS */}
+          {/* PROPER SEMICIRCLE ORBITING CARDS WITH INCREASED SPACING */}
           {HOBBIES_LIST.map((hobby, index) => {
             // Endless circular index diff offset calculation
             let diff = (index - activeIndex + total) % total;
@@ -251,20 +213,23 @@ export default function CinematicHobbies() {
             if (diff < -total / 2) diff += total;
 
             const absDiff = Math.abs(diff);
-            // Render only active card (0) and 2 neighboring cards on each side (-2, -1, 0, 1, 2)
+            // Render active card (0) and 2 neighboring cards on each side (-2, -1, 0, 1, 2)
             if (absDiff > 2) return null;
 
-            // Compact shallow arc geometry
-            const arcSpacingX = isMobile ? 140 : 220;
-            const cardX = diff * arcSpacingX;
-            // Shallow arch curve: active card (diff=0) is at top-center (cardY = -90px / -110px)
-            const cardY = (diff * diff) * (isMobile ? 18 : 28) - (isMobile ? 90 : 110);
-            const cardRotate = diff * 8; // subtle tilt on arc
+            // Semicircle arc geometry with generous card spacing
+            const angleDeg = diff * (isMobile ? 32 : 30); // Increased angle step for clear spacing after every card
+            const angleRad = (angleDeg * Math.PI) / 180;
+            const radiusX = isMobile ? 400 : 620; // Expanded radius for spacing
+            const radiusY = isMobile ? 110 : 150;
 
-            const scale = absDiff === 0 ? 1.08 : absDiff === 1 ? 0.82 : 0.68;
-            const opacity = absDiff === 0 ? 1 : absDiff === 1 ? 0.6 : 0.25;
+            const cardX = Math.sin(angleRad) * radiusX;
+            const cardY = (1 - Math.cos(angleRad)) * radiusY - (isMobile ? 40 : 60);
+            const cardRotate = diff * 7; // Clean symmetrical radial tilt
+
+            const scale = absDiff === 0 ? 1.08 : absDiff === 1 ? 0.84 : 0.70;
+            const opacity = absDiff === 0 ? 1 : absDiff === 1 ? 0.65 : 0.3;
             const grayscale = absDiff === 0 ? 0 : 1;
-            const blur = absDiff === 0 ? 0 : absDiff === 1 ? 3 : 6;
+            const blur = absDiff === 0 ? 0 : absDiff === 1 ? 3 : 5;
             const isActive = absDiff === 0;
 
             return (
@@ -328,6 +293,44 @@ export default function CinematicHobbies() {
             );
           })}
         </div>
+
+        {/* INDEPENDENT PAGE-CENTERED ACTIVE CONTENT BLOCK */}
+        {HOBBIES_LIST[activeIndex] && (
+          <div className="w-full max-w-[600px] mx-auto text-center flex flex-col items-center justify-center my-4 z-30 pointer-events-none">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={HOBBIES_LIST[activeIndex].id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.25 }}
+                className="flex flex-col items-center justify-center"
+              >
+                {/* Title */}
+                <h3 className={`font-['Caveat',cursive] text-3xl sm:text-5xl font-bold tracking-wide capitalize mb-1 sm:mb-2 ${
+                  isBeach ? 'text-[#00838F]' : 'text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]'
+                }`}>
+                  {HOBBIES_LIST[activeIndex].title}
+                </h3>
+
+                {/* Description */}
+                <p className={`font-['Inter',sans-serif] text-xs sm:text-sm font-light max-w-md leading-relaxed px-2 ${
+                  isBeach ? 'text-[#4A5B66]' : 'text-[#BFBFBF]'
+                }`}>
+                  {HOBBIES_LIST[activeIndex].description}
+                </p>
+
+                {/* Scroll Indicator Prompt */}
+                <div className={`mt-3 flex items-center gap-2 text-[10px] font-mono tracking-widest uppercase ${
+                  isBeach ? 'text-[#00838F]/70' : 'text-white/40'
+                }`}>
+                  <Mouse className="w-3.5 h-3.5 animate-bounce" />
+                  <span>SCROLL TO ROTATE ({activeIndex + 1} / {total})</span>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        )}
       </div>
     </section>
   );
