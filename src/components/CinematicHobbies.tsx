@@ -126,39 +126,19 @@ export default function CinematicHobbies() {
     setActiveIndex((prev) => (prev - 1 + total) % total);
   };
 
-  // Wheel scroll handler supporting both vertical (deltaY) and horizontal (deltaX / trackpad swipe)
+  // Wheel scroll handler to continuously rotate circular cards endless loop
   const handleWheel = (e: React.WheelEvent) => {
-    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-    if (delta > 20) {
+    if (e.deltaY > 30) {
       handleNext();
-    } else if (delta < -20) {
+    } else if (e.deltaY < -30) {
       handlePrev();
     }
   };
 
-  // Touch swipe support for mobile/trackpad horizontal gesture
-  const [touchStartX, setTouchStartX] = useState<number | null>(null);
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStartX(e.touches[0].clientX);
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX === null) return;
-    const touchEndX = e.changedTouches[0].clientX;
-    const diffX = touchStartX - touchEndX;
-    if (diffX > 40) {
-      handleNext();
-    } else if (diffX < -40) {
-      handlePrev();
-    }
-    setTouchStartX(null);
-  };
-
-  // Calculate position on arc so card sits exactly centered in stage viewport
-  const radius = isMobile ? 380 : 650;
-  const arcCenterY = isMobile ? 420 : 680;
-  const angleStep = isMobile ? 26 : 24;
+  // Calculate position on arc for each card with wide spacing (25 degrees)
+  const radius = isMobile ? 420 : 720;
+  const arcCenterY = isMobile ? 360 : 580;
+  const angleStep = isMobile ? 26 : 25; // Extra spacing between cards
 
   const activeHobby = HOBBIES_LIST[activeIndex];
 
@@ -167,13 +147,11 @@ export default function CinematicHobbies() {
       ref={containerRef}
       id="hobbies"
       onWheel={handleWheel}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
       className="relative w-full min-h-screen py-16 sm:py-24 bg-[#000000] text-[#FFFFFF] z-20 flex flex-col justify-between overflow-hidden"
     >
       {/* Viewport Container */}
       <div className="w-full min-h-[85vh] flex flex-col justify-between py-6 sm:py-10 px-4 sm:px-8 lg:px-12 bg-[#000000]">
-        
+
         {/* TOP SECTION HEADER */}
         <div className="w-full max-w-[1400px] mx-auto z-30">
           <div className="flex items-center gap-3 mb-2 sm:mb-3">
@@ -193,8 +171,8 @@ export default function CinematicHobbies() {
         </div>
 
         {/* CIRCULAR STAGE CAROUSEL WITH ULTRA-THIN SIDE NAVIGATION ARROWS */}
-        <div className="relative w-full min-h-[420px] sm:min-h-[500px] flex-grow flex items-center justify-center my-4 sm:my-8 overflow-hidden">
-          
+        <div className="relative w-full min-h-[380px] sm:min-h-[460px] flex-grow flex items-center justify-center my-4 sm:my-8 overflow-hidden">
+
           {/* Ultra-thin Left Side Navigation Arrow */}
           <button
             onClick={handlePrev}
@@ -219,12 +197,12 @@ export default function CinematicHobbies() {
             if (diff > total / 2) diff -= total;
             if (diff < -total / 2) diff += total;
 
-            // Compute circular arc angles
+            // Compute circular arc angles with 0 deg at top center
             const cardAngle = diff * angleStep; // in degrees
-            const rad = (cardAngle - 90) * (Math.PI / 180);
-            
-            const cardX = Math.cos(rad) * radius;
-            const cardY = Math.sin(rad) * radius + arcCenterY;
+            const rad = cardAngle * (Math.PI / 180);
+
+            const cardX = Math.sin(rad) * radius; // sin(0) = 0 -> exact center X = 0 above text
+            const cardY = -Math.cos(rad) * radius + arcCenterY; // cos(0) = 1 -> arc apex
             const cardRotate = cardAngle;
 
             // Scale, blur, grayscale, opacity based on distance from active center
@@ -232,7 +210,7 @@ export default function CinematicHobbies() {
             const isVisible = absDiff <= 4;
             if (!isVisible) return null;
 
-            const scale = absDiff === 0 ? 1.15 : Math.max(0.65, 0.95 - absDiff * 0.12);
+            const scale = absDiff === 0 ? 1.12 : Math.max(0.65, 0.95 - absDiff * 0.12);
             const opacity = absDiff === 0 ? 1 : Math.max(0.15, 0.8 - absDiff * 0.22);
             const grayscale = absDiff === 0 ? 0 : 1;
             const blur = absDiff === 0 ? 0 : Math.min(6, absDiff * 2);
@@ -254,17 +232,16 @@ export default function CinematicHobbies() {
                   stiffness: 280,
                   damping: 28,
                 }}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 origin-center pointer-events-auto cursor-pointer"
+                className="absolute top-[42%] left-1/2 -translate-x-1/2 -translate-y-1/2 origin-center pointer-events-auto cursor-pointer"
               >
                 <div
                   style={{
                     filter: `grayscale(${grayscale}) blur(${blur}px)`,
                   }}
-                  className={`relative w-[160px] xs:w-[190px] sm:w-[230px] lg:w-[250px] aspect-[3/4] rounded-2xl sm:rounded-3xl p-2 sm:p-2.5 bg-[#0d0d0f] border transition-all duration-300 ${
-                    diff === 0
+                  className={`relative w-[160px] xs:w-[190px] sm:w-[230px] lg:w-[250px] aspect-[3/4] rounded-2xl sm:rounded-3xl p-2 sm:p-2.5 bg-[#0d0d0f] border transition-all duration-300 ${diff === 0
                       ? 'border-white/80 shadow-[0_0_40px_rgba(255,255,255,0.22)] z-30 ring-1 ring-white/40'
                       : 'border-white/15 shadow-[0_10px_30px_rgba(0,0,0,0.9)] z-10'
-                  }`}
+                    }`}
                 >
                   {/* Subtle inner metallic frame line */}
                   <div className="absolute inset-1 rounded-xl sm:rounded-2xl border border-white/10 pointer-events-none" />
