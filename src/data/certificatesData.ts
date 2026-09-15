@@ -34,6 +34,12 @@ import wadhwaniPdf from './Certificates/Wadhwani Foundation Certificate - 67a220
 import wordpressImg from './Certificates/previews/wordpress-1.jpg';
 import wordpressPdf from './Certificates/wordpress.pdf';
 
+import ksfaImg from './Ksfa B division.jpeg';
+import eventHeadImg from './Event head at manoeuvre it fes for videography and photography3.0.jpeg';
+import winnersImg from './Manoeuvre it fest overall winners 2.0.jpeg';
+import rajyaPuraskarImg from './Rajya puraskar award.jpeg';
+import southZoneImg from './south zone.jpeg';
+
 export interface CertificateItem {
   id: string;
   title: string;
@@ -65,6 +71,56 @@ export const certificateList: CertificateItem[] = [
     pdfUrl: digitalMarketingPdf,
     description: 'Professional certificate covering search engine optimization, email marketing, digital analytics, and display advertising strategies.',
     category: 'Coursera / Google',
+  },
+  {
+    id: 'ksfa-b-division',
+    title: 'KSFA B Division League — Official Player Achievement',
+    issuer: 'Karnataka State Football Association',
+    year: '2024',
+    image: ksfaImg,
+    pdfUrl: ksfaImg,
+    description: 'Official registration & team representation in the prestigious KSFA B Division Football League.',
+    category: 'Athletic Achievement',
+  },
+  {
+    id: 'south-zone-varsity',
+    title: 'South Zone Inter-University Varsity Football Representative',
+    issuer: 'Association of Indian Universities (AIU)',
+    year: '2024',
+    image: southZoneImg,
+    pdfUrl: southZoneImg,
+    description: 'Selected to represent varsity football at the national South Zone Inter-University Championship.',
+    category: 'Varsity Honor',
+  },
+  {
+    id: 'manoeuvre-event-head',
+    title: 'Event Head — Videography & Photography (Manoeuvre IT Fest)',
+    issuer: 'Kristu Jayanti College',
+    year: '2025',
+    image: eventHeadImg,
+    pdfUrl: eventHeadImg,
+    description: 'Appointed Event Head leading multi-camera coverage, creative media direction, and IT fest videography production.',
+    category: 'Leadership & Media',
+  },
+  {
+    id: 'manoeuvre-overall-winners',
+    title: 'Overall Championship Winners — Manoeuvre IT Fest',
+    issuer: 'Kristu Jayanti College',
+    year: '2025',
+    image: winnersImg,
+    pdfUrl: winnersImg,
+    description: 'Awarded Overall Champions title at the national Manoeuvre IT Fest across photography & creative events.',
+    category: 'National IT Fest Award',
+  },
+  {
+    id: 'rajya-puraskar-scout',
+    title: 'Rajya Puraskar Governor Scout Award',
+    issuer: 'The Bharat Scouts and Guides',
+    year: '2022',
+    image: rajyaPuraskarImg,
+    pdfUrl: rajyaPuraskarImg,
+    description: 'Prestigious Governor Scouting Award recognizing community leadership, outdoor survival mastery, and discipline.',
+    category: 'Governor Award',
   },
   {
     id: 'intro-ai-infosys',

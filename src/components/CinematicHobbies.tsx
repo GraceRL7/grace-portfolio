@@ -18,79 +18,79 @@ export interface HobbyItem {
 export const HOBBIES_LIST: HobbyItem[] = [
   {
     id: 'sketching',
-    title: 'SKETCHING',
+    title: 'Sketching',
     category: 'Fine Arts & Freehand Drawing',
     image: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=1000&auto=format&fit=crop',
     description: 'Pencil portraits, freehand illustration, and detailed artistic sketching.',
   },
   {
     id: 'football',
-    title: 'FOOTBALL',
+    title: 'Football',
     category: 'Competitive Athletics',
-    image: ksfaImg,
+    image: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1000&auto=format&fit=crop',
     description: 'KSFA B Division League player & South Zone Inter-University varsity representative.',
   },
   {
     id: 'badminton',
-    title: 'BADMINTON',
+    title: 'Badminton',
     category: 'Court Sports & Reflexes',
     image: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?q=80&w=1000&auto=format&fit=crop',
     description: 'Competitive singles & doubles badminton, agility and focus.',
   },
   {
     id: 'cricket',
-    title: 'CRICKET',
+    title: 'Cricket',
     category: 'Team Strategy & Sports',
     image: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?q=80&w=1000&auto=format&fit=crop',
     description: 'Inter-collegiate cricket tournaments, team leadership, and strategic gameplay.',
   },
   {
     id: 'gardening',
-    title: 'GARDENING',
+    title: 'Gardening',
     category: 'Nature & Plant Cultivation',
     image: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?q=80&w=1000&auto=format&fit=crop',
     description: 'Botanical care, organic garden cultivation, and relaxing green living spaces.',
   },
   {
     id: 'designing',
-    title: 'DESIGNING',
+    title: 'Designing',
     category: 'UI/UX & Brand Graphics',
     image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=1000&auto=format&fit=crop',
     description: 'Digital posters, user interface mockups, and creative brand design systems.',
   },
   {
     id: 'video-editing',
-    title: 'VIDEO EDITING',
+    title: 'Video Editing',
     category: 'Cinematic Post-Production',
-    image: eventHeadImg,
+    image: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=1000&auto=format&fit=crop',
     description: 'Event head for videography, multi-track timeline editing, color grading & audio sync.',
   },
   {
     id: 'photography',
-    title: 'PHOTOGRAPHY',
+    title: 'Photography',
     category: 'Visual Framing & Stories',
-    image: winnersImg,
+    image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1000&auto=format&fit=crop',
     description: 'Award-winning photography at Milaverse 2.0 & Manoeuvre IT Fest event coverage.',
   },
   {
     id: 'reels',
-    title: 'REELS / CONTENT CREATION',
+    title: 'Reels / Content Creation',
     category: 'Social Media & Media Edits',
-    image: southZoneImg,
+    image: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=1000&auto=format&fit=crop',
     description: 'Short-form video editing, aesthetic visual pacing, and creative digital storytelling.',
   },
   {
     id: 'keyboard',
-    title: 'KEYBOARD',
+    title: 'Keyboard',
     category: 'Instrumental Music',
     image: 'https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?q=80&w=1000&auto=format&fit=crop',
     description: 'Keyboard melodies, chord arrangements, and live acoustic music sessions.',
   },
   {
     id: 'music',
-    title: 'MUSIC',
+    title: 'Music',
     category: 'Soundscapes & Rhythm',
-    image: rajyaPuraskarImg,
+    image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1000&auto=format&fit=crop',
     description: 'Exploring diverse musical genres, rhythm production, and sound design inspiration.',
   },
 ];
@@ -258,7 +258,7 @@ export default function CinematicHobbies() {
             transition={{ duration: 0.35 }}
             className="flex flex-col items-center"
           >
-            <h3 className="font-['Bebas_Neue',sans-serif] text-2xl sm:text-4xl tracking-[0.08em] text-white uppercase mb-1 sm:mb-2">
+            <h3 className="font-['Caveat',cursive] text-3xl sm:text-5xl font-bold tracking-wide text-white capitalize mb-1 sm:mb-2 drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
               {activeHobby.title}
             </h3>
             <p className="font-['Inter',sans-serif] text-xs sm:text-sm text-[#BFBFBF] font-light max-w-md leading-relaxed px-4">
