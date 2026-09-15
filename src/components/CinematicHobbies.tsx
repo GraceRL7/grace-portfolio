@@ -147,10 +147,10 @@ export default function CinematicHobbies() {
       ref={containerRef}
       id="hobbies"
       onWheel={handleWheel}
-      className="relative w-full min-h-screen py-16 sm:py-24 bg-[#000000] text-[#FFFFFF] z-20 flex flex-col justify-between overflow-hidden"
+      className="relative w-full min-h-screen pt-24 sm:pt-32 pb-16 bg-[#000000] text-[#FFFFFF] z-20 flex flex-col justify-between overflow-hidden"
     >
       {/* Viewport Container */}
-      <div className="w-full min-h-[85vh] flex flex-col justify-between py-6 sm:py-10 px-4 sm:px-8 lg:px-12 bg-[#000000]">
+      <div className="w-full min-h-[85vh] flex flex-col justify-between py-4 sm:py-8 px-4 sm:px-8 lg:px-12 bg-[#000000]">
 
         {/* TOP SECTION HEADER */}
         <div className="w-full max-w-[1400px] mx-auto z-30">
