@@ -135,10 +135,10 @@ export default function CinematicHobbies() {
   });
 
   // Calculate position on arc for each card
-  // Arc radius & center
-  const radius = isMobile ? 420 : 750; // Radius of circular arc
-  const arcCenterY = isMobile ? 540 : 880; // Distance of center below card focus point
-  const angleStep = isMobile ? 18 : 15; // Degrees per step along circle
+  // Arc radius & center tailored to screen width & height
+  const radius = isMobile ? 380 : 650; // Radius of circular arc
+  const arcCenterY = isMobile ? 320 : 520; // Lower center so top of arc lifts cards up into center of viewport
+  const angleStep = isMobile ? 18 : 16; // Degrees per step along circle
 
   const activeHobby = HOBBIES_LIST[activeIndex];
 
@@ -210,7 +210,7 @@ export default function CinematicHobbies() {
                   scale,
                   opacity,
                 }}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 origin-center pointer-events-auto cursor-pointer"
+                className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 origin-center pointer-events-auto cursor-pointer"
               >
                 <motion.div
                   style={{
@@ -219,7 +219,7 @@ export default function CinematicHobbies() {
                       ([g, b]) => `grayscale(${g}) blur(${b}px)`
                     ),
                   }}
-                  className={`relative w-[180px] xs:w-[210px] sm:w-[260px] lg:w-[290px] aspect-[3/4] rounded-2xl sm:rounded-3xl p-2.5 sm:p-3 bg-[#0d0d0f] border transition-all duration-300 ${
+                  className={`relative w-[150px] xs:w-[180px] sm:w-[220px] lg:w-[240px] aspect-[3/4] rounded-2xl sm:rounded-3xl p-2 sm:p-2.5 bg-[#0d0d0f] border transition-all duration-300 ${
                     index === activeIndex
                       ? 'border-white/70 shadow-[0_0_35px_rgba(255,255,255,0.18)] z-30'
                       : 'border-white/15 shadow-[0_10px_30px_rgba(0,0,0,0.9)] z-10'
