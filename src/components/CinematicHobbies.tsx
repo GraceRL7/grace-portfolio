@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Mouse, ChevronLeft, ChevronRight } from 'lucide-react';
 
 import sketchingImg from '../data/Hobbies/Sketching.png';
@@ -141,10 +141,8 @@ export default function CinematicHobbies() {
 
   // Calculate position on arc for each card
   const radius = isMobile ? 420 : 720;
-  const arcCenterY = isMobile ? 380 : 660; // Lift arc center slightly so cards sit 100% visible above text
+  const arcCenterY = isMobile ? 360 : 600;
   const angleStep = isMobile ? 26 : 25;
-
-  const activeHobby = HOBBIES_LIST[activeIndex];
 
   return (
     <section
@@ -182,8 +180,8 @@ export default function CinematicHobbies() {
           </p>
         </div>
 
-        {/* CIRCULAR STAGE CAROUSEL WITH FULL UNCLIPPED VISIBILITY */}
-        <div className="relative w-full min-h-[460px] sm:min-h-[540px] lg:min-h-[580px] flex-grow flex items-center justify-center my-2 sm:my-6">
+        {/* CIRCULAR STAGE CAROUSEL WITH ACTIVE CARD + TEXT AS ONE UNIFIED UNIT */}
+        <div className="relative w-full min-h-[500px] sm:min-h-[580px] lg:min-h-[620px] flex-grow flex items-center justify-center my-2 sm:my-6">
 
           {/* Ultra-thin Left Side Navigation Arrow */}
           <button
@@ -230,6 +228,7 @@ export default function CinematicHobbies() {
             const opacity = absDiff === 0 ? 1 : Math.max(0.15, 0.8 - absDiff * 0.22);
             const grayscale = absDiff === 0 ? 0 : 1;
             const blur = absDiff === 0 ? 0 : Math.min(6, absDiff * 2);
+            const isActive = absDiff === 0;
 
             return (
               <motion.div
@@ -248,20 +247,23 @@ export default function CinematicHobbies() {
                   stiffness: 280,
                   damping: 28,
                 }}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 origin-center pointer-events-auto cursor-pointer"
+                className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 origin-center pointer-events-auto cursor-pointer flex flex-col items-center ${
+                  isActive ? 'z-30' : 'z-10'
+                }`}
               >
+                {/* CARD IMAGE CONTAINER */}
                 <div
                   style={{
                     filter: `grayscale(${grayscale}) blur(${blur}px)`,
                   }}
                   className={`relative w-[160px] xs:w-[190px] sm:w-[230px] lg:w-[250px] aspect-[3/4] rounded-2xl sm:rounded-3xl p-2 sm:p-2.5 border transition-all duration-300 ${
                     isBeach
-                      ? diff === 0
-                        ? 'bg-[#FFFFFF] border-[#00ACC1] shadow-[0_0_35px_rgba(0,188,212,0.3)] z-30 ring-2 ring-[#00ACC1]/40'
-                        : 'bg-[#F0F7F9] border-[#0097A7]/20 shadow-[0_6px_20px_rgba(0,131,143,0.1)] z-10'
-                      : diff === 0
-                        ? 'bg-[#0d0d0f] border-white/80 shadow-[0_0_40px_rgba(255,255,255,0.22)] z-30 ring-1 ring-white/40'
-                        : 'bg-[#0d0d0f] border-white/15 shadow-[0_10px_30px_rgba(0,0,0,0.9)] z-10'
+                      ? isActive
+                        ? 'bg-[#FFFFFF] border-[#00ACC1] shadow-[0_0_35px_rgba(0,188,212,0.3)] ring-2 ring-[#00ACC1]/40'
+                        : 'bg-[#F0F7F9] border-[#0097A7]/20 shadow-[0_6px_20px_rgba(0,131,143,0.1)]'
+                      : isActive
+                        ? 'bg-[#0d0d0f] border-white/80 shadow-[0_0_40px_rgba(255,255,255,0.22)] ring-1 ring-white/40'
+                        : 'bg-[#0d0d0f] border-white/15 shadow-[0_10px_30px_rgba(0,0,0,0.9)]'
                   }`}
                 >
                   {/* Subtle inner metallic/brown frame line */}
@@ -285,39 +287,45 @@ export default function CinematicHobbies() {
                     </span>
                   </div>
                 </div>
+
+                {/* ACTIVE CARD TITLE & DESCRIPTION - LOCKED DIRECTLY BELOW ACTIVE IMAGE */}
+                <AnimatePresence mode="wait">
+                  {isActive && (
+                    <motion.div
+                      key={hobby.id}
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.3 }}
+                      className="w-[280px] xs:w-[320px] sm:w-[420px] md:w-[480px] text-center mt-5 sm:mt-6 flex flex-col items-center justify-center pointer-events-none"
+                    >
+                      {/* Title sitting 20-25px below image */}
+                      <h3 className={`font-['Caveat',cursive] text-3xl sm:text-5xl font-bold tracking-wide capitalize mb-1 sm:mb-2 ${
+                        isBeach ? 'text-[#00838F]' : 'text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]'
+                      }`}>
+                        {hobby.title}
+                      </h3>
+
+                      {/* Description sitting 8-12px below title */}
+                      <p className={`font-['Inter',sans-serif] text-xs sm:text-sm font-light max-w-md leading-relaxed px-2 ${
+                        isBeach ? 'text-[#4A5B66]' : 'text-[#BFBFBF]'
+                      }`}>
+                        {hobby.description}
+                      </p>
+
+                      {/* Scroll Indicator Prompt */}
+                      <div className={`mt-3 flex items-center gap-2 text-[10px] font-mono tracking-widest uppercase ${
+                        isBeach ? 'text-[#00838F]/70' : 'text-white/40'
+                      }`}>
+                        <Mouse className="w-3.5 h-3.5 animate-bounce" />
+                        <span>SCROLL TO ROTATE ({activeIndex + 1} / {total})</span>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.div>
             );
           })}
-        </div>
-
-        {/* ACTIVE CAPTION & DESCRIPTION BELOW CARD */}
-        <div className="w-full max-w-[600px] mx-auto text-center z-30 pt-4 sm:pt-6 pb-2 min-h-[100px] flex flex-col items-center justify-center">
-          <motion.div
-            key={activeHobby.id}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35 }}
-            className="flex flex-col items-center"
-          >
-            <h3 className={`font-['Caveat',cursive] text-3xl sm:text-5xl font-bold tracking-wide capitalize mb-1 sm:mb-2 ${
-              isBeach ? 'text-[#00838F]' : 'text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]'
-            }`}>
-              {activeHobby.title}
-            </h3>
-            <p className={`font-['Inter',sans-serif] text-xs sm:text-sm font-light max-w-md leading-relaxed px-4 ${
-              isBeach ? 'text-[#4A5B66]' : 'text-[#BFBFBF]'
-            }`}>
-              {activeHobby.description}
-            </p>
-          </motion.div>
-
-          {/* Scroll Indicator Prompt */}
-          <div className={`mt-3 flex items-center gap-2 text-[10px] font-mono tracking-widest uppercase ${
-            isBeach ? 'text-[#00838F]/70' : 'text-white/40'
-          }`}>
-            <Mouse className="w-3.5 h-3.5 animate-bounce" />
-            <span>SCROLL TO ROTATE ({activeIndex + 1} / {total})</span>
-          </div>
         </div>
       </div>
     </section>
