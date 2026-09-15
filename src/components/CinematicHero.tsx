@@ -104,12 +104,22 @@ export default function CinematicHero() {
           >
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-full">
+              {/* 3D Monochrome Galaxy Glass Button */}
               <a
                 href="#projects"
-                className="group relative inline-flex items-center justify-center gap-2 sm:gap-2.5 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full border border-[#FFFFFF] bg-transparent text-[#FFFFFF] font-['Inter',sans-serif] text-[11px] sm:text-xs font-semibold tracking-[0.15em] sm:tracking-[0.2em] uppercase transition-all duration-300 hover:bg-[#FFFFFF] hover:text-[#000000] hover:scale-[1.03] whitespace-nowrap"
+                className="galaxy-btn group"
               >
-                <span>VIEW PROJECTS</span>
-                <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
+                <span className="galaxy-spark" />
+                <span className="galaxy-backdrop" />
+                <span className="galaxy-container">
+                  <span className="galaxy-star galaxy-star--static" style={{ top: '30%', left: '20%', '--duration': 12, '--delay': 2, '--size': 3 } as React.CSSProperties} />
+                  <span className="galaxy-star galaxy-star--static" style={{ top: '70%', left: '75%', '--duration': 15, '--delay': 4, '--size': 2 } as React.CSSProperties} />
+                  <span className="galaxy-star galaxy-star--static" style={{ top: '40%', left: '85%', '--duration': 10, '--delay': 1, '--size': 3 } as React.CSSProperties} />
+                  <span className="galaxy-star galaxy-star--static" style={{ top: '80%', left: '15%', '--duration': 18, '--delay': 3, '--size': 2 } as React.CSSProperties} />
+                </span>
+                <span className="galaxy-text">
+                  <span>VIEW PROJECTS ↗</span>
+                </span>
               </a>
 
               <a
