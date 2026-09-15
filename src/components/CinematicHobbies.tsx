@@ -137,7 +137,7 @@ export default function CinematicHobbies() {
 
   // Calculate position on arc for each card with wide spacing (25 degrees)
   const radius = isMobile ? 420 : 720;
-  const arcCenterY = radius; // Set arc center Y to radius so apex (diff=0) is exactly Y=0 (vertically centered)
+  const arcCenterY = isMobile ? 360 : 580;
   const angleStep = isMobile ? 26 : 25; // Extra spacing between cards
 
   const activeHobby = HOBBIES_LIST[activeIndex];
@@ -147,10 +147,10 @@ export default function CinematicHobbies() {
       ref={containerRef}
       id="hobbies"
       onWheel={handleWheel}
-      className="relative w-full min-h-screen pt-24 sm:pt-32 pb-16 bg-[#000000] text-[#FFFFFF] z-20 flex flex-col justify-between overflow-hidden"
+      className="relative w-full min-h-screen py-16 sm:py-24 bg-[#000000] text-[#FFFFFF] z-20 flex flex-col justify-between overflow-hidden"
     >
       {/* Viewport Container */}
-      <div className="w-full min-h-[85vh] flex flex-col justify-between py-4 sm:py-8 px-4 sm:px-8 lg:px-12 bg-[#000000]">
+      <div className="w-full min-h-[85vh] flex flex-col justify-between py-6 sm:py-10 px-4 sm:px-8 lg:px-12 bg-[#000000]">
 
         {/* TOP SECTION HEADER */}
         <div className="w-full max-w-[1400px] mx-auto z-30">
@@ -232,15 +232,15 @@ export default function CinematicHobbies() {
                   stiffness: 280,
                   damping: 28,
                 }}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 origin-center pointer-events-auto cursor-pointer"
+                className="absolute top-[42%] left-1/2 -translate-x-1/2 -translate-y-1/2 origin-center pointer-events-auto cursor-pointer"
               >
                 <div
                   style={{
                     filter: `grayscale(${grayscale}) blur(${blur}px)`,
                   }}
                   className={`relative w-[160px] xs:w-[190px] sm:w-[230px] lg:w-[250px] aspect-[3/4] rounded-2xl sm:rounded-3xl p-2 sm:p-2.5 bg-[#0d0d0f] border transition-all duration-300 ${diff === 0
-                      ? 'border-white/80 shadow-[0_0_40px_rgba(255,255,255,0.22)] z-30 ring-1 ring-white/40'
-                      : 'border-white/15 shadow-[0_10px_30px_rgba(0,0,0,0.9)] z-10'
+                    ? 'border-white/80 shadow-[0_0_40px_rgba(255,255,255,0.22)] z-30 ring-1 ring-white/40'
+                    : 'border-white/15 shadow-[0_10px_30px_rgba(0,0,0,0.9)] z-10'
                     }`}
                 >
                   {/* Subtle inner metallic frame line */}
