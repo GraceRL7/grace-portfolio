@@ -6,6 +6,7 @@ import CinematicSkills from './components/CinematicSkills';
 import CinematicHobbies from './components/CinematicHobbies';
 import Achievements from './components/Achievements';
 import CinematicProjects from './components/CinematicProjects';
+import CinematicCertifications from './components/CinematicCertifications';
 import CinematicAIAutomation from './components/CinematicAIAutomation';
 import CinematicExperience from './components/CinematicExperience';
 import CinematicContact from './components/CinematicContact';
@@ -23,6 +24,7 @@ export default function App() {
         <CinematicHobbies />
         <Achievements />
         <CinematicProjects />
+        <CinematicCertifications />
         <CinematicAIAutomation />
         <CinematicExperience />
         <CinematicContact />
