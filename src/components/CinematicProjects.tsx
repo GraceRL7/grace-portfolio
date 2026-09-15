@@ -3,8 +3,19 @@ import { motion } from 'framer-motion';
 import { ArrowUpRight, Github, Globe, Cpu, Workflow, Bot, MailCheck, Database, Zap } from 'lucide-react';
 
 export default function CinematicProjects() {
-  const [activeTab, setActiveTab] = useState<'projects' | 'automation'>('projects');
+  const [activeTab, setActiveTab] = useState<'projects' | 'automation' | 'social'>('projects');
   const [autoTab, setAutoTab] = useState<'chatbot' | 'contact'>('chatbot');
+
+  const instagramLinks = [
+    { name: 'Grace Lewis Personal', url: 'https://www.instagram.com/gracerlewis?stkn=MTAweGoza2JsdDQwYQ%3D%3D&utm_source=qr', handle: '@gracerlewis' },
+    { name: 'Grace Captures', url: 'https://www.instagram.com/grace_captures__?stkn=MWM5YzhzNjhoeWNlcg%3D%3D&utm_source=qr', handle: '@grace_captures__' },
+    { name: 'Nithyadar Kripa Food Products', url: 'https://www.instagram.com/nithyadar_kripa_food_products?stkn=d3QzeW9pcnA3c2xz&utm_source=qr', handle: '@nithyadar_kripa_food_products' },
+    { name: 'SHELLS 2026', url: 'https://www.instagram.com/shells.2026?stkn=MXZ0dTZ4Y2w0NWM1Yg==', handle: '@shells.2026' },
+    { name: 'KJU KJIT', url: 'https://www.instagram.com/kju_kjit?stkn=MW9na2szOHcxZDg2bQ==', handle: '@kju_kjit' },
+    { name: 'ICYM Sasthan', url: 'https://www.instagram.com/icym__sasthan?stkn=MWglZWJ1djNoZXFicg==', handle: '@icym__sasthan' },
+    { name: 'Udupi District Football Association', url: 'https://www.instagram.com/udupi_district_football_a?stkn=MXhiMGNqM3Ridmw1ZA==', handle: '@udupi_district_football_a' },
+    { name: 'VFA Manipal', url: 'https://www.instagram.com/vfa_manipal?stkn=MW81Z2ZuN2wxNzNycQ==', handle: '@vfa_manipal' },
+  ];
 
   const projects = [
     {
@@ -117,11 +128,11 @@ export default function CinematicProjects() {
             </p>
           </div>
 
-          {/* Subtabs for Projects vs AI Automation */}
-          <div className="flex items-center gap-2 p-1.5 rounded-full bg-[#111111] border border-white/15 self-start lg:self-auto">
+          {/* Subtabs for Projects vs AI Automation vs Social Media */}
+          <div className="flex flex-wrap items-center gap-2 p-1.5 rounded-2xl lg:rounded-full bg-[#111111] border border-white/15 self-start lg:self-auto">
             <button
               onClick={() => setActiveTab('projects')}
-              className={`px-5 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider transition-all duration-300 ${
+              className={`px-4 sm:px-5 py-2.5 rounded-xl lg:rounded-full font-mono text-xs uppercase tracking-wider transition-all duration-300 ${
                 activeTab === 'projects'
                   ? 'bg-white text-black font-semibold shadow-lg'
                   : 'text-white/60 hover:text-white'
@@ -131,13 +142,23 @@ export default function CinematicProjects() {
             </button>
             <button
               onClick={() => setActiveTab('automation')}
-              className={`px-5 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider transition-all duration-300 ${
+              className={`px-4 sm:px-5 py-2.5 rounded-xl lg:rounded-full font-mono text-xs uppercase tracking-wider transition-all duration-300 ${
                 activeTab === 'automation'
                   ? 'bg-white text-black font-semibold shadow-lg'
                   : 'text-white/60 hover:text-white'
               }`}
             >
               AI Automation Architecture
+            </button>
+            <button
+              onClick={() => setActiveTab('social')}
+              className={`px-4 sm:px-5 py-2.5 rounded-xl lg:rounded-full font-mono text-xs uppercase tracking-wider transition-all duration-300 ${
+                activeTab === 'social'
+                  ? 'bg-white text-black font-semibold shadow-lg'
+                  : 'text-white/60 hover:text-white'
+              }`}
+            >
+              Digital Marketing & Social Media
             </button>
           </div>
         </div>
@@ -300,6 +321,65 @@ export default function CinematicProjects() {
                     </motion.div>
                   );
                 })}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* DIGITAL MARKETING & SOCIAL MEDIA TAB */}
+        {activeTab === 'social' && (
+          <div className="space-y-8 sm:space-y-12">
+            {/* Top Stats Overview Banner */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="p-6 rounded-3xl bg-[#111111]/80 border border-white/15 backdrop-blur-xl">
+                <span className="text-xs font-mono uppercase tracking-widest text-white/50">Total Views Generated</span>
+                <h3 className="font-['Bebas_Neue',sans-serif] text-5xl sm:text-6xl text-white mt-2">441K+</h3>
+                <p className="text-xs text-white/60 mt-1 font-['Inter',sans-serif]">Across Grace Captures & client reels content</p>
+              </div>
+              <div className="p-6 rounded-3xl bg-[#111111]/80 border border-white/15 backdrop-blur-xl">
+                <span className="text-xs font-mono uppercase tracking-widest text-white/50">SEO Search Impressions</span>
+                <h3 className="font-['Bebas_Neue',sans-serif] text-5xl sm:text-6xl text-white mt-2">48K+</h3>
+                <p className="text-xs text-white/60 mt-1 font-['Inter',sans-serif]">El Mundo Sports Google Search Console</p>
+              </div>
+              <div className="p-6 rounded-3xl bg-[#111111]/80 border border-white/15 backdrop-blur-xl">
+                <span className="text-xs font-mono uppercase tracking-widest text-white/50">Profile Activity</span>
+                <h3 className="font-['Bebas_Neue',sans-serif] text-5xl sm:text-6xl text-white mt-2">+38.2%</h3>
+                <p className="text-xs text-white/60 mt-1 font-['Inter',sans-serif]">Increase in profile visits & actions</p>
+              </div>
+            </div>
+
+            {/* Managed Instagram Pages Grid */}
+            <div>
+              <h3 className="font-['Bebas_Neue',sans-serif] text-3xl sm:text-4xl tracking-wider text-white mb-4">
+                MANAGED INSTAGRAM & BRAND CHANNELS
+              </h3>
+              <p className="text-sm font-['Inter',sans-serif] text-white/60 mb-6">
+                Active social media management, promotional video creation, reels editing & audience growth analytics.
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {instagramLinks.map((item) => (
+                  <a
+                    key={item.handle}
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group p-5 rounded-2xl bg-[#111111]/80 border border-white/15 hover:border-white/50 transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-white/80">
+                          INSTAGRAM
+                        </span>
+                        <ArrowUpRight className="w-4 h-4 text-white/40 group-hover:text-white transition-colors" />
+                      </div>
+                      <h4 className="font-['Inter',sans-serif] font-bold text-white text-base mb-1 group-hover:text-white/90">
+                        {item.name}
+                      </h4>
+                      <p className="text-xs font-mono text-white/50">{item.handle}</p>
+                    </div>
+                  </a>
+                ))}
               </div>
             </div>
           </div>

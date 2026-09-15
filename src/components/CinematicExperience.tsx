@@ -16,6 +16,16 @@ export default function CinematicExperience() {
       ],
     },
     {
+      role: 'Social Media & Content Creation Specialist',
+      company: 'Freelance & Brand Client Accounts',
+      period: 'Aug 2024 – Present',
+      contributions: [
+        'Managed social media content for Grace Captures, KJU KJIT, SHELLS 2026, Nithyadar Kripa Food Products, ICYM Sasthan, Udupi District Football Association, and VFA Manipal, including reels, promotional videos, and event creatives.',
+        'Generated 441K+ views on Grace Captures, with 5,493 profile activity actions and a 38.2% increase in profile visits.',
+        'Created high-performing content reaching 40K+ views per campaign using Instagram Analytics to track reach, engagement, and audience performance.',
+      ],
+    },
+    {
       role: 'Web Developer Intern',
       company: 'Nano Stream Technologies, Bengaluru',
       period: 'Feb 2026 – Jun 2026',
