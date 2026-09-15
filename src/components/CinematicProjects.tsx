@@ -129,12 +129,12 @@ export default function CinematicProjects() {
           </div>
 
           {/* Subtabs for Projects vs AI Automation vs Social Media */}
-          <div className="flex flex-wrap items-center gap-2 p-1.5 rounded-2xl lg:rounded-full bg-[#111111] border border-white/15 self-start lg:self-auto">
+          <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-xl sm:rounded-full bg-[#111111] border border-white/15 self-start lg:self-auto max-w-full">
             <button
               onClick={() => setActiveTab('projects')}
-              className={`px-4 sm:px-5 py-2.5 rounded-xl lg:rounded-full font-mono text-xs uppercase tracking-wider transition-all duration-300 ${
+              className={`px-3 sm:px-4 py-1.5 rounded-lg sm:rounded-full font-mono text-[10px] sm:text-[11px] uppercase tracking-wider transition-all duration-300 ${
                 activeTab === 'projects'
-                  ? 'bg-white text-black font-semibold shadow-lg'
+                  ? 'bg-white text-black font-semibold shadow-sm'
                   : 'text-white/60 hover:text-white'
               }`}
             >
@@ -142,9 +142,9 @@ export default function CinematicProjects() {
             </button>
             <button
               onClick={() => setActiveTab('automation')}
-              className={`px-4 sm:px-5 py-2.5 rounded-xl lg:rounded-full font-mono text-xs uppercase tracking-wider transition-all duration-300 ${
+              className={`px-3 sm:px-4 py-1.5 rounded-lg sm:rounded-full font-mono text-[10px] sm:text-[11px] uppercase tracking-wider transition-all duration-300 ${
                 activeTab === 'automation'
-                  ? 'bg-white text-black font-semibold shadow-lg'
+                  ? 'bg-white text-black font-semibold shadow-sm'
                   : 'text-white/60 hover:text-white'
               }`}
             >
@@ -152,9 +152,9 @@ export default function CinematicProjects() {
             </button>
             <button
               onClick={() => setActiveTab('social')}
-              className={`px-4 sm:px-5 py-2.5 rounded-xl lg:rounded-full font-mono text-xs uppercase tracking-wider transition-all duration-300 ${
+              className={`px-3 sm:px-4 py-1.5 rounded-lg sm:rounded-full font-mono text-[10px] sm:text-[11px] uppercase tracking-wider transition-all duration-300 ${
                 activeTab === 'social'
-                  ? 'bg-white text-black font-semibold shadow-lg'
+                  ? 'bg-white text-black font-semibold shadow-sm'
                   : 'text-white/60 hover:text-white'
               }`}
             >
