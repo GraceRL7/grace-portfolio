@@ -294,9 +294,9 @@ export default function CinematicHobbies() {
           })}
         </div>
 
-        {/* INDEPENDENT PAGE-CENTERED ACTIVE CONTENT BLOCK */}
+        {/* INDEPENDENT PAGE-CENTERED ACTIVE CONTENT BLOCK (Shifted 30px below) */}
         {HOBBIES_LIST[activeIndex] && (
-          <div className="w-full max-w-[600px] mx-auto text-center flex flex-col items-center justify-center my-4 z-30 pointer-events-none">
+          <div className="w-full max-w-[600px] mx-auto text-center flex flex-col items-center justify-center my-4 mt-8 sm:mt-10 z-30 pointer-events-none">
             <AnimatePresence mode="wait">
               <motion.div
                 key={HOBBIES_LIST[activeIndex].id}
