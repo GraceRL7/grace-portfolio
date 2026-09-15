@@ -54,8 +54,8 @@ export default function CinematicAbout() {
           className="mb-8 sm:mb-12"
         >
           <h2 className="font-['Bebas_Neue',sans-serif] font-bold text-[36px] xs:text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] text-[#FFFFFF] tracking-[0.03em] sm:tracking-[0.05em] leading-[0.95] uppercase max-w-5xl">
-            BUILDING DIGITAL EXPERIENCES <br />
-            <span className="italic font-serif font-normal text-[#BFBFBF]">THAT LEAVE AN IMPACT</span>
+            WHO I AM <br />
+            <span className="italic font-serif font-normal text-[#BFBFBF] text-2xl sm:text-4xl md:text-5xl">BUILDING DIGITAL EXPERIENCES THAT LEAVE AN IMPACT</span>
           </h2>
         </motion.div>
 

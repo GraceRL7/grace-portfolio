@@ -55,10 +55,10 @@ export default function CinematicExperience() {
         {/* Section Heading */}
         <div className="mb-10 sm:mb-16">
           <h2 className="font-['Bebas_Neue',sans-serif] font-bold text-[36px] xs:text-[48px] sm:text-[72px] lg:text-[96px] text-[#FFFFFF] tracking-[0.03em] sm:tracking-[0.05em] leading-none uppercase mb-2 sm:mb-4">
-            EXPERIENCE
+            WHAT I'VE DONE
           </h2>
           <p className="font-['Inter',sans-serif] text-sm sm:text-base lg:text-lg text-[#BFBFBF] font-light max-w-xl">
-            WHERE I'VE BUILT & LEARNED
+            CAREER JOURNEY & PROFESSIONAL EXPERIENCE
           </p>
         </div>
 

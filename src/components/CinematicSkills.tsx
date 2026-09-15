@@ -121,7 +121,7 @@ export default function CinematicSkills() {
 
         {/* Section Heading */}
         <h2 className="font-['Bebas_Neue',sans-serif] font-bold text-[36px] xs:text-[48px] sm:text-[72px] lg:text-[96px] text-[#FFFFFF] tracking-[0.03em] sm:tracking-[0.05em] leading-none uppercase mb-8 sm:mb-12">
-          TECHNICAL EXPERTISE
+          WHAT I KNOW
         </h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
