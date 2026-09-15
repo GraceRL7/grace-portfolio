@@ -1,11 +1,18 @@
 import { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useMotionValueEvent, useSpring } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Mouse, ChevronLeft, ChevronRight } from 'lucide-react';
-import ksfaImg from '../data/Ksfa B division.jpeg';
-import eventHeadImg from '../data/Event head at manoeuvre it fes for videography and photography3.0.jpeg';
-import winnersImg from '../data/Manoeuvre it fest overall winners 2.0.jpeg';
-import rajyaPuraskarImg from '../data/Rajya puraskar award.jpeg';
-import southZoneImg from '../data/south zone.jpeg';
+
+import sketchingImg from '../data/Hobbies/Sketching.png';
+import footballImg from '../data/Hobbies/football.png';
+import badmintonImg from '../data/Hobbies/Badminton.png';
+import cricketImg from '../data/Hobbies/Cricket.png';
+import gardeningImg from '../data/Hobbies/Gardening.png';
+import designingImg from '../data/Hobbies/Designing.png';
+import videoEditorImg from '../data/Hobbies/Video editor.png';
+import photographyImg from '../data/Hobbies/photography.png';
+import reelsContentImg from '../data/Hobbies/ReelsContent.png';
+import keyboardImg from '../data/Hobbies/Keyboard.png';
+import musicImg from '../data/Hobbies/Music.png';
 
 export interface HobbyItem {
   id: string;
@@ -20,77 +27,77 @@ export const HOBBIES_LIST: HobbyItem[] = [
     id: 'sketching',
     title: 'Sketching',
     category: 'Fine Arts & Freehand Drawing',
-    image: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=1000&auto=format&fit=crop',
+    image: sketchingImg,
     description: 'Pencil portraits, freehand illustration, and detailed artistic sketching.',
   },
   {
     id: 'football',
     title: 'Football',
     category: 'Competitive Athletics',
-    image: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1000&auto=format&fit=crop',
+    image: footballImg,
     description: 'KSFA B Division League player & South Zone Inter-University varsity representative.',
   },
   {
     id: 'badminton',
     title: 'Badminton',
     category: 'Court Sports & Reflexes',
-    image: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?q=80&w=1000&auto=format&fit=crop',
+    image: badmintonImg,
     description: 'Competitive singles & doubles badminton, agility and focus.',
   },
   {
     id: 'cricket',
     title: 'Cricket',
     category: 'Team Strategy & Sports',
-    image: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?q=80&w=1000&auto=format&fit=crop',
+    image: cricketImg,
     description: 'Inter-collegiate cricket tournaments, team leadership, and strategic gameplay.',
   },
   {
     id: 'gardening',
     title: 'Gardening',
     category: 'Nature & Plant Cultivation',
-    image: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?q=80&w=1000&auto=format&fit=crop',
+    image: gardeningImg,
     description: 'Botanical care, organic garden cultivation, and relaxing green living spaces.',
   },
   {
     id: 'designing',
     title: 'Designing',
     category: 'UI/UX & Brand Graphics',
-    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=1000&auto=format&fit=crop',
+    image: designingImg,
     description: 'Digital posters, user interface mockups, and creative brand design systems.',
   },
   {
     id: 'video-editing',
     title: 'Video Editing',
     category: 'Cinematic Post-Production',
-    image: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=1000&auto=format&fit=crop',
+    image: videoEditorImg,
     description: 'Event head for videography, multi-track timeline editing, color grading & audio sync.',
   },
   {
     id: 'photography',
     title: 'Photography',
     category: 'Visual Framing & Stories',
-    image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1000&auto=format&fit=crop',
+    image: photographyImg,
     description: 'Award-winning photography at Milaverse 2.0 & Manoeuvre IT Fest event coverage.',
   },
   {
     id: 'reels',
     title: 'Reels / Content Creation',
     category: 'Social Media & Media Edits',
-    image: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=1000&auto=format&fit=crop',
+    image: reelsContentImg,
     description: 'Short-form video editing, aesthetic visual pacing, and creative digital storytelling.',
   },
   {
     id: 'keyboard',
     title: 'Keyboard',
     category: 'Instrumental Music',
-    image: 'https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?q=80&w=1000&auto=format&fit=crop',
+    image: keyboardImg,
     description: 'Keyboard melodies, chord arrangements, and live acoustic music sessions.',
   },
   {
     id: 'music',
     title: 'Music',
     category: 'Soundscapes & Rhythm',
-    image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1000&auto=format&fit=crop',
+    image: musicImg,
     description: 'Exploring diverse musical genres, rhythm production, and sound design inspiration.',
   },
 ];
@@ -111,34 +118,27 @@ export default function CinematicHobbies() {
 
   const total = HOBBIES_LIST.length;
 
-  // Track scroll progress within tall container
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end'],
-  });
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev + 1) % total);
+  };
 
-  // Smooth scroll progress
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 120,
-    damping: 24,
-    restDelta: 0.001,
-  });
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev - 1 + total) % total);
+  };
 
-  // Map scroll progress (0 to 1) to active index (0 to total - 1)
-  const rawIndex = useTransform(smoothProgress, [0, 1], [0, total - 1]);
-
-  useMotionValueEvent(rawIndex, 'change', (latest) => {
-    const rounded = Math.min(total - 1, Math.max(0, Math.round(latest)));
-    if (rounded !== activeIndex) {
-      setActiveIndex(rounded);
+  // Wheel scroll handler to continuously rotate circular cards endless loop
+  const handleWheel = (e: React.WheelEvent) => {
+    if (e.deltaY > 30) {
+      handleNext();
+    } else if (e.deltaY < -30) {
+      handlePrev();
     }
-  });
+  };
 
-  // Calculate position on arc for each card
-  // Arc radius & center tailored to screen width & height
-  const radius = isMobile ? 380 : 650; // Radius of circular arc
-  const arcCenterY = isMobile ? 320 : 520; // Lower center so top of arc lifts cards up into center of viewport
-  const angleStep = isMobile ? 18 : 16; // Degrees per step along circle
+  // Calculate position on arc for each card with wide spacing (25 degrees)
+  const radius = isMobile ? 420 : 720;
+  const arcCenterY = isMobile ? 360 : 580;
+  const angleStep = isMobile ? 26 : 25; // Extra spacing between cards
 
   const activeHobby = HOBBIES_LIST[activeIndex];
 
@@ -146,10 +146,11 @@ export default function CinematicHobbies() {
     <section
       ref={containerRef}
       id="hobbies"
-      className="relative w-full h-[350vh] bg-[#000000] text-[#FFFFFF] z-20"
+      onWheel={handleWheel}
+      className="relative w-full min-h-screen py-16 sm:py-24 bg-[#000000] text-[#FFFFFF] z-20 flex flex-col justify-between overflow-hidden"
     >
-      {/* Sticky Viewport Container */}
-      <div className="sticky top-0 w-full h-screen overflow-hidden flex flex-col justify-between py-8 sm:py-12 px-4 sm:px-8 lg:px-12 bg-[#000000]">
+      {/* Viewport Container */}
+      <div className="w-full min-h-[85vh] flex flex-col justify-between py-6 sm:py-10 px-4 sm:px-8 lg:px-12 bg-[#000000]">
         
         {/* TOP SECTION HEADER */}
         <div className="w-full max-w-[1400px] mx-auto z-30">
@@ -170,89 +171,76 @@ export default function CinematicHobbies() {
         </div>
 
         {/* CIRCULAR STAGE CAROUSEL WITH ULTRA-THIN SIDE NAVIGATION ARROWS */}
-        <div className="relative w-full flex-grow flex items-center justify-center my-2 sm:my-4 overflow-hidden">
+        <div className="relative w-full min-h-[380px] sm:min-h-[460px] flex-grow flex items-center justify-center my-4 sm:my-8 overflow-hidden">
           
           {/* Ultra-thin Left Side Navigation Arrow */}
           <button
-            onClick={() => {
-              if (containerRef.current) {
-                const stepScroll = containerRef.current.clientHeight / (total - 1);
-                const targetY = containerRef.current.offsetTop + Math.max(0, activeIndex - 1) * stepScroll;
-                window.scrollTo({ top: targetY, behavior: 'smooth' });
-              }
-            }}
+            onClick={handlePrev}
             aria-label="Previous Hobby"
-            className="absolute left-2 sm:left-6 top-[40%] -translate-y-1/2 z-40 p-2 sm:p-3 text-white/30 hover:text-white/90 transition-colors focus-visible:outline-none group"
+            className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-40 p-3 sm:p-4 text-white/50 hover:text-white transition-colors focus-visible:outline-none group cursor-pointer"
           >
-            <ChevronLeft strokeWidth={1} className="w-8 h-8 sm:w-11 sm:h-11 group-hover:scale-110 transition-transform" />
+            <ChevronLeft strokeWidth={1} className="w-9 h-9 sm:w-12 sm:h-12 group-hover:scale-125 transition-transform" />
           </button>
 
           {/* Ultra-thin Right Side Navigation Arrow */}
           <button
-            onClick={() => {
-              if (containerRef.current) {
-                const stepScroll = containerRef.current.clientHeight / (total - 1);
-                const targetY = containerRef.current.offsetTop + Math.min(total - 1, activeIndex + 1) * stepScroll;
-                window.scrollTo({ top: targetY, behavior: 'smooth' });
-              }
-            }}
+            onClick={handleNext}
             aria-label="Next Hobby"
-            className="absolute right-2 sm:right-6 top-[40%] -translate-y-1/2 z-40 p-2 sm:p-3 text-white/30 hover:text-white/90 transition-colors focus-visible:outline-none group"
+            className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-40 p-3 sm:p-4 text-white/50 hover:text-white transition-colors focus-visible:outline-none group cursor-pointer"
           >
-            <ChevronRight strokeWidth={1} className="w-8 h-8 sm:w-11 sm:h-11 group-hover:scale-110 transition-transform" />
+            <ChevronRight strokeWidth={1} className="w-9 h-9 sm:w-12 sm:h-12 group-hover:scale-125 transition-transform" />
           </button>
 
           {HOBBIES_LIST.map((hobby, index) => {
-            // Transform for card position based on smooth scroll index
-            // Angle offset relative to current smoothProgress index
-            const cardAngle = useTransform(rawIndex, (currIndex) => {
-              const diff = index - currIndex;
-              return diff * angleStep; // in degrees
-            });
+            // Endless circular index diff offset calculation
+            let diff = (index - activeIndex + total) % total;
+            if (diff > total / 2) diff -= total;
+            if (diff < -total / 2) diff += total;
 
-            // Calculate x, y position along circular arc
-            const cardX = useTransform(cardAngle, (deg) => {
-              const rad = (deg - 90) * (Math.PI / 180);
-              return Math.cos(rad) * radius;
-            });
-
-            const cardY = useTransform(cardAngle, (deg) => {
-              const rad = (deg - 90) * (Math.PI / 180);
-              return Math.sin(rad) * radius + arcCenterY;
-            });
-
-            const cardRotate = useTransform(cardAngle, (deg) => deg);
-
-            // Scale, blur, grayscale, opacity based on distance from center
-            const distFromCenter = useTransform(cardAngle, (deg) => Math.abs(deg) / angleStep);
+            // Compute circular arc angles with 25 deg spacing
+            const cardAngle = diff * angleStep; // in degrees
+            const rad = (cardAngle - 90) * (Math.PI / 180);
             
-            const scale = useTransform(distFromCenter, [0, 1, 2, 3], [1.15, 0.92, 0.78, 0.65]);
-            const opacity = useTransform(distFromCenter, [0, 1, 2, 3.5], [1, 0.75, 0.45, 0]);
-            const grayscale = useTransform(distFromCenter, [0, 0.4, 1], [0, 1, 1]);
-            const blur = useTransform(distFromCenter, [0, 0.5, 2], [0, 2, 6]);
+            const cardX = Math.cos(rad) * radius;
+            const cardY = Math.sin(rad) * radius + arcCenterY;
+            const cardRotate = cardAngle;
+
+            // Scale, blur, grayscale, opacity based on distance from active center
+            const absDiff = Math.abs(diff);
+            const isVisible = absDiff <= 4;
+            if (!isVisible) return null;
+
+            const scale = absDiff === 0 ? 1.12 : Math.max(0.65, 0.95 - absDiff * 0.12);
+            const opacity = absDiff === 0 ? 1 : Math.max(0.15, 0.8 - absDiff * 0.22);
+            const grayscale = absDiff === 0 ? 0 : 1;
+            const blur = absDiff === 0 ? 0 : Math.min(6, absDiff * 2);
 
             return (
               <motion.div
                 key={hobby.id}
-                style={{
+                onClick={() => setActiveIndex(index)}
+                initial={false}
+                animate={{
                   x: cardX,
                   y: cardY,
                   rotate: cardRotate,
                   scale,
                   opacity,
                 }}
-                className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 origin-center pointer-events-auto cursor-pointer"
+                transition={{
+                  type: 'spring',
+                  stiffness: 280,
+                  damping: 28,
+                }}
+                className="absolute top-[42%] left-1/2 -translate-x-1/2 -translate-y-1/2 origin-center pointer-events-auto cursor-pointer"
               >
-                <motion.div
+                <div
                   style={{
-                    filter: useTransform(
-                      [grayscale, blur],
-                      ([g, b]) => `grayscale(${g}) blur(${b}px)`
-                    ),
+                    filter: `grayscale(${grayscale}) blur(${blur}px)`,
                   }}
-                  className={`relative w-[150px] xs:w-[180px] sm:w-[220px] lg:w-[240px] aspect-[3/4] rounded-2xl sm:rounded-3xl p-2 sm:p-2.5 bg-[#0d0d0f] border transition-all duration-300 ${
-                    index === activeIndex
-                      ? 'border-white/70 shadow-[0_0_35px_rgba(255,255,255,0.18)] z-30'
+                  className={`relative w-[160px] xs:w-[190px] sm:w-[230px] lg:w-[250px] aspect-[3/4] rounded-2xl sm:rounded-3xl p-2 sm:p-2.5 bg-[#0d0d0f] border transition-all duration-300 ${
+                    diff === 0
+                      ? 'border-white/80 shadow-[0_0_40px_rgba(255,255,255,0.22)] z-30 ring-1 ring-white/40'
                       : 'border-white/15 shadow-[0_10px_30px_rgba(0,0,0,0.9)] z-10'
                   }`}
                 >
@@ -274,7 +262,7 @@ export default function CinematicHobbies() {
                       {hobby.category}
                     </span>
                   </div>
-                </motion.div>
+                </div>
               </motion.div>
             );
           })}
