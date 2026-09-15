@@ -137,7 +137,7 @@ export default function CinematicHobbies() {
 
   // Calculate position on arc for each card with wide spacing (25 degrees)
   const radius = isMobile ? 420 : 720;
-  const arcCenterY = isMobile ? 360 : 580;
+  const arcCenterY = radius; // Set arc center Y to radius so apex (diff=0) is exactly Y=0 (vertically centered)
   const angleStep = isMobile ? 26 : 25; // Extra spacing between cards
 
   const activeHobby = HOBBIES_LIST[activeIndex];
@@ -232,7 +232,7 @@ export default function CinematicHobbies() {
                   stiffness: 280,
                   damping: 28,
                 }}
-                className="absolute top-[42%] left-1/2 -translate-x-1/2 -translate-y-1/2 origin-center pointer-events-auto cursor-pointer"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 origin-center pointer-events-auto cursor-pointer"
               >
                 <div
                   style={{
