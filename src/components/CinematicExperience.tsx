@@ -18,9 +18,10 @@ export default function CinematicExperience() {
     {
       role: 'Social Media & Content Creation Specialist',
       company: 'Freelance & Brand Client Accounts',
-      period: 'Aug 2024 – Present',
+      period: '2024 – 2026',
       contributions: [
-        'Managed social media content for Grace Captures, KJU KJIT, SHELLS 2026, Nithyadar Kripa Food Products, ICYM Sasthan, Udupi District Football Association, and VFA Manipal, including reels, promotional videos, and event creatives.',
+        'Served as full-time Social Media Lead for KJU KJIT and Grace Captures (2024–2026), managing end-to-end content calendars, brand strategy, and reels editing.',
+        'Executed short-term event media campaigns & promotional video coverage for SHELLS 2026, VFA Manipal, Udupi District Football Association, ICYM Sasthan, and Nithyadar Kripa Food Products.',
         'Generated 441K+ views on Grace Captures, with 5,493 profile activity actions and a 38.2% increase in profile visits.',
         'Created high-performing content reaching 40K+ views per campaign using Instagram Analytics to track reach, engagement, and audience performance.',
       ],

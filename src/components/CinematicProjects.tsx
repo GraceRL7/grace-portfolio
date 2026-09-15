@@ -7,14 +7,14 @@ export default function CinematicProjects() {
   const [autoTab, setAutoTab] = useState<'chatbot' | 'contact'>('chatbot');
 
   const instagramLinks = [
-    { name: 'Grace Lewis Personal', url: 'https://www.instagram.com/gracerlewis?stkn=MTAweGoza2JsdDQwYQ%3D%3D&utm_source=qr', handle: '@gracerlewis' },
-    { name: 'Grace Captures', url: 'https://www.instagram.com/grace_captures__?stkn=MWM5YzhzNjhoeWNlcg%3D%3D&utm_source=qr', handle: '@grace_captures__' },
-    { name: 'Nithyadar Kripa Food Products', url: 'https://www.instagram.com/nithyadar_kripa_food_products?stkn=d3QzeW9pcnA3c2xz&utm_source=qr', handle: '@nithyadar_kripa_food_products' },
-    { name: 'SHELLS 2026', url: 'https://www.instagram.com/shells.2026?stkn=MXZ0dTZ4Y2w0NWM1Yg==', handle: '@shells.2026' },
-    { name: 'KJU KJIT', url: 'https://www.instagram.com/kju_kjit?stkn=MW9na2szOHcxZDg2bQ==', handle: '@kju_kjit' },
-    { name: 'ICYM Sasthan', url: 'https://www.instagram.com/icym__sasthan?stkn=MWglZWJ1djNoZXFicg==', handle: '@icym__sasthan' },
-    { name: 'Udupi District Football Association', url: 'https://www.instagram.com/udupi_district_football_a?stkn=MXhiMGNqM3Ridmw1ZA==', handle: '@udupi_district_football_a' },
-    { name: 'VFA Manipal', url: 'https://www.instagram.com/vfa_manipal?stkn=MW81Z2ZuN2wxNzNycQ==', handle: '@vfa_manipal' },
+    { name: 'Grace Lewis Personal', url: 'https://www.instagram.com/gracerlewis?stkn=MTAweGoza2JsdDQwYQ%3D%3D&utm_source=qr', handle: '@gracerlewis', badge: 'Personal' },
+    { name: 'Grace Captures', url: 'https://www.instagram.com/grace_captures__?stkn=MWM5YzhzNjhoeWNlcg%3D%3D&utm_source=qr', handle: '@grace_captures__', badge: 'Full-Time (2024-2026)' },
+    { name: 'KJU KJIT', url: 'https://www.instagram.com/kju_kjit?stkn=MW9na2szOHcxZDg2bQ==', handle: '@kju_kjit', badge: 'Full-Time (2024-2026)' },
+    { name: 'SHELLS 2026', url: 'https://www.instagram.com/shells.2026?stkn=MXZ0dTZ4Y2w0NWM1Yg==', handle: '@shells.2026', badge: 'Event Coverage' },
+    { name: 'VFA Manipal', url: 'https://www.instagram.com/vfa_manipal?stkn=MW81Z2ZuN2wxNzNycQ==', handle: '@vfa_manipal', badge: 'Event Coverage' },
+    { name: 'Udupi District Football Association', url: 'https://www.instagram.com/udupi_district_football_a?stkn=MXhiMGNqM3Ridmw1ZA==', handle: '@udupi_district_football_a', badge: 'Event Coverage' },
+    { name: 'ICYM Sasthan', url: 'https://www.instagram.com/icym__sasthan?stkn=MWglZWJ1djNoZXFicg==', handle: '@icym__sasthan', badge: 'Event Media' },
+    { name: 'Nithyadar Kripa Food Products', url: 'https://www.instagram.com/nithyadar_kripa_food_products?stkn=d3QzeW9pcnA3c2xz&utm_source=qr', handle: '@nithyadar_kripa_food_products', badge: 'Brand Campaign' },
   ];
 
   const projects = [
@@ -369,7 +369,7 @@ export default function CinematicProjects() {
                     <div>
                       <div className="flex items-center justify-between mb-3">
                         <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-white/80">
-                          INSTAGRAM
+                          {item.badge}
                         </span>
                         <ArrowUpRight className="w-4 h-4 text-white/40 group-hover:text-white transition-colors" />
                       </div>
