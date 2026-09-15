@@ -49,6 +49,7 @@ export interface CertificateItem {
   pdfUrl: string;
   description: string;
   category: string;
+  type: 'certificate' | 'award';
   youtubeUrl?: string;
 }
 
@@ -63,6 +64,7 @@ export const certificateList: CertificateItem[] = [
     youtubeUrl: 'https://www.youtube.com/embed/n8D0tpW85XQ?autoplay=1&rel=0',
     description: 'Secured 1st Place overall in national video production. Directed, filmed, and edited the winning video project featuring cinematic storytelling, multi-track audio sync, and color grading.',
     category: '1st Place Award & Video Production',
+    type: 'award',
   },
   {
     id: 'oracle-ai',
@@ -73,6 +75,7 @@ export const certificateList: CertificateItem[] = [
     pdfUrl: oraclePdf,
     description: 'Official industry certification validating AI architecture, cloud deployment, and machine learning infrastructure.',
     category: 'Oracle / Cloud & AI',
+    type: 'certificate',
   },
   {
     id: 'digital-marketing',
@@ -83,6 +86,7 @@ export const certificateList: CertificateItem[] = [
     pdfUrl: digitalMarketingPdf,
     description: 'Professional certificate covering search engine optimization, email marketing, digital analytics, and display advertising strategies.',
     category: 'Coursera / Google',
+    type: 'certificate',
   },
   {
     id: 'ksfa-b-division',
@@ -93,6 +97,7 @@ export const certificateList: CertificateItem[] = [
     pdfUrl: ksfaImg,
     description: 'Official registration & team representation in the prestigious KSFA B Division Football League.',
     category: 'Athletic Achievement',
+    type: 'award',
   },
   {
     id: 'south-zone-varsity',
@@ -103,6 +108,7 @@ export const certificateList: CertificateItem[] = [
     pdfUrl: southZoneImg,
     description: 'Selected to represent varsity football at the national South Zone Inter-University Championship.',
     category: 'Varsity Honor',
+    type: 'award',
   },
   {
     id: 'manoeuvre-event-head',
@@ -113,6 +119,7 @@ export const certificateList: CertificateItem[] = [
     pdfUrl: eventHeadImg,
     description: 'Appointed Event Head leading multi-camera coverage, creative media direction, and IT fest videography production.',
     category: 'Leadership & Media',
+    type: 'award',
   },
   {
     id: 'manoeuvre-overall-winners',
@@ -123,6 +130,7 @@ export const certificateList: CertificateItem[] = [
     pdfUrl: winnersImg,
     description: 'Awarded Overall Champions title at the national Manoeuvre IT Fest across photography & creative events.',
     category: 'National IT Fest Award',
+    type: 'award',
   },
   {
     id: 'rajya-puraskar-scout',
@@ -133,6 +141,7 @@ export const certificateList: CertificateItem[] = [
     pdfUrl: rajyaPuraskarImg,
     description: 'Prestigious Governor Scouting Award recognizing community leadership, outdoor survival mastery, and discipline.',
     category: 'Governor Award',
+    type: 'award',
   },
   {
     id: 'intro-ai-infosys',
@@ -143,6 +152,7 @@ export const certificateList: CertificateItem[] = [
     pdfUrl: introAiPdf,
     description: 'Foundational mastery in neural networks, machine learning principles, and generative AI application frameworks.',
     category: 'Infosys Springboard',
+    type: 'certificate',
   },
   {
     id: 'java-fundamentals-infosys',
@@ -153,6 +163,7 @@ export const certificateList: CertificateItem[] = [
     pdfUrl: javaPdf,
     description: 'Object-oriented programming, data structures, exception handling, and core Java application architecture.',
     category: 'Infosys Springboard',
+    type: 'certificate',
   },
   {
     id: 'prog-fundamentals-infosys',
@@ -163,6 +174,7 @@ export const certificateList: CertificateItem[] = [
     pdfUrl: progFundPdf,
     description: 'Algorithmic thinking, control structures, memory management, and software engineering principles.',
     category: 'Infosys Springboard',
+    type: 'certificate',
   },
   {
     id: 'google-analytics',
@@ -173,6 +185,7 @@ export const certificateList: CertificateItem[] = [
     pdfUrl: googleAdsPdf,
     description: 'Comprehensive training on web analytics, audience segmentation, conversion tracking, and performance reporting.',
     category: 'Coursera / Google',
+    type: 'certificate',
   },
   {
     id: 'agentic-automation',
@@ -183,6 +196,7 @@ export const certificateList: CertificateItem[] = [
     pdfUrl: agenticPdf,
     description: 'Diploma in designing autonomous AI agents, enterprise workflow orchestrations, and intelligent process automation.',
     category: 'AI Automation',
+    type: 'certificate',
   },
   {
     id: 'seo-fundamentals',
@@ -193,6 +207,7 @@ export const certificateList: CertificateItem[] = [
     pdfUrl: seoPdf,
     description: 'Technical search engine optimization, keyword research, on-page optimization, and backlink audit methodologies.',
     category: 'SEO',
+    type: 'certificate',
   },
   {
     id: 'wordpress-dev',
@@ -203,6 +218,7 @@ export const certificateList: CertificateItem[] = [
     pdfUrl: wordpressPdf,
     description: 'Full-stack WordPress website architecture, custom theme development, Elementor customization, and plugin engineering.',
     category: 'Web Development',
+    type: 'certificate',
   },
   {
     id: 'research-symposium',
@@ -213,6 +229,7 @@ export const certificateList: CertificateItem[] = [
     pdfUrl: researchPdf,
     description: 'Paper presentation certification on "Role of Cloud Networking in Telecom" at the national student research conference.',
     category: 'Research',
+    type: 'award',
   },
   {
     id: 'wadhwani-employability',
@@ -223,6 +240,7 @@ export const certificateList: CertificateItem[] = [
     pdfUrl: wadhwaniPdf,
     description: 'Professional development program covering workplace ethics, teamwork, agile project management, and corporate readiness.',
     category: 'Career Readiness',
+    type: 'certificate',
   },
   {
     id: 'aptitude-skills',
@@ -233,5 +251,6 @@ export const certificateList: CertificateItem[] = [
     pdfUrl: graceCertPdf,
     description: 'Advanced certification program focused on quantitative problem solving, logical reasoning, and technical presentation skills.',
     category: 'Professional Skills',
+    type: 'certificate',
   },
 ];
