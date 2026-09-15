@@ -243,7 +243,7 @@ export default function CinematicCertifications() {
                       src={cert.image}
                       alt={cert.title}
                       loading="lazy"
-                      className="w-full h-full object-cover grayscale opacity-85 group-hover/card:grayscale-0 group-hover/card:opacity-100 group-hover/card:scale-[1.03] transition-all duration-500 ease-out"
+                      className="w-full h-full object-cover group-hover/card:scale-[1.03] transition-all duration-500 ease-out"
                     />
 
                     {/* Play Button Overlay for Video Items */}
@@ -254,19 +254,6 @@ export default function CinematicCertifications() {
                         </div>
                       </div>
                     )}
-
-                    {/* Category Tag */}
-                    <div className="absolute top-3 left-3 flex items-center gap-2 z-10">
-                      <span className={`px-2.5 py-1 rounded-md border backdrop-blur-md text-[10px] font-mono tracking-widest uppercase shadow-md ${
-                        cert.type === 'award'
-                          ? 'bg-amber-500/20 border-amber-400/40 text-amber-200'
-                          : isBeach
-                            ? 'bg-[#FAF6F0]/90 border-[#7A4A21]/20 text-[#1C242B]'
-                            : 'bg-black/80 border-white/20 text-white/90'
-                      }`}>
-                        {cert.category}
-                      </span>
-                    </div>
                   </div>
 
                   {/* BOTTOM DETAILS */}

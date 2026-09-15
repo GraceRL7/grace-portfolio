@@ -39,6 +39,7 @@ import eventHeadImg from './Event head at manoeuvre it fes for videography and p
 import winnersImg from './Manoeuvre it fest overall winners 2.0.jpeg';
 import rajyaPuraskarImg from './Rajya puraskar award.jpeg';
 import southZoneImg from './south zone.jpeg';
+import shadowsCoverImg from './Certificates/previews/shadows-cover.png';
 
 export interface CertificateItem {
   id: string;
@@ -59,7 +60,7 @@ export const certificateList: CertificateItem[] = [
     title: '1st Place Winner — Directed, Shot & Edited Short Film / Video Production',
     issuer: 'Inter-Collegiate Film Festival & Competition',
     year: '2025',
-    image: eventHeadImg,
+    image: shadowsCoverImg,
     pdfUrl: 'https://youtu.be/n8D0tpW85XQ?si=9RwUiiAT0lvri-3x',
     youtubeUrl: 'https://www.youtube.com/embed/n8D0tpW85XQ?autoplay=1&rel=0',
     description: 'Secured 1st Place overall in national video production. Directed, filmed, and edited the winning video project featuring cinematic storytelling, multi-track audio sync, and color grading.',

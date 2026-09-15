@@ -130,7 +130,7 @@ export default function CinematicHobbies() {
     setActiveIndex((prev) => (prev - 1 + total) % total);
   };
 
-  // Wheel scroll handler
+  // Mouse wheel scroll handler
   const handleWheel = (e: React.WheelEvent) => {
     if (e.deltaY > 30) {
       handleNext();
@@ -139,16 +139,44 @@ export default function CinematicHobbies() {
     }
   };
 
-  // Calculate position on arc for each card
-  const radius = isMobile ? 420 : 720;
-  const arcCenterY = isMobile ? 360 : 600;
-  const angleStep = isMobile ? 26 : 25;
+  // Touch swipe state for mobile & tablet horizontal gesture scrolling
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+    const distance = touchStartX.current - touchEndX.current;
+    const minSwipeDistance = 35; // minimum swipe distance threshold in px
+
+    if (distance > minSwipeDistance) {
+      // Swiped finger Left -> rotate next hobby image
+      handleNext();
+    } else if (distance < -minSwipeDistance) {
+      // Swiped finger Right -> rotate previous hobby image
+      handlePrev();
+    }
+
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
 
   return (
     <section
       ref={containerRef}
       id="hobbies"
       onWheel={handleWheel}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
       className={`relative w-full min-h-screen pt-24 sm:pt-32 pb-16 z-20 flex flex-col justify-between overflow-hidden transition-colors duration-1000 ${
         isBeach ? 'bg-[#FAF8F5] text-[#121E24]' : 'bg-[#000000] text-[#FFFFFF]'
       }`}
@@ -182,28 +210,6 @@ export default function CinematicHobbies() {
 
         {/* PROPER FIXED SEMICIRCLE CAROUSEL STAGE (Shifted 100px left) */}
         <div className="relative w-full h-[380px] sm:h-[440px] lg:h-[480px] flex items-center justify-center my-2 sm:my-4 -translate-x-0 md:-translate-x-[100px]">
-
-          {/* Ultra-thin Left Side Navigation Arrow */}
-          <button
-            onClick={handlePrev}
-            aria-label="Previous Hobby"
-            className={`absolute left-2 sm:left-6 translate-x-[150px] top-1/2 -translate-y-1/2 z-40 p-3 sm:p-4 transition-colors focus-visible:outline-none group cursor-pointer ${
-              isBeach ? 'text-[#7A4A21]/50 hover:text-[#00ACC1]' : 'text-white/50 hover:text-white'
-            }`}
-          >
-            <ChevronLeft strokeWidth={1} className="w-9 h-9 sm:w-12 sm:h-12 group-hover:scale-125 transition-transform" />
-          </button>
-
-          {/* Ultra-thin Right Side Navigation Arrow */}
-          <button
-            onClick={handleNext}
-            aria-label="Next Hobby"
-            className={`absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-40 p-3 sm:p-4 transition-colors focus-visible:outline-none group cursor-pointer ${
-              isBeach ? 'text-[#7A4A21]/50 hover:text-[#00ACC1]' : 'text-white/50 hover:text-white'
-            }`}
-          >
-            <ChevronRight strokeWidth={1} className="w-9 h-9 sm:w-12 sm:h-12 group-hover:scale-125 transition-transform" />
-          </button>
 
           {/* PROPER SEMICIRCLE ORBITING CARDS WITH INCREASED SPACING */}
           {HOBBIES_LIST.map((hobby, index) => {
@@ -258,7 +264,7 @@ export default function CinematicHobbies() {
                   style={{
                     filter: `grayscale(${grayscale}) blur(${blur}px)`,
                   }}
-                  className={`relative w-[170px] sm:w-[220px] h-[225px] sm:h-[290px] rounded-2xl sm:rounded-3xl p-2 sm:p-2.5 border transition-all duration-300 ${
+                  className={`relative w-[170px] sm:w-[220px] h-[240px] sm:h-[305px] rounded-2xl sm:rounded-3xl p-2 sm:p-2.5 border transition-all duration-300 ${
                     isBeach
                       ? isActive
                         ? 'bg-[#FFFFFF] border-[#00ACC1] shadow-[0_0_35px_rgba(0,188,212,0.3)] ring-2 ring-[#00ACC1]/40'
@@ -288,9 +294,9 @@ export default function CinematicHobbies() {
           })}
         </div>
 
-        {/* INDEPENDENT PAGE-CENTERED ACTIVE CONTENT BLOCK (Shifted 30px below) */}
+        {/* INDEPENDENT PAGE-CENTERED ACTIVE CONTENT BLOCK WITH ARROWS BESIDE TITLE */}
         {HOBBIES_LIST[activeIndex] && (
-          <div className="w-full max-w-[600px] mx-auto text-center flex flex-col items-center justify-center my-4 mt-8 sm:mt-10 z-30 pointer-events-none">
+          <div className="w-full max-w-[650px] mx-auto text-center flex flex-col items-center justify-center my-4 mt-8 sm:mt-10 z-30 pointer-events-none">
             <AnimatePresence mode="wait">
               <motion.div
                 key={HOBBIES_LIST[activeIndex].id}
@@ -298,14 +304,39 @@ export default function CinematicHobbies() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.25 }}
-                className="flex flex-col items-center justify-center"
+                className="flex flex-col items-center justify-center w-full"
               >
-                {/* Title */}
-                <h3 className={`font-['Caveat',cursive] text-3xl sm:text-5xl font-bold tracking-wide capitalize mb-1 sm:mb-2 ${
-                  isBeach ? 'text-[#00838F]' : 'text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]'
-                }`}>
-                  {HOBBIES_LIST[activeIndex].title}
-                </h3>
+                {/* Title Container with Left & Right Arrow Buttons Beside Text */}
+                <div className="flex items-center justify-center gap-4 sm:gap-8 w-full pointer-events-auto mb-1 sm:mb-2">
+                  {/* Left Side Navigation Arrow Beside Title */}
+                  <button
+                    onClick={handlePrev}
+                    aria-label="Previous Hobby"
+                    className={`p-2 sm:p-3 transition-colors focus-visible:outline-none group cursor-pointer ${
+                      isBeach ? 'text-[#7A4A21]/60 hover:text-[#00ACC1]' : 'text-white/60 hover:text-white'
+                    }`}
+                  >
+                    <ChevronLeft strokeWidth={1.5} className="w-7 h-7 sm:w-10 sm:h-10 group-hover:scale-125 transition-transform" />
+                  </button>
+
+                  {/* Active Hobby Title */}
+                  <h3 className={`font-['Caveat',cursive] text-3xl sm:text-5xl font-bold tracking-wide capitalize ${
+                    isBeach ? 'text-[#00838F]' : 'text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]'
+                  }`}>
+                    {HOBBIES_LIST[activeIndex].title}
+                  </h3>
+
+                  {/* Right Side Navigation Arrow Beside Title */}
+                  <button
+                    onClick={handleNext}
+                    aria-label="Next Hobby"
+                    className={`p-2 sm:p-3 transition-colors focus-visible:outline-none group cursor-pointer ${
+                      isBeach ? 'text-[#7A4A21]/60 hover:text-[#00ACC1]' : 'text-white/60 hover:text-white'
+                    }`}
+                  >
+                    <ChevronRight strokeWidth={1.5} className="w-7 h-7 sm:w-10 sm:h-10 group-hover:scale-125 transition-transform" />
+                  </button>
+                </div>
 
                 {/* Description */}
                 <p className={`font-['Inter',sans-serif] text-xs sm:text-sm font-light max-w-md leading-relaxed px-2 ${
