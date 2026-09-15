@@ -180,8 +180,8 @@ export default function CinematicHobbies() {
           </p>
         </div>
 
-        {/* COMPACT SHALLOW ARC CAROUSEL STAGE (Shifted 500px left) */}
-        <div className="relative w-full h-[500px] sm:h-[580px] lg:h-[620px] flex items-center justify-center my-2 sm:my-4 -translate-x-0 md:-translate-x-[500px]">
+        {/* COMPACT SHALLOW ARC CAROUSEL STAGE (Shifted 80px left on desktop) */}
+        <div className="relative w-full h-[500px] sm:h-[580px] lg:h-[620px] flex items-center justify-center my-2 sm:my-4 -translate-x-0 md:-translate-x-[80px]">
 
           {/* Ultra-thin Left Side Navigation Arrow */}
           <button
@@ -205,9 +205,9 @@ export default function CinematicHobbies() {
             <ChevronRight strokeWidth={1} className="w-9 h-9 sm:w-12 sm:h-12 group-hover:scale-125 transition-transform" />
           </button>
 
-          {/* ACTIVE CONTENT BLOCK - LOCKED AT CONTAINER CENTER DIRECTLY BENEATH ACTIVE CARD */}
+          {/* ACTIVE CONTENT BLOCK - SHIFTED 20PX DOWN & 30PX RIGHT BENEATH ACTIVE CARD */}
           {HOBBIES_LIST[activeIndex] && (
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-[130px] sm:translate-y-[165px] lg:translate-y-[185px] z-30 w-[280px] xs:w-[320px] sm:w-[440px] md:w-[500px] text-center flex flex-col items-center justify-center pointer-events-none">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-x-[30px] translate-y-[150px] sm:translate-y-[185px] lg:translate-y-[205px] z-30 w-[280px] xs:w-[320px] sm:w-[440px] md:w-[500px] text-center flex flex-col items-center justify-center pointer-events-none">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={HOBBIES_LIST[activeIndex].id}
