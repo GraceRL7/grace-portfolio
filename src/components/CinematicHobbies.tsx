@@ -226,7 +226,7 @@ export default function CinematicHobbies() {
             const cardY = (1 - Math.cos(angleRad)) * radiusY - (isMobile ? 40 : 60);
             const cardRotate = diff * 7; // Clean symmetrical radial tilt
 
-            const scale = absDiff === 0 ? 1.08 : absDiff === 1 ? 0.84 : 0.70;
+            const scale = 1; // Constant fixed size across all cards
             const opacity = absDiff === 0 ? 1 : absDiff === 1 ? 0.65 : 0.3;
             const grayscale = absDiff === 0 ? 0 : 1;
             const blur = absDiff === 0 ? 0 : absDiff === 1 ? 3 : 5;
@@ -253,12 +253,12 @@ export default function CinematicHobbies() {
                   isActive ? 'z-30' : 'z-10'
                 }`}
               >
-                {/* CARD IMAGE CONTAINER */}
+                {/* UNIFORM FIXED-SIZE CARD CONTAINER */}
                 <div
                   style={{
                     filter: `grayscale(${grayscale}) blur(${blur}px)`,
                   }}
-                  className={`relative w-[150px] xs:w-[180px] sm:w-[210px] lg:w-[230px] aspect-[3/4] rounded-2xl sm:rounded-3xl p-2 sm:p-2.5 border transition-all duration-300 ${
+                  className={`relative w-[170px] sm:w-[220px] h-[225px] sm:h-[290px] rounded-2xl sm:rounded-3xl p-2 sm:p-2.5 border transition-all duration-300 ${
                     isBeach
                       ? isActive
                         ? 'bg-[#FFFFFF] border-[#00ACC1] shadow-[0_0_35px_rgba(0,188,212,0.3)] ring-2 ring-[#00ACC1]/40'
