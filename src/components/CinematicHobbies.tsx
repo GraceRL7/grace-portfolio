@@ -205,9 +205,9 @@ export default function CinematicHobbies() {
             <ChevronRight strokeWidth={1} className="w-9 h-9 sm:w-12 sm:h-12 group-hover:scale-125 transition-transform" />
           </button>
 
-          {/* ACTIVE CONTENT BLOCK - SHIFTED 20PX DOWN & 30PX RIGHT BENEATH ACTIVE CARD */}
+          {/* ACTIVE CONTENT BLOCK - POSITIONED 10PX LEFT & 10PX DOWN BENEATH ACTIVE CARD */}
           {HOBBIES_LIST[activeIndex] && (
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-x-[30px] translate-y-[150px] sm:translate-y-[185px] lg:translate-y-[205px] z-30 w-[280px] xs:w-[320px] sm:w-[440px] md:w-[500px] text-center flex flex-col items-center justify-center pointer-events-none">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-x-[10px] translate-y-[140px] sm:translate-y-[175px] lg:translate-y-[195px] z-30 w-[280px] xs:w-[320px] sm:w-[440px] md:w-[500px] text-center flex flex-col items-center justify-center pointer-events-none">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={HOBBIES_LIST[activeIndex].id}
