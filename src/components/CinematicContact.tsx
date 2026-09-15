@@ -1,11 +1,14 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 import { Mail, Linkedin, Instagram, Send, Workflow, CheckCircle2, AlertCircle, ArrowRight } from 'lucide-react';
 import { profile } from '../data/cinematicProfile';
+import { useTheme } from '../context/ThemeContext';
 
 const N8N_CONTACT_WEBHOOK_URL = 'https://n8n.srv965596.hstgr.cloud/webhook/grace-contact';
 
 export default function CinematicContact() {
+  const { theme } = useTheme();
+  const isBeach = theme === 'beach';
+
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [statusMsg, setStatusMsg] = useState('');
@@ -71,40 +74,58 @@ export default function CinematicContact() {
   return (
     <section
       id="contact"
-      className="relative w-full min-h-screen py-16 sm:py-24 lg:py-32 bg-[#000000] text-[#FFFFFF] flex flex-col justify-center px-4 sm:px-8 lg:px-12 border-t border-[#FFFFFF]/10 z-20"
+      className={`relative w-full min-h-screen py-16 sm:py-24 lg:py-32 border-t flex flex-col justify-center px-4 sm:px-8 lg:px-12 z-20 transition-colors duration-1000 ${
+        isBeach
+          ? 'bg-[#FAF6F0] text-[#1C242B] border-[#5C5349]/15'
+          : 'bg-[#000000] text-[#FFFFFF] border-[#FFFFFF]/10'
+      }`}
     >
       <div className="w-full max-w-[1400px] mx-auto">
         {/* Section Label */}
         <div className="flex items-center gap-3 mb-4 sm:mb-6">
-          <div className="w-2 h-2 rounded-full bg-[#FFFFFF]" />
-          <span className="font-['Inter',sans-serif] text-[12px] sm:text-[14px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[#BFBFBF]">
+          <div className={`w-2 h-2 rounded-full ${isBeach ? 'bg-[#1C6E8C]' : 'bg-[#FFFFFF]'}`} />
+          <span className={`font-['Inter',sans-serif] text-[12px] sm:text-[14px] uppercase tracking-[0.25em] sm:tracking-[0.3em] ${
+            isBeach ? 'text-[#7A4A21]' : 'text-[#BFBFBF]'
+          }`}>
             07 / CONTACT ME
           </span>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           <div className="lg:col-span-6 space-y-4 sm:space-y-6">
-            <h2 className="font-['Bebas_Neue',sans-serif] font-bold text-[36px] xs:text-[48px] sm:text-[72px] lg:text-[96px] text-[#FFFFFF] tracking-[0.03em] sm:tracking-[0.05em] leading-none uppercase">
+            <h2 className={`font-['Bebas_Neue',sans-serif] font-bold text-[36px] xs:text-[48px] sm:text-[72px] lg:text-[96px] tracking-[0.03em] sm:tracking-[0.05em] leading-none uppercase ${
+              isBeach ? 'text-[#1C242B]' : 'text-[#FFFFFF]'
+            }`}>
               CONTACT ME
             </h2>
 
-            <p className="font-['Inter',sans-serif] text-sm sm:text-base text-[#BFBFBF] font-light leading-relaxed max-w-md">
+            <p className={`font-['Inter',sans-serif] text-sm sm:text-base font-light leading-relaxed max-w-md ${
+              isBeach ? 'text-[#5C5349]' : 'text-[#BFBFBF]'
+            }`}>
               Available for AI automation architecture, full-stack web applications, and digital engineering inquiries.
             </p>
 
             {/* Workflow Pipeline Diagram Card */}
-            <div className="p-6 rounded-2xl bg-[#0D0D0D] border border-white/10 space-y-3">
-              <div className="flex items-center gap-2 text-xs font-mono text-emerald-400 uppercase tracking-wider">
+            <div className={`p-6 rounded-2xl border space-y-3 ${
+              isBeach
+                ? 'bg-[#F3ECE1] border-[#7A4A21]/20'
+                : 'bg-[#0D0D0D] border-white/10'
+            }`}>
+              <div className={`flex items-center gap-2 text-xs font-mono uppercase tracking-wider ${
+                isBeach ? 'text-[#1C6E8C]' : 'text-emerald-400'
+              }`}>
                 <Workflow size={14} />
                 <span>Contact Workflow Engine</span>
               </div>
-              <div className="flex items-center gap-2 text-[11px] font-mono text-white/60 flex-wrap">
+              <div className={`flex items-center gap-2 text-[11px] font-mono flex-wrap ${
+                isBeach ? 'text-[#5C5349]' : 'text-white/60'
+              }`}>
                 <span>Contact Form</span>
-                <ArrowRight size={12} className="text-white/30" />
+                <ArrowRight size={12} className={isBeach ? 'text-[#7A4A21]/40' : 'text-white/30'} />
                 <span>n8n Webhook</span>
-                <ArrowRight size={12} className="text-white/30" />
+                <ArrowRight size={12} className={isBeach ? 'text-[#7A4A21]/40' : 'text-white/30'} />
                 <span>Google Sheets</span>
-                <ArrowRight size={12} className="text-white/30" />
+                <ArrowRight size={12} className={isBeach ? 'text-[#7A4A21]/40' : 'text-white/30'} />
                 <span>Auto-Reply Email</span>
               </div>
             </div>
@@ -112,7 +133,11 @@ export default function CinematicContact() {
             <div className="flex flex-wrap gap-4 pt-2">
               <a
                 href={`mailto:${profile.email}`}
-                className="flex items-center gap-3 px-6 py-3 rounded-full border border-[#FFFFFF]/30 bg-transparent text-[#FFFFFF] hover:bg-[#FFFFFF] hover:text-[#000000] transition-all duration-300 font-['Inter',sans-serif] text-xs font-semibold tracking-widest uppercase"
+                className={`flex items-center gap-3 px-6 py-3 rounded-full border transition-all duration-300 font-['Inter',sans-serif] text-xs font-semibold tracking-widest uppercase ${
+                  isBeach
+                    ? 'border-[#7A4A21]/30 bg-transparent text-[#1C242B] hover:bg-[#1C6E8C] hover:text-white hover:border-[#1C6E8C]'
+                    : 'border-[#FFFFFF]/30 bg-transparent text-[#FFFFFF] hover:bg-[#FFFFFF] hover:text-[#000000]'
+                }`}
               >
                 <Mail size={16} />
                 <span>EMAIL ME</span>
@@ -122,7 +147,11 @@ export default function CinematicContact() {
                 href={profile.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-3 px-6 py-3 rounded-full border border-[#FFFFFF]/30 bg-transparent text-[#FFFFFF] hover:bg-[#FFFFFF] hover:text-[#000000] transition-all duration-300 font-['Inter',sans-serif] text-xs font-semibold tracking-widest uppercase"
+                className={`flex items-center gap-3 px-6 py-3 rounded-full border transition-all duration-300 font-['Inter',sans-serif] text-xs font-semibold tracking-widest uppercase ${
+                  isBeach
+                    ? 'border-[#7A4A21]/30 bg-transparent text-[#1C242B] hover:bg-[#1C6E8C] hover:text-white hover:border-[#1C6E8C]'
+                    : 'border-[#FFFFFF]/30 bg-transparent text-[#FFFFFF] hover:bg-[#FFFFFF] hover:text-[#000000]'
+                }`}
               >
                 <Linkedin size={16} />
                 <span>LINKEDIN</span>
@@ -132,7 +161,11 @@ export default function CinematicContact() {
                 href={profile.instagram}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-3 px-6 py-3 rounded-full border border-[#FFFFFF]/30 bg-transparent text-[#FFFFFF] hover:bg-[#FFFFFF] hover:text-[#000000] transition-all duration-300 font-['Inter',sans-serif] text-xs font-semibold tracking-widest uppercase"
+                className={`flex items-center gap-3 px-6 py-3 rounded-full border transition-all duration-300 font-['Inter',sans-serif] text-xs font-semibold tracking-widest uppercase ${
+                  isBeach
+                    ? 'border-[#7A4A21]/30 bg-transparent text-[#1C242B] hover:bg-[#1C6E8C] hover:text-white hover:border-[#1C6E8C]'
+                    : 'border-[#FFFFFF]/30 bg-transparent text-[#FFFFFF] hover:bg-[#FFFFFF] hover:text-[#000000]'
+                }`}
               >
                 <Instagram size={16} />
                 <span>INSTAGRAM</span>
@@ -140,10 +173,16 @@ export default function CinematicContact() {
             </div>
           </div>
 
-          <div className="lg:col-span-6 p-8 rounded-3xl bg-[#111111]/70 border border-[#FFFFFF]/15 backdrop-blur-[20px]">
+          <div className={`lg:col-span-6 p-8 rounded-3xl border backdrop-blur-[20px] transition-colors ${
+            isBeach
+              ? 'bg-[#FFFFFF] border-[#7A4A21]/15 shadow-[0_10px_30px_rgba(90,82,74,0.08)]'
+              : 'bg-[#111111]/70 border-[#FFFFFF]/15 shadow-2xl'
+          }`}>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-[12px] font-mono uppercase tracking-widest text-[#BFBFBF] mb-2">Name</label>
+                <label className={`block text-[12px] font-mono uppercase tracking-widest mb-2 ${
+                  isBeach ? 'text-[#7A4A21]' : 'text-[#BFBFBF]'
+                }`}>Name</label>
                 <input
                   type="text"
                   required
@@ -151,12 +190,18 @@ export default function CinematicContact() {
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="Your Name"
                   disabled={status === 'submitting'}
-                  className="w-full px-5 py-3 rounded-xl bg-[#000000] border border-[#FFFFFF]/15 text-[#FFFFFF] placeholder:text-[#BFBFBF]/40 focus:outline-none focus:border-[#FFFFFF] transition-colors text-sm disabled:opacity-50"
+                  className={`w-full px-5 py-3 rounded-xl border text-sm transition-colors disabled:opacity-50 focus:outline-none ${
+                    isBeach
+                      ? 'bg-[#FAF6F0] border-[#7A4A21]/20 text-[#1C242B] placeholder:text-[#5C5349]/40 focus:border-[#1C6E8C]'
+                      : 'bg-[#000000] border-[#FFFFFF]/15 text-[#FFFFFF] placeholder:text-[#BFBFBF]/40 focus:border-[#FFFFFF]'
+                  }`}
                 />
               </div>
 
               <div>
-                <label className="block text-[12px] font-mono uppercase tracking-widest text-[#BFBFBF] mb-2">Email</label>
+                <label className={`block text-[12px] font-mono uppercase tracking-widest mb-2 ${
+                  isBeach ? 'text-[#7A4A21]' : 'text-[#BFBFBF]'
+                }`}>Email</label>
                 <input
                   type="email"
                   required
@@ -164,12 +209,18 @@ export default function CinematicContact() {
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="Your Email"
                   disabled={status === 'submitting'}
-                  className="w-full px-5 py-3 rounded-xl bg-[#000000] border border-[#FFFFFF]/15 text-[#FFFFFF] placeholder:text-[#BFBFBF]/40 focus:outline-none focus:border-[#FFFFFF] transition-colors text-sm disabled:opacity-50"
+                  className={`w-full px-5 py-3 rounded-xl border text-sm transition-colors disabled:opacity-50 focus:outline-none ${
+                    isBeach
+                      ? 'bg-[#FAF6F0] border-[#7A4A21]/20 text-[#1C242B] placeholder:text-[#5C5349]/40 focus:border-[#1C6E8C]'
+                      : 'bg-[#000000] border-[#FFFFFF]/15 text-[#FFFFFF] placeholder:text-[#BFBFBF]/40 focus:border-[#FFFFFF]'
+                  }`}
                 />
               </div>
 
               <div>
-                <label className="block text-[12px] font-mono uppercase tracking-widest text-[#BFBFBF] mb-2">Message</label>
+                <label className={`block text-[12px] font-mono uppercase tracking-widest mb-2 ${
+                  isBeach ? 'text-[#7A4A21]' : 'text-[#BFBFBF]'
+                }`}>Message</label>
                 <textarea
                   rows={4}
                   required
@@ -177,21 +228,21 @@ export default function CinematicContact() {
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder="Your Message..."
                   disabled={status === 'submitting'}
-                  className="w-full px-5 py-3 rounded-xl bg-[#000000] border border-[#FFFFFF]/15 text-[#FFFFFF] placeholder:text-[#BFBFBF]/40 focus:outline-none focus:border-[#FFFFFF] transition-colors text-sm disabled:opacity-50"
+                  className={`w-full px-5 py-3 rounded-xl border text-sm transition-colors disabled:opacity-50 focus:outline-none ${
+                    isBeach
+                      ? 'bg-[#FAF6F0] border-[#7A4A21]/20 text-[#1C242B] placeholder:text-[#5C5349]/40 focus:border-[#1C6E8C]'
+                      : 'bg-[#000000] border-[#FFFFFF]/15 text-[#FFFFFF] placeholder:text-[#BFBFBF]/40 focus:border-[#FFFFFF]'
+                  }`}
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={status === 'submitting'}
-                className="galaxy-btn w-full !py-3.5 group"
+                className="galaxy-btn w-full !py-3.5 group cursor-pointer"
               >
                 <span className="galaxy-spark" />
                 <span className="galaxy-backdrop" />
-                <span className="galaxy-container">
-                  <span className="galaxy-star galaxy-star--static" style={{ top: '30%', left: '20%', '--duration': 10, '--delay': 1, '--size': 2 } as React.CSSProperties} />
-                  <span className="galaxy-star galaxy-star--static" style={{ top: '70%', left: '80%', '--duration': 14, '--delay': 3, '--size': 3 } as React.CSSProperties} />
-                </span>
                 <span className="galaxy-text">
                   <span>{status === 'submitting' ? 'SENDING...' : 'SEND MESSAGE ↗'}</span>
                   <Send size={14} />

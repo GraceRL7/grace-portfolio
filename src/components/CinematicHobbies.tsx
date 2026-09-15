@@ -13,6 +13,7 @@ import photographyImg from '../data/Hobbies/photography.png';
 import reelsContentImg from '../data/Hobbies/ReelsContent.png';
 import keyboardImg from '../data/Hobbies/Keyboard.png';
 import musicImg from '../data/Hobbies/Music.png';
+import { useTheme } from '../context/ThemeContext';
 
 export interface HobbyItem {
   id: string;
@@ -103,6 +104,9 @@ export const HOBBIES_LIST: HobbyItem[] = [
 ];
 
 export default function CinematicHobbies() {
+  const { theme } = useTheme();
+  const isBeach = theme === 'beach';
+
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
@@ -126,7 +130,7 @@ export default function CinematicHobbies() {
     setActiveIndex((prev) => (prev - 1 + total) % total);
   };
 
-  // Wheel scroll handler to continuously rotate circular cards endless loop
+  // Wheel scroll handler
   const handleWheel = (e: React.WheelEvent) => {
     if (e.deltaY > 30) {
       handleNext();
@@ -135,10 +139,10 @@ export default function CinematicHobbies() {
     }
   };
 
-  // Calculate position on arc for each card with wide spacing (25 degrees)
+  // Calculate position on arc for each card
   const radius = isMobile ? 420 : 720;
-  const arcCenterY = isMobile ? 360 : 580;
-  const angleStep = isMobile ? 26 : 25; // Extra spacing between cards
+  const arcCenterY = radius; // Vertically centered
+  const angleStep = isMobile ? 26 : 25;
 
   const activeHobby = HOBBIES_LIST[activeIndex];
 
@@ -147,25 +151,33 @@ export default function CinematicHobbies() {
       ref={containerRef}
       id="hobbies"
       onWheel={handleWheel}
-      className="relative w-full min-h-screen py-16 sm:py-24 bg-[#000000] text-[#FFFFFF] z-20 flex flex-col justify-between overflow-hidden"
+      className={`relative w-full min-h-screen pt-24 sm:pt-32 pb-16 z-20 flex flex-col justify-between overflow-hidden transition-colors duration-1000 ${
+        isBeach ? 'bg-[#FAF6F0] text-[#1C242B]' : 'bg-[#000000] text-[#FFFFFF]'
+      }`}
     >
       {/* Viewport Container */}
-      <div className="w-full min-h-[85vh] flex flex-col justify-between py-6 sm:py-10 px-4 sm:px-8 lg:px-12 bg-[#000000]">
+      <div className="w-full min-h-[85vh] flex flex-col justify-between py-4 sm:py-8 px-4 sm:px-8 lg:px-12">
 
         {/* TOP SECTION HEADER */}
         <div className="w-full max-w-[1400px] mx-auto z-30">
           <div className="flex items-center gap-3 mb-2 sm:mb-3">
-            <div className="w-2 h-2 rounded-full bg-[#FFFFFF]" />
-            <span className="font-['Inter',sans-serif] text-[11px] sm:text-[13px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[#BFBFBF]">
+            <div className={`w-2 h-2 rounded-full ${isBeach ? 'bg-[#1C6E8C]' : 'bg-[#FFFFFF]'}`} />
+            <span className={`font-['Inter',sans-serif] text-[11px] sm:text-[13px] uppercase tracking-[0.25em] sm:tracking-[0.3em] ${
+              isBeach ? 'text-[#7A4A21]' : 'text-[#BFBFBF]'
+            }`}>
               06 / WHO I AM OUTSIDE WORK
             </span>
           </div>
 
-          <h2 className="font-['Bebas_Neue',sans-serif] font-bold text-[32px] xs:text-[42px] sm:text-[60px] lg:text-[76px] text-[#FFFFFF] tracking-[0.04em] leading-none uppercase mb-1 sm:mb-2">
+          <h2 className={`font-['Bebas_Neue',sans-serif] font-bold text-[32px] xs:text-[42px] sm:text-[60px] lg:text-[76px] tracking-[0.04em] leading-none uppercase mb-1 sm:mb-2 ${
+            isBeach ? 'text-[#1C242B]' : 'text-[#FFFFFF]'
+          }`}>
             WHO I AM OUTSIDE WORK
           </h2>
 
-          <p className="font-['Inter',sans-serif] text-xs sm:text-sm lg:text-base text-[#BFBFBF] font-light max-w-xl">
+          <p className={`font-['Inter',sans-serif] text-xs sm:text-sm lg:text-base font-light max-w-xl ${
+            isBeach ? 'text-[#5C5349]' : 'text-[#BFBFBF]'
+          }`}>
             Creative arts, music, visual editing, and athletic passions.
           </p>
         </div>
@@ -177,7 +189,9 @@ export default function CinematicHobbies() {
           <button
             onClick={handlePrev}
             aria-label="Previous Hobby"
-            className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-40 p-3 sm:p-4 text-white/50 hover:text-white transition-colors focus-visible:outline-none group cursor-pointer"
+            className={`absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-40 p-3 sm:p-4 transition-colors focus-visible:outline-none group cursor-pointer ${
+              isBeach ? 'text-[#7A4A21]/50 hover:text-[#1C6E8C]' : 'text-white/50 hover:text-white'
+            }`}
           >
             <ChevronLeft strokeWidth={1} className="w-9 h-9 sm:w-12 sm:h-12 group-hover:scale-125 transition-transform" />
           </button>
@@ -186,7 +200,9 @@ export default function CinematicHobbies() {
           <button
             onClick={handleNext}
             aria-label="Next Hobby"
-            className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-40 p-3 sm:p-4 text-white/50 hover:text-white transition-colors focus-visible:outline-none group cursor-pointer"
+            className={`absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-40 p-3 sm:p-4 transition-colors focus-visible:outline-none group cursor-pointer ${
+              isBeach ? 'text-[#7A4A21]/50 hover:text-[#1C6E8C]' : 'text-white/50 hover:text-white'
+            }`}
           >
             <ChevronRight strokeWidth={1} className="w-9 h-9 sm:w-12 sm:h-12 group-hover:scale-125 transition-transform" />
           </button>
@@ -201,8 +217,8 @@ export default function CinematicHobbies() {
             const cardAngle = diff * angleStep; // in degrees
             const rad = cardAngle * (Math.PI / 180);
 
-            const cardX = Math.sin(rad) * radius; // sin(0) = 0 -> exact center X = 0 above text
-            const cardY = -Math.cos(rad) * radius + arcCenterY; // cos(0) = 1 -> arc apex
+            const cardX = Math.sin(rad) * radius;
+            const cardY = -Math.cos(rad) * radius + arcCenterY;
             const cardRotate = cardAngle;
 
             // Scale, blur, grayscale, opacity based on distance from active center
@@ -232,19 +248,26 @@ export default function CinematicHobbies() {
                   stiffness: 280,
                   damping: 28,
                 }}
-                className="absolute top-[42%] left-1/2 -translate-x-1/2 -translate-y-1/2 origin-center pointer-events-auto cursor-pointer"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 origin-center pointer-events-auto cursor-pointer"
               >
                 <div
                   style={{
                     filter: `grayscale(${grayscale}) blur(${blur}px)`,
                   }}
-                  className={`relative w-[160px] xs:w-[190px] sm:w-[230px] lg:w-[250px] aspect-[3/4] rounded-2xl sm:rounded-3xl p-2 sm:p-2.5 bg-[#0d0d0f] border transition-all duration-300 ${diff === 0
-                    ? 'border-white/80 shadow-[0_0_40px_rgba(255,255,255,0.22)] z-30 ring-1 ring-white/40'
-                    : 'border-white/15 shadow-[0_10px_30px_rgba(0,0,0,0.9)] z-10'
-                    }`}
+                  className={`relative w-[160px] xs:w-[190px] sm:w-[230px] lg:w-[250px] aspect-[3/4] rounded-2xl sm:rounded-3xl p-2 sm:p-2.5 border transition-all duration-300 ${
+                    isBeach
+                      ? diff === 0
+                        ? 'bg-[#FFFFFF] border-[#1C6E8C] shadow-[0_0_35px_rgba(28,110,140,0.25)] z-30 ring-2 ring-[#1C6E8C]/30'
+                        : 'bg-[#F3ECE1] border-[#7A4A21]/20 shadow-[0_6px_20px_rgba(90,82,74,0.1)] z-10'
+                      : diff === 0
+                        ? 'bg-[#0d0d0f] border-white/80 shadow-[0_0_40px_rgba(255,255,255,0.22)] z-30 ring-1 ring-white/40'
+                        : 'bg-[#0d0d0f] border-white/15 shadow-[0_10px_30px_rgba(0,0,0,0.9)] z-10'
+                  }`}
                 >
-                  {/* Subtle inner metallic frame line */}
-                  <div className="absolute inset-1 rounded-xl sm:rounded-2xl border border-white/10 pointer-events-none" />
+                  {/* Subtle inner metallic/brown frame line */}
+                  <div className={`absolute inset-1 rounded-xl sm:rounded-2xl border pointer-events-none ${
+                    isBeach ? 'border-[#7A4A21]/15' : 'border-white/10'
+                  }`} />
 
                   {/* Card Image */}
                   <div className="relative w-full h-full rounded-xl sm:rounded-2xl overflow-hidden bg-black">
@@ -276,16 +299,22 @@ export default function CinematicHobbies() {
             transition={{ duration: 0.35 }}
             className="flex flex-col items-center"
           >
-            <h3 className="font-['Caveat',cursive] text-3xl sm:text-5xl font-bold tracking-wide text-white capitalize mb-1 sm:mb-2 drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
+            <h3 className={`font-['Caveat',cursive] text-3xl sm:text-5xl font-bold tracking-wide capitalize mb-1 sm:mb-2 ${
+              isBeach ? 'text-[#1C6E8C]' : 'text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]'
+            }`}>
               {activeHobby.title}
             </h3>
-            <p className="font-['Inter',sans-serif] text-xs sm:text-sm text-[#BFBFBF] font-light max-w-md leading-relaxed px-4">
+            <p className={`font-['Inter',sans-serif] text-xs sm:text-sm font-light max-w-md leading-relaxed px-4 ${
+              isBeach ? 'text-[#5C5349]' : 'text-[#BFBFBF]'
+            }`}>
               {activeHobby.description}
             </p>
           </motion.div>
 
           {/* Scroll Indicator Prompt */}
-          <div className="mt-3 flex items-center gap-2 text-[10px] font-mono tracking-widest text-white/40 uppercase">
+          <div className={`mt-3 flex items-center gap-2 text-[10px] font-mono tracking-widest uppercase ${
+            isBeach ? 'text-[#7A4A21]/60' : 'text-white/40'
+          }`}>
             <Mouse className="w-3.5 h-3.5 animate-bounce" />
             <span>SCROLL TO ROTATE ({activeIndex + 1} / {total})</span>
           </div>
@@ -294,4 +323,3 @@ export default function CinematicHobbies() {
     </section>
   );
 }
-

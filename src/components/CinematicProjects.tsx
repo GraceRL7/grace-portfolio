@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Github, Globe, Cpu, Workflow, Bot, MailCheck, Database, Zap } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 export default function CinematicProjects() {
+  const { theme } = useTheme();
+  const isBeach = theme === 'beach';
+
   const [activeTab, setActiveTab] = useState<'projects' | 'automation' | 'social'>('projects');
   const [autoTab, setAutoTab] = useState<'chatbot' | 'contact'>('chatbot');
 
@@ -106,13 +110,19 @@ export default function CinematicProjects() {
   return (
     <section
       id="projects"
-      className="relative w-full min-h-screen py-16 sm:py-24 lg:py-32 bg-[#000000] text-[#FFFFFF] flex flex-col justify-center px-4 sm:px-8 lg:px-12 border-t border-[#FFFFFF]/10 z-20"
+      className={`relative w-full min-h-screen py-16 sm:py-24 lg:py-32 flex flex-col justify-center px-4 sm:px-8 lg:px-12 border-t transition-colors duration-1000 z-20 ${
+        isBeach
+          ? 'bg-[#FAF6F0] text-[#1C242B] border-[#5C5349]/15'
+          : 'bg-[#000000] text-[#FFFFFF] border-[#FFFFFF]/10'
+      }`}
     >
       <div className="w-full max-w-[1400px] mx-auto">
         {/* Section Label */}
         <div className="flex items-center gap-3 mb-4 sm:mb-6">
-          <div className="w-2 h-2 rounded-full bg-[#FFFFFF]" />
-          <span className="font-['Inter',sans-serif] text-[12px] sm:text-[14px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[#BFBFBF]">
+          <div className={`w-2 h-2 rounded-full ${isBeach ? 'bg-[#1C6E8C]' : 'bg-[#FFFFFF]'}`} />
+          <span className={`font-['Inter',sans-serif] text-[12px] sm:text-[14px] uppercase tracking-[0.25em] sm:tracking-[0.3em] ${
+            isBeach ? 'text-[#7A4A21]' : 'text-[#BFBFBF]'
+          }`}>
             04 / WHAT I'VE BUILT
           </span>
         </div>
@@ -120,42 +130,62 @@ export default function CinematicProjects() {
         {/* Section Heading & Subtabs */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-8 sm:mb-12 gap-6">
           <div>
-            <h2 className="font-['Bebas_Neue',sans-serif] font-bold text-[36px] xs:text-[48px] sm:text-[72px] lg:text-[96px] text-[#FFFFFF] tracking-[0.03em] sm:tracking-[0.05em] leading-none uppercase mb-2">
+            <h2 className={`font-['Bebas_Neue',sans-serif] font-bold text-[36px] xs:text-[48px] sm:text-[72px] lg:text-[96px] tracking-[0.03em] sm:tracking-[0.05em] leading-none uppercase mb-2 ${
+              isBeach ? 'text-[#1C242B]' : 'text-[#FFFFFF]'
+            }`}>
               WHAT I'VE BUILT
             </h2>
-            <p className="font-['Inter',sans-serif] text-sm sm:text-base text-[#BFBFBF] font-light max-w-xl">
+            <p className={`font-['Inter',sans-serif] text-sm sm:text-base font-light max-w-xl ${
+              isBeach ? 'text-[#5C5349]' : 'text-[#BFBFBF]'
+            }`}>
               Web applications, live production portals, and autonomous AI workflow engines.
             </p>
           </div>
 
           {/* Subtabs for Projects vs AI Automation vs Social Media */}
-          <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-xl sm:rounded-full bg-[#111111] border border-white/15 self-start lg:self-auto max-w-full">
+          <div className={`flex flex-wrap items-center gap-1.5 p-1.5 rounded-xl sm:rounded-full border transition-colors self-start lg:self-auto max-w-full ${
+            isBeach
+              ? 'bg-[#F3ECE1] border-[#7A4A21]/20'
+              : 'bg-[#111111] border-white/15'
+          }`}>
             <button
               onClick={() => setActiveTab('projects')}
-              className={`px-3 sm:px-4 py-1.5 rounded-lg sm:rounded-full font-mono text-[10px] sm:text-[11px] uppercase tracking-wider transition-all duration-300 ${
+              className={`px-3.5 sm:px-4 py-1.5 rounded-lg sm:rounded-full font-mono text-[10px] sm:text-[11px] uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                 activeTab === 'projects'
-                  ? 'bg-white text-black font-semibold shadow-sm'
-                  : 'text-white/60 hover:text-white'
+                  ? isBeach
+                    ? 'bg-[#1C6E8C] text-white font-bold shadow-md'
+                    : 'bg-white text-black font-semibold shadow-sm'
+                  : isBeach
+                    ? 'text-[#5C5349] hover:text-[#1C242B]'
+                    : 'text-white/60 hover:text-white'
               }`}
             >
               Featured Applications
             </button>
             <button
               onClick={() => setActiveTab('automation')}
-              className={`px-3 sm:px-4 py-1.5 rounded-lg sm:rounded-full font-mono text-[10px] sm:text-[11px] uppercase tracking-wider transition-all duration-300 ${
+              className={`px-3.5 sm:px-4 py-1.5 rounded-lg sm:rounded-full font-mono text-[10px] sm:text-[11px] uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                 activeTab === 'automation'
-                  ? 'bg-white text-black font-semibold shadow-sm'
-                  : 'text-white/60 hover:text-white'
+                  ? isBeach
+                    ? 'bg-[#1C6E8C] text-white font-bold shadow-md'
+                    : 'bg-white text-black font-semibold shadow-sm'
+                  : isBeach
+                    ? 'text-[#5C5349] hover:text-[#1C242B]'
+                    : 'text-white/60 hover:text-white'
               }`}
             >
               AI Automation Architecture
             </button>
             <button
               onClick={() => setActiveTab('social')}
-              className={`px-3 sm:px-4 py-1.5 rounded-lg sm:rounded-full font-mono text-[10px] sm:text-[11px] uppercase tracking-wider transition-all duration-300 ${
+              className={`px-3.5 sm:px-4 py-1.5 rounded-lg sm:rounded-full font-mono text-[10px] sm:text-[11px] uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                 activeTab === 'social'
-                  ? 'bg-white text-black font-semibold shadow-sm'
-                  : 'text-white/60 hover:text-white'
+                  ? isBeach
+                    ? 'bg-[#1C6E8C] text-white font-bold shadow-md'
+                    : 'bg-white text-black font-semibold shadow-sm'
+                  : isBeach
+                    ? 'text-[#5C5349] hover:text-[#1C242B]'
+                    : 'text-white/60 hover:text-white'
               }`}
             >
               Digital Marketing & Social Media
@@ -173,11 +203,19 @@ export default function CinematicProjects() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="group p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#111111]/70 border border-[#FFFFFF]/15 backdrop-blur-[20px] hover:border-[#FFFFFF]/50 transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between"
+                className={`group p-6 sm:p-8 rounded-2xl sm:rounded-3xl border backdrop-blur-[20px] transition-all duration-500 hover:-translate-y-2 flex flex-col justify-between ${
+                  isBeach
+                    ? 'bg-[#FFFFFF] border-[#7A4A21]/15 shadow-[0_10px_30px_rgba(90,82,74,0.08)] hover:border-[#1C6E8C]/50 hover:shadow-[0_15px_40px_rgba(28,110,140,0.15)]'
+                    : 'bg-[#111111]/70 border-[#FFFFFF]/15 shadow-2xl hover:border-[#FFFFFF]/50'
+                }`}
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="font-mono text-[11px] uppercase tracking-widest text-[#BFBFBF] bg-black/60 px-3 py-1 rounded-full border border-white/10">
+                    <span className={`font-mono text-[11px] uppercase tracking-widest px-3 py-1 rounded-full border ${
+                      isBeach
+                        ? 'bg-[#F3ECE1] border-[#7A4A21]/20 text-[#7A4A21]'
+                        : 'bg-black/60 border-white/10 text-[#BFBFBF]'
+                    }`}>
                       {proj.badge}
                     </span>
 
@@ -187,7 +225,11 @@ export default function CinematicProjects() {
                           href={proj.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-2 rounded-full border border-white/20 text-[#BFBFBF] hover:text-white hover:border-white transition-all"
+                          className={`p-2 rounded-full border transition-all ${
+                            isBeach
+                              ? 'border-[#7A4A21]/20 text-[#5C5349] hover:text-[#1C6E8C] hover:border-[#1C6E8C]'
+                              : 'border-white/20 text-[#BFBFBF] hover:text-white hover:border-white'
+                          }`}
                           title="Visit Live Website"
                         >
                           <Globe className="w-4 h-4" />
@@ -199,7 +241,11 @@ export default function CinematicProjects() {
                           href={proj.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-2 rounded-full border border-white/20 text-[#BFBFBF] hover:text-white hover:border-white transition-all"
+                          className={`p-2 rounded-full border transition-all ${
+                            isBeach
+                              ? 'border-[#7A4A21]/20 text-[#5C5349] hover:text-[#1C6E8C] hover:border-[#1C6E8C]'
+                              : 'border-white/20 text-[#BFBFBF] hover:text-white hover:border-white'
+                          }`}
                           title="View GitHub Repository"
                         >
                           <Github className="w-4 h-4" />
@@ -208,19 +254,32 @@ export default function CinematicProjects() {
                     </div>
                   </div>
 
-                  <h3 className="font-['Bebas_Neue',sans-serif] text-[34px] tracking-[0.05em] text-[#FFFFFF] mb-3 group-hover:text-[#BFBFBF] transition-colors">
+                  <h3 className={`font-['Bebas_Neue',sans-serif] text-[34px] tracking-[0.05em] mb-3 transition-colors ${
+                    isBeach ? 'text-[#1C242B] group-hover:text-[#1C6E8C]' : 'text-[#FFFFFF] group-hover:text-[#BFBFBF]'
+                  }`}>
                     {proj.title}
                   </h3>
 
-                  <p className="font-['Inter',sans-serif] text-xs sm:text-sm text-[#BFBFBF] font-light leading-relaxed mb-6">
+                  <p className={`font-['Inter',sans-serif] text-xs sm:text-sm font-light leading-relaxed mb-6 ${
+                    isBeach ? 'text-[#5C5349]' : 'text-[#BFBFBF]'
+                  }`}>
                     {proj.description}
                   </p>
                 </div>
 
-                <div className="space-y-4 pt-4 border-t border-[#FFFFFF]/10">
+                <div className={`space-y-4 pt-4 border-t ${
+                  isBeach ? 'border-[#7A4A21]/15' : 'border-[#FFFFFF]/10'
+                }`}>
                   <div className="flex flex-wrap gap-2">
                     {proj.tags.map((t) => (
-                      <span key={t} className="text-[10px] font-mono text-[#BFBFBF] px-2.5 py-1 rounded-md bg-[#000000] border border-white/10">
+                      <span
+                        key={t}
+                        className={`text-[10px] font-mono px-2.5 py-1 rounded-md border ${
+                          isBeach
+                            ? 'bg-[#F3ECE1] border-[#7A4A21]/15 text-[#5C5349]'
+                            : 'bg-[#000000] border-white/10 text-[#BFBFBF]'
+                        }`}
+                      >
                         {t}
                       </span>
                     ))}
@@ -231,7 +290,9 @@ export default function CinematicProjects() {
                       href={proj.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-white hover:underline pt-2"
+                      className={`inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest hover:underline pt-2 ${
+                        isBeach ? 'text-[#1C6E8C]' : 'text-white'
+                      }`}
                     >
                       <span>Visit Live Site</span>
                       <ArrowUpRight className="w-3.5 h-3.5" />
@@ -243,7 +304,9 @@ export default function CinematicProjects() {
                       href={proj.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-white hover:underline pt-2"
+                      className={`inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest hover:underline pt-2 ${
+                        isBeach ? 'text-[#1C6E8C]' : 'text-white'
+                      }`}
                     >
                       <span>View GitHub Source</span>
                       <ArrowUpRight className="w-3.5 h-3.5" />
@@ -258,29 +321,49 @@ export default function CinematicProjects() {
         {/* AI AUTOMATION ARCHITECTURE TAB */}
         {activeTab === 'automation' && (
           <div className="space-y-12">
-            <div className="p-6 sm:p-10 rounded-3xl bg-[#111111]/80 border border-white/15 backdrop-blur-xl">
+            <div className={`p-6 sm:p-10 rounded-3xl border backdrop-blur-xl transition-colors ${
+              isBeach
+                ? 'bg-[#FFFFFF] border-[#7A4A21]/15 shadow-[0_10px_30px_rgba(90,82,74,0.08)]'
+                : 'bg-[#111111]/80 border-white/15'
+            }`}>
               <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
                 <div>
-                  <h3 className="font-['Bebas_Neue',sans-serif] text-3xl sm:text-4xl tracking-wider text-white">
+                  <h3 className={`font-['Bebas_Neue',sans-serif] text-3xl sm:text-4xl tracking-wider ${
+                    isBeach ? 'text-[#1C242B]' : 'text-white'
+                  }`}>
                     {automationWorkflows[autoTab].title}
                   </h3>
-                  <p className="text-sm font-['Inter',sans-serif] text-white/60">
+                  <p className={`text-sm font-['Inter',sans-serif] ${
+                    isBeach ? 'text-[#5C5349]' : 'text-white/60'
+                  }`}>
                     {automationWorkflows[autoTab].subtitle}
                   </p>
                 </div>
                 <div className="flex gap-2">
                   <button
                     onClick={() => setAutoTab('chatbot')}
-                    className={`px-4 py-2 rounded-xl text-xs font-mono border transition-all ${
-                      autoTab === 'chatbot' ? 'bg-white text-black border-white' : 'border-white/20 text-white/60'
+                    className={`px-4 py-2 rounded-xl text-xs font-mono border transition-all cursor-pointer ${
+                      autoTab === 'chatbot'
+                        ? isBeach
+                          ? 'bg-[#1C6E8C] text-white border-[#1C6E8C]'
+                          : 'bg-white text-black border-white'
+                        : isBeach
+                          ? 'border-[#7A4A21]/20 text-[#5C5349]'
+                          : 'border-white/20 text-white/60'
                     }`}
                   >
                     Grace AI Bot
                   </button>
                   <button
                     onClick={() => setAutoTab('contact')}
-                    className={`px-4 py-2 rounded-xl text-xs font-mono border transition-all ${
-                      autoTab === 'contact' ? 'bg-white text-black border-white' : 'border-white/20 text-white/60'
+                    className={`px-4 py-2 rounded-xl text-xs font-mono border transition-all cursor-pointer ${
+                      autoTab === 'contact'
+                        ? isBeach
+                          ? 'bg-[#1C6E8C] text-white border-[#1C6E8C]'
+                          : 'bg-white text-black border-white'
+                        : isBeach
+                          ? 'border-[#7A4A21]/20 text-[#5C5349]'
+                          : 'border-white/20 text-white/60'
                     }`}
                   >
                     Contact Pipeline
@@ -297,25 +380,39 @@ export default function CinematicProjects() {
                       initial={{ opacity: 0, y: 15 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.4, delay: i * 0.1 }}
-                      className="p-5 rounded-2xl bg-black/80 border border-white/10 flex flex-col justify-between"
+                      className={`p-5 rounded-2xl border flex flex-col justify-between ${
+                        isBeach
+                          ? 'bg-[#FAF6F0] border-[#7A4A21]/15'
+                          : 'bg-black/80 border-white/10'
+                      }`}
                     >
                       <div>
                         <div className="flex items-center justify-between mb-3">
-                          <div className="p-2.5 rounded-xl bg-white/10 border border-white/20 text-white">
+                          <div className={`p-2.5 rounded-xl border ${
+                            isBeach ? 'bg-[#1C6E8C]/10 border-[#1C6E8C]/20 text-[#1C6E8C]' : 'bg-white/10 border-white/20 text-white'
+                          }`}>
                             <Icon className="w-5 h-5" />
                           </div>
-                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-white/80">
+                          <span className={`text-[10px] font-mono px-2 py-0.5 rounded ${
+                            isBeach ? 'bg-[#1C6E8C]/15 text-[#1C6E8C]' : 'bg-white/10 text-white/80'
+                          }`}>
                             {node.badge}
                           </span>
                         </div>
-                        <h4 className="font-['Inter',sans-serif] font-bold text-white text-base mb-1">
+                        <h4 className={`font-['Inter',sans-serif] font-bold text-base mb-1 ${
+                          isBeach ? 'text-[#1C242B]' : 'text-white'
+                        }`}>
                           {node.title}
                         </h4>
-                        <p className="text-xs text-white/60 leading-relaxed font-['Inter',sans-serif]">
+                        <p className={`text-xs leading-relaxed font-['Inter',sans-serif] ${
+                          isBeach ? 'text-[#5C5349]' : 'text-white/60'
+                        }`}>
                           {node.desc}
                         </p>
                       </div>
-                      <div className="mt-4 pt-3 border-t border-white/10 text-[11px] font-mono text-white/40">
+                      <div className={`mt-4 pt-3 border-t text-[11px] font-mono ${
+                        isBeach ? 'border-[#7A4A21]/15 text-[#7A4A21]' : 'border-white/10 text-white/40'
+                      }`}>
                         STEP 0{i + 1}
                       </div>
                     </motion.div>
@@ -331,29 +428,45 @@ export default function CinematicProjects() {
           <div className="space-y-8 sm:space-y-12">
             {/* Top Stats Overview Banner */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="p-6 rounded-3xl bg-[#111111]/80 border border-white/15 backdrop-blur-xl">
-                <span className="text-xs font-mono uppercase tracking-widest text-white/50">Total Views Generated</span>
-                <h3 className="font-['Bebas_Neue',sans-serif] text-5xl sm:text-6xl text-white mt-2">441K+</h3>
-                <p className="text-xs text-white/60 mt-1 font-['Inter',sans-serif]">Across Grace Captures & client reels content</p>
+              <div className={`p-6 rounded-3xl border backdrop-blur-xl ${
+                isBeach
+                  ? 'bg-[#FFFFFF] border-[#7A4A21]/15 shadow-[0_10px_30px_rgba(90,82,74,0.08)]'
+                  : 'bg-[#111111]/80 border-white/15'
+              }`}>
+                <span className={`text-xs font-mono uppercase tracking-widest ${isBeach ? 'text-[#7A4A21]' : 'text-white/50'}`}>Total Views Generated</span>
+                <h3 className={`font-['Bebas_Neue',sans-serif] text-5xl sm:text-6xl mt-2 ${isBeach ? 'text-[#1C6E8C]' : 'text-white'}`}>441K+</h3>
+                <p className={`text-xs mt-1 font-['Inter',sans-serif] ${isBeach ? 'text-[#5C5349]' : 'text-white/60'}`}>Across Grace Captures & client reels content</p>
               </div>
-              <div className="p-6 rounded-3xl bg-[#111111]/80 border border-white/15 backdrop-blur-xl">
-                <span className="text-xs font-mono uppercase tracking-widest text-white/50">SEO Search Impressions</span>
-                <h3 className="font-['Bebas_Neue',sans-serif] text-5xl sm:text-6xl text-white mt-2">48K+</h3>
-                <p className="text-xs text-white/60 mt-1 font-['Inter',sans-serif]">El Mundo Sports Google Search Console</p>
+              <div className={`p-6 rounded-3xl border backdrop-blur-xl ${
+                isBeach
+                  ? 'bg-[#FFFFFF] border-[#7A4A21]/15 shadow-[0_10px_30px_rgba(90,82,74,0.08)]'
+                  : 'bg-[#111111]/80 border-white/15'
+              }`}>
+                <span className={`text-xs font-mono uppercase tracking-widest ${isBeach ? 'text-[#7A4A21]' : 'text-white/50'}`}>SEO Search Impressions</span>
+                <h3 className={`font-['Bebas_Neue',sans-serif] text-5xl sm:text-6xl mt-2 ${isBeach ? 'text-[#1C6E8C]' : 'text-white'}`}>48K+</h3>
+                <p className={`text-xs mt-1 font-['Inter',sans-serif] ${isBeach ? 'text-[#5C5349]' : 'text-white/60'}`}>El Mundo Sports Google Search Console</p>
               </div>
-              <div className="p-6 rounded-3xl bg-[#111111]/80 border border-white/15 backdrop-blur-xl">
-                <span className="text-xs font-mono uppercase tracking-widest text-white/50">Profile Activity</span>
-                <h3 className="font-['Bebas_Neue',sans-serif] text-5xl sm:text-6xl text-white mt-2">+38.2%</h3>
-                <p className="text-xs text-white/60 mt-1 font-['Inter',sans-serif]">Increase in profile visits & actions</p>
+              <div className={`p-6 rounded-3xl border backdrop-blur-xl ${
+                isBeach
+                  ? 'bg-[#FFFFFF] border-[#7A4A21]/15 shadow-[0_10px_30px_rgba(90,82,74,0.08)]'
+                  : 'bg-[#111111]/80 border-white/15'
+              }`}>
+                <span className={`text-xs font-mono uppercase tracking-widest ${isBeach ? 'text-[#7A4A21]' : 'text-white/50'}`}>Profile Activity</span>
+                <h3 className={`font-['Bebas_Neue',sans-serif] text-5xl sm:text-6xl mt-2 ${isBeach ? 'text-[#1C6E8C]' : 'text-white'}`}>+38.2%</h3>
+                <p className={`text-xs mt-1 font-['Inter',sans-serif] ${isBeach ? 'text-[#5C5349]' : 'text-white/60'}`}>Increase in profile visits & actions</p>
               </div>
             </div>
 
             {/* Managed Instagram Pages Grid */}
             <div>
-              <h3 className="font-['Bebas_Neue',sans-serif] text-3xl sm:text-4xl tracking-wider text-white mb-4">
+              <h3 className={`font-['Bebas_Neue',sans-serif] text-3xl sm:text-4xl tracking-wider mb-4 ${
+                isBeach ? 'text-[#1C242B]' : 'text-white'
+              }`}>
                 MANAGED INSTAGRAM & BRAND CHANNELS
               </h3>
-              <p className="text-sm font-['Inter',sans-serif] text-white/60 mb-6">
+              <p className={`text-sm font-['Inter',sans-serif] mb-6 ${
+                isBeach ? 'text-[#5C5349]' : 'text-white/60'
+              }`}>
                 Active social media management, promotional video creation, reels editing & audience growth analytics.
               </p>
 
@@ -364,19 +477,29 @@ export default function CinematicProjects() {
                     href={item.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group p-5 rounded-2xl bg-[#111111]/80 border border-white/15 hover:border-white/50 transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"
+                    className={`group p-5 rounded-2xl border transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between ${
+                      isBeach
+                        ? 'bg-[#FFFFFF] border-[#7A4A21]/15 hover:border-[#1C6E8C]/50 shadow-[0_6px_20px_rgba(90,82,74,0.06)]'
+                        : 'bg-[#111111]/80 border-white/15 hover:border-white/50'
+                    }`}
                   >
                     <div>
                       <div className="flex items-center justify-between mb-3">
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-white/80">
+                        <span className={`text-[10px] font-mono px-2 py-0.5 rounded ${
+                          isBeach ? 'bg-[#1C6E8C]/10 text-[#1C6E8C]' : 'bg-white/10 text-white/80'
+                        }`}>
                           {item.badge}
                         </span>
-                        <ArrowUpRight className="w-4 h-4 text-white/40 group-hover:text-white transition-colors" />
+                        <ArrowUpRight className={`w-4 h-4 transition-colors ${
+                          isBeach ? 'text-[#5C5349] group-hover:text-[#1C6E8C]' : 'text-white/40 group-hover:text-white'
+                        }`} />
                       </div>
-                      <h4 className="font-['Inter',sans-serif] font-bold text-white text-base mb-1 group-hover:text-white/90">
+                      <h4 className={`font-['Inter',sans-serif] font-bold text-base mb-1 ${
+                        isBeach ? 'text-[#1C242B] group-hover:text-[#1C6E8C]' : 'text-white group-hover:text-white/90'
+                      }`}>
                         {item.name}
                       </h4>
-                      <p className="text-xs font-mono text-white/50">{item.handle}</p>
+                      <p className={`text-xs font-mono ${isBeach ? 'text-[#5C5349]' : 'text-white/50'}`}>{item.handle}</p>
                     </div>
                   </a>
                 ))}

@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Send, Trash2, Sparkles } from 'lucide-react';
 import GraceRobotCanvas from './GraceRobotCanvas';
+import { useTheme } from '../context/ThemeContext';
 
 interface Message {
   id: string;
@@ -24,6 +25,9 @@ const LOCAL_STORAGE_KEY = 'grace_ai_chat_history_v2';
 const N8N_WEBHOOK_URL = 'https://n8n.srv965596.hstgr.cloud/webhook/grace-ai';
 
 export default function GraceAIAssistant() {
+  const { theme } = useTheme();
+  const isBeach = theme === 'beach';
+
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [soundEnabled] = useState(true);
@@ -48,11 +52,9 @@ export default function GraceAIAssistant() {
     setHasPlayedGreeting(true);
 
     try {
-      // 1. Try playing custom robotic audio file hello-robot.mp3
       const audio = new Audio('/assets/hello-robot.mp3');
       audio.volume = 0.7;
       audio.play().then(() => {
-        // Also synthesize speech voice if browser SpeechSynthesis is available
         if ('speechSynthesis' in window) {
           window.speechSynthesis.cancel();
           const utterance = new SpeechSynthesisUtterance("Hello! I'm Grace AI. Welcome to Grace Lewis's portfolio. How can I help you today?");
@@ -67,7 +69,6 @@ export default function GraceAIAssistant() {
           }, 350);
         }
       }).catch(() => {
-        // Fallback directly to SpeechSynthesis if audio file autoplay block occurs
         if ('speechSynthesis' in window) {
           window.speechSynthesis.cancel();
           const utterance = new SpeechSynthesisUtterance("Hello! I'm Grace AI. Welcome to Grace Lewis's portfolio. How can I help you today?");
@@ -185,14 +186,7 @@ export default function GraceAIAssistant() {
     let botResponseText = '';
     let isErr = false;
 
-    console.log('[Grace AI Webhook Request]', {
-      url: N8N_WEBHOOK_URL,
-      method: 'POST',
-      body: { chatInput: query },
-    });
-
     try {
-      // Direct POST request with CORS mode configured
       const response = await fetch(N8N_WEBHOOK_URL, {
         method: 'POST',
         mode: 'cors',
@@ -203,26 +197,11 @@ export default function GraceAIAssistant() {
         body: JSON.stringify({ chatInput: query }),
       });
 
-      console.log('[Grace AI Webhook Response Status]', {
-        status: response.status,
-        statusText: response.statusText,
-        ok: response.ok,
-        type: response.type,
-      });
-
       if (!response.ok) {
-        const errorText = await response.text().catch(() => '');
-        console.error('[Grace AI Webhook HTTP Error]', {
-          status: response.status,
-          statusText: response.statusText,
-          responseBody: errorText,
-        });
-        throw new Error(`HTTP ${response.status}: ${response.statusText || 'Webhook error'}`);
+        throw new Error(`HTTP ${response.status}`);
       }
 
       const responseText = await response.text();
-      console.log('[Grace AI Webhook Raw Body]', responseText);
-
       let data;
       try {
         data = JSON.parse(responseText);
@@ -230,7 +209,6 @@ export default function GraceAIAssistant() {
         data = responseText;
       }
 
-      // Extract response string directly from n8n webhook response
       if (typeof data === 'string' && data.trim()) {
         botResponseText = data;
       } else if (typeof data === 'object' && data !== null) {
@@ -240,7 +218,6 @@ export default function GraceAIAssistant() {
         }
       }
 
-      // If webhook returned empty or non-text object, use local intelligent response engine
       if (!botResponseText || !botResponseText.trim()) {
         const q = query.toLowerCase();
         if (q.includes('project') || q.includes('show projects') || q.includes('work') || q.includes('built')) {
@@ -259,17 +236,8 @@ export default function GraceAIAssistant() {
           botResponseText = "Grace AI is here! Grace is a Web Developer & AI Automation Engineer skilled in React, TypeScript, n8n, and WordPress. Feel free to ask about her projects, skills, achievements, or contact details!";
         }
       }
-    } catch (err: unknown) {
+    } catch {
       isErr = true;
-      const errorObj = err instanceof Error ? err : new Error(String(err));
-      console.error('[Grace AI Webhook CORS/Fetch Error Details]', {
-        url: N8N_WEBHOOK_URL,
-        errorName: errorObj.name,
-        errorMessage: errorObj.message,
-        stack: errorObj.stack,
-      });
-
-      // Smart local fallback assistant matching portfolio facts
       const q = query.toLowerCase();
       if (q.includes('project') || q.includes('show projects') || q.includes('work') || q.includes('built')) {
         botResponseText = "Here are Grace's top featured projects:\n\n• **El Mundo Sports** - Live sports club website built with WordPress & Elementor\n• **Vidhyardhi School** - Modern educational institution portal using React & Tailwind\n• **Svasthya Fresh** - Full-stack real-time admin management system\n• **Sportify** - Digital sports trials management web app\n• **HomiFi** - Role-based PG management platform\n\nYou can scroll down to the Projects section to explore live links & GitHub repositories!";
@@ -282,9 +250,6 @@ export default function GraceAIAssistant() {
         isErr = false;
       } else if (q.includes('about') || q.includes('who') || q.includes('grace') || q.includes('mca')) {
         botResponseText = "Grace Reshal Lewis is a Web Developer, AI Automation Engineer, and MCA Postgraduate student based in Bengaluru, Karnataka.\n\nShe specializes in building responsive web applications, integrating APIs, automating workflows using n8n & Gemini AI, and creating digital user experiences that stand out.";
-        isErr = false;
-      } else if (q.includes('award') || q.includes('puraskar') || q.includes('achievement') || q.includes('honor')) {
-        botResponseText = "Grace has received several notable honors & leadership achievements:\n\n• **Rajya Puraskar Award** recipient under Bharat Scouts & Guides\n• **Overall Champions** at Manoeuvre 2.0 IT Fest (2025)\n• **Co-Convenor** for SHELLS 2026 National IT Fest\n• **Event Head** for Videography & Photography at Manoeuvre 3.0";
         isErr = false;
       } else if (q.includes('contact') || q.includes('email') || q.includes('hire') || q.includes('reach')) {
         botResponseText = "You can reach Grace directly:\n\n📧 **Email:** graceworkspace777@gmail.com\n💼 **LinkedIn:** linkedin.com/in/grace-reshal-lewis-5b5178290\n📍 **Location:** Bengaluru, Karnataka\n\nOr scroll to the Contact section to submit an automated query form!";
@@ -320,7 +285,7 @@ export default function GraceAIAssistant() {
 
   return (
     <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end">
-      {/* Interactive Cyber Chat Drawer */}
+      {/* Interactive Chat Drawer */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -353,25 +318,41 @@ export default function GraceAIAssistant() {
               borderRadius: '9999px',
               transition: { duration: 0.25, ease: 'easeIn' }
             }}
-            className="w-[calc(100vw-32px)] sm:w-[380px] md:w-[420px] max-h-[80vh] sm:max-h-[85vh] h-[550px] mb-4 bg-black/95 border border-white/20 rounded-3xl backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.9),0_0_40px_rgba(255,255,255,0.08)] flex flex-col overflow-hidden text-white font-sans origin-bottom-right"
+            className={`w-[calc(100vw-32px)] sm:w-[380px] md:w-[420px] max-h-[80vh] sm:max-h-[85vh] h-[550px] mb-4 border rounded-3xl backdrop-blur-2xl flex flex-col overflow-hidden font-sans origin-bottom-right transition-colors duration-500 ${
+              isBeach
+                ? 'bg-[#FAF6F0]/95 border-[#7A4A21]/20 text-[#1C242B] shadow-[0_20px_60px_rgba(90,82,74,0.15)]'
+                : 'bg-black/95 border-white/20 text-white shadow-[0_20px_60px_rgba(0,0,0,0.9),0_0_40px_rgba(255,255,255,0.08)]'
+            }`}
           >
             {/* Header */}
-            <div className="p-4 sm:p-5 border-b border-white/10 flex items-center justify-between bg-black/90">
+            <div className={`p-4 sm:p-5 border-b flex items-center justify-between transition-colors ${
+              isBeach ? 'bg-[#F3ECE1]/90 border-[#7A4A21]/15' : 'bg-black/90 border-white/10'
+            }`}>
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-xl bg-white/10 border border-white/20 text-white">
+                <div className={`p-2 rounded-xl border ${
+                  isBeach ? 'bg-[#1C6E8C]/10 border-[#1C6E8C]/20 text-[#1C6E8C]' : 'bg-white/10 border-white/20 text-white'
+                }`}>
                   <Sparkles size={18} />
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <h3 className="font-['Bebas_Neue',sans-serif] text-2xl tracking-[0.1em] text-white leading-none">
+                    <h3 className={`font-['Bebas_Neue',sans-serif] text-2xl tracking-[0.1em] leading-none ${
+                      isBeach ? 'text-[#1C242B]' : 'text-white'
+                    }`}>
                       GRACE AI
                     </h3>
-                    <span className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[10px] font-mono text-emerald-400">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className={`flex items-center gap-1.5 px-2 py-0.5 rounded-full border text-[10px] font-mono ${
+                      isBeach
+                        ? 'bg-[#1C6E8C]/10 border-[#1C6E8C]/30 text-[#1C6E8C]'
+                        : 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400'
+                    }`}>
+                      <span className={`w-1.5 h-1.5 rounded-full animate-pulse ${isBeach ? 'bg-[#1C6E8C]' : 'bg-emerald-400'}`} />
                       ONLINE · n8n + GEMINI
                     </span>
                   </div>
-                  <span className="text-[11px] font-mono text-[#A3A3A3] tracking-wider block mt-0.5">
+                  <span className={`text-[11px] font-mono tracking-wider block mt-0.5 ${
+                    isBeach ? 'text-[#5C5349]' : 'text-[#A3A3A3]'
+                  }`}>
                     Autonomous Portfolio Assistant
                   </span>
                 </div>
@@ -381,13 +362,17 @@ export default function GraceAIAssistant() {
                 <button
                   onClick={handleClearHistory}
                   title="Clear chat history"
-                  className="p-2 rounded-full text-white/50 hover:text-white hover:bg-white/10 transition-colors"
+                  className={`p-2 rounded-full transition-colors ${
+                    isBeach ? 'text-[#5C5349] hover:text-[#1C242B] hover:bg-black/5' : 'text-white/50 hover:text-white hover:bg-white/10'
+                  }`}
                 >
                   <Trash2 size={15} />
                 </button>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="p-2 rounded-full text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+                  className={`p-2 rounded-full transition-colors ${
+                    isBeach ? 'text-[#5C5349] hover:text-[#1C242B] hover:bg-black/5' : 'text-white/70 hover:text-white hover:bg-white/10'
+                  }`}
                 >
                   <X size={16} />
                 </button>
@@ -395,7 +380,9 @@ export default function GraceAIAssistant() {
             </div>
 
             {/* Chat Body */}
-            <div className="flex-1 p-4 sm:p-5 overflow-y-auto space-y-4 text-xs sm:text-sm leading-relaxed bg-[#050505]/40">
+            <div className={`flex-1 p-4 sm:p-5 overflow-y-auto space-y-4 text-xs sm:text-sm leading-relaxed ${
+              isBeach ? 'bg-[#FAF6F0]' : 'bg-[#050505]/40'
+            }`}>
               {messages.map((msg) => (
                 <div
                   key={msg.id}
@@ -404,17 +391,23 @@ export default function GraceAIAssistant() {
                   <div
                     className={`max-w-[85%] p-3.5 sm:p-4 rounded-2xl whitespace-pre-line ${
                       msg.sender === 'user'
-                        ? 'bg-white text-black font-medium shadow-lg rounded-br-none'
+                        ? isBeach
+                          ? 'bg-[#1C6E8C] text-white font-medium shadow-md rounded-br-none'
+                          : 'bg-white text-black font-medium shadow-lg rounded-br-none'
                         : msg.isError
                         ? 'bg-red-950/40 border border-red-500/30 text-red-200 font-light shadow-md rounded-bl-none'
-                        : 'bg-[#141414] border border-white/15 text-[#E5E5E5] font-light shadow-md rounded-bl-none'
+                        : isBeach
+                          ? 'bg-[#FFFFFF] border border-[#7A4A21]/15 text-[#1C242B] font-normal shadow-sm rounded-bl-none'
+                          : 'bg-[#141414] border border-white/15 text-[#E5E5E5] font-light shadow-md rounded-bl-none'
                     }`}
                   >
                     <div>{msg.text}</div>
                     {msg.timestamp && (
                       <div
                         className={`text-[9px] font-mono mt-2 text-right ${
-                          msg.sender === 'user' ? 'text-black/60' : 'text-white/40'
+                          msg.sender === 'user'
+                            ? 'text-white/70'
+                            : isBeach ? 'text-[#7A4A21]/60' : 'text-white/40'
                         }`}
                       >
                         {msg.timestamp}
@@ -427,14 +420,18 @@ export default function GraceAIAssistant() {
               {/* Thinking / Typing Animation */}
               {isLoading && (
                 <div className="flex justify-start">
-                  <div className="px-4 py-3 rounded-2xl rounded-bl-none bg-[#141414] border border-white/15 text-[#E5E5E5] flex items-center gap-3">
-                    <span className="text-xs font-mono text-emerald-400 animate-pulse">
+                  <div className={`px-4 py-3 rounded-2xl rounded-bl-none border flex items-center gap-3 ${
+                    isBeach
+                      ? 'bg-[#FFFFFF] border-[#7A4A21]/15 text-[#1C242B]'
+                      : 'bg-[#141414] border-white/15 text-[#E5E5E5]'
+                  }`}>
+                    <span className={`text-xs font-mono animate-pulse ${isBeach ? 'text-[#1C6E8C]' : 'text-emerald-400'}`}>
                       Grace AI is thinking...
                     </span>
                     <div className="flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-white animate-bounce" style={{ animationDelay: '0ms' }} />
-                      <span className="w-1.5 h-1.5 rounded-full bg-white animate-bounce" style={{ animationDelay: '150ms' }} />
-                      <span className="w-1.5 h-1.5 rounded-full bg-white animate-bounce" style={{ animationDelay: '300ms' }} />
+                      <span className={`w-1.5 h-1.5 rounded-full animate-bounce ${isBeach ? 'bg-[#1C6E8C]' : 'bg-white'}`} style={{ animationDelay: '0ms' }} />
+                      <span className={`w-1.5 h-1.5 rounded-full animate-bounce ${isBeach ? 'bg-[#1C6E8C]' : 'bg-white'}`} style={{ animationDelay: '150ms' }} />
+                      <span className={`w-1.5 h-1.5 rounded-full animate-bounce ${isBeach ? 'bg-[#1C6E8C]' : 'bg-white'}`} style={{ animationDelay: '300ms' }} />
                     </div>
                   </div>
                 </div>
@@ -443,13 +440,19 @@ export default function GraceAIAssistant() {
             </div>
 
             {/* Quick Action Chips */}
-            <div className="px-4 py-2 flex items-center gap-2 overflow-x-auto border-t border-white/10 bg-black/90 no-scrollbar shrink-0">
+            <div className={`px-4 py-2 flex items-center gap-2 overflow-x-auto border-t no-scrollbar shrink-0 ${
+              isBeach ? 'bg-[#F3ECE1] border-[#7A4A21]/15' : 'bg-black/90 border-white/10'
+            }`}>
               {quickActionChips.map((chip) => (
                 <button
                   key={chip}
                   disabled={isLoading}
                   onClick={() => handleSend(chip)}
-                  className="px-3 py-1.5 rounded-full border border-white/20 bg-white/5 text-[11px] font-mono text-white/80 shrink-0 hover:bg-white hover:text-black transition-all duration-200 disabled:opacity-50"
+                  className={`px-3 py-1.5 rounded-full border text-[11px] font-mono shrink-0 transition-all duration-200 disabled:opacity-50 cursor-pointer ${
+                    isBeach
+                      ? 'border-[#7A4A21]/20 bg-[#FAF6F0] text-[#5C5349] hover:bg-[#1C6E8C] hover:text-white hover:border-[#1C6E8C]'
+                      : 'border-white/20 bg-white/5 text-white/80 hover:bg-white hover:text-black'
+                  }`}
                 >
                   {chip}
                 </button>
@@ -462,7 +465,9 @@ export default function GraceAIAssistant() {
                 e.preventDefault();
                 handleSend();
               }}
-              className="p-3 border-t border-white/10 bg-black flex items-center gap-2"
+              className={`p-3 border-t flex items-center gap-2 ${
+                isBeach ? 'bg-[#FAF6F0] border-[#7A4A21]/15' : 'bg-black border-white/10'
+              }`}
             >
               <input
                 type="text"
@@ -470,12 +475,20 @@ export default function GraceAIAssistant() {
                 disabled={isLoading}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder={isLoading ? 'Grace AI is thinking...' : 'Ask Grace AI anything...'}
-                className="flex-1 bg-[#121212] border border-white/20 rounded-full px-4 py-2.5 text-xs text-white placeholder-white/40 focus:outline-none focus:border-white transition-colors disabled:opacity-50"
+                className={`flex-1 border rounded-full px-4 py-2.5 text-xs transition-colors disabled:opacity-50 focus:outline-none ${
+                  isBeach
+                    ? 'bg-[#FFFFFF] border-[#7A4A21]/20 text-[#1C242B] placeholder-[#5C5349]/50 focus:border-[#1C6E8C]'
+                    : 'bg-[#121212] border-white/20 text-white placeholder-white/40 focus:border-white'
+                }`}
               />
               <button
                 type="submit"
                 disabled={isLoading || !input.trim()}
-                className="p-2.5 rounded-full bg-white text-black hover:bg-neutral-200 disabled:opacity-40 transition-colors shrink-0"
+                className={`p-2.5 rounded-full disabled:opacity-40 transition-colors shrink-0 cursor-pointer ${
+                  isBeach
+                    ? 'bg-[#1C6E8C] text-white hover:bg-[#1C6E8C]/90'
+                    : 'bg-white text-black hover:bg-neutral-200'
+                }`}
               >
                 <Send className="w-3.5 h-3.5" />
               </button>
@@ -484,7 +497,7 @@ export default function GraceAIAssistant() {
         )}
       </AnimatePresence>
 
-      {/* Floating Interactive 3D Canvas Avatar Button with Cute Speech Bubble */}
+      {/* Floating Interactive 3D Canvas Avatar Button */}
       <div
         onMouseEnter={() => {
           setIsHovered(true);
@@ -510,14 +523,19 @@ export default function GraceAIAssistant() {
               transition={{ type: 'spring', stiffness: 450, damping: 25 }}
               className="absolute -top-14 right-2 z-30 pointer-events-none whitespace-nowrap"
             >
-              <div className="relative px-4 py-2 rounded-2xl bg-[#0F0F12]/90 border border-white/20 backdrop-blur-xl shadow-[0_12px_30px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.3)] flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34d399]" />
-                <span className="text-white font-['Inter',sans-serif] text-xs font-semibold tracking-wide">
+              <div className={`relative px-4 py-2 rounded-2xl border backdrop-blur-xl shadow-lg flex items-center gap-2 ${
+                isBeach
+                  ? 'bg-[#FAF6F0]/95 border-[#7A4A21]/30 text-[#1C242B]'
+                  : 'bg-[#0F0F12]/90 border-white/20 text-white shadow-[0_12px_30px_rgba(0,0,0,0.8)]'
+              }`}>
+                <div className={`w-2 h-2 rounded-full animate-pulse ${isBeach ? 'bg-[#1C6E8C]' : 'bg-emerald-400'}`} />
+                <span className="font-['Inter',sans-serif] text-xs font-semibold tracking-wide">
                   {isOpen ? 'Close Assistant' : 'Chat with Grace AI'}
                 </span>
 
-                {/* 3D Arrow pointer */}
-                <div className="absolute -bottom-1.5 right-6 w-3 h-3 bg-[#0F0F12]/90 border-r border-b border-white/20 rotate-45" />
+                <div className={`absolute -bottom-1.5 right-6 w-3 h-3 border-r border-b rotate-45 ${
+                  isBeach ? 'bg-[#FAF6F0]/95 border-[#7A4A21]/30' : 'bg-[#0F0F12]/90 border-white/20'
+                }`} />
               </div>
             </motion.div>
           )}

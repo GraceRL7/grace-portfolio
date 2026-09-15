@@ -23,6 +23,7 @@ import { TbApi } from 'react-icons/tb';
 import { VscVscode } from 'react-icons/vsc';
 import { Sparkles, Bot, Palette, Database } from 'lucide-react';
 import { IconType } from 'react-icons';
+import { useTheme } from '../context/ThemeContext';
 
 type IconComponent = IconType | typeof Sparkles | React.FC<{ className?: string; style?: React.CSSProperties }>;
 
@@ -30,26 +31,6 @@ type IconComponent = IconType | typeof Sparkles | React.FC<{ className?: string;
 const ClaudeLogo = ({ className, style }: { className?: string; style?: React.CSSProperties }) => (
   <svg viewBox="0 0 24 24" fill="currentColor" className={className} style={style}>
     <path d="M12 2L13.8 8.2L19.5 5.5L15.8 10.8L22 12.5L15.8 14.2L19.5 19.5L13.8 16.8L12 23L10.2 16.8L4.5 19.5L8.2 14.2L2 12.5L8.2 10.8L4.5 5.5L10.2 8.2L12 2Z" />
-  </svg>
-);
-
-// Exact Google Antigravity logo with full multi-color gradient mesh arc
-const AntigravityLogo = ({ className }: { className?: string; style?: React.CSSProperties }) => (
-  <svg viewBox="0 0 24 24" fill="none" className={className}>
-    <defs>
-      <linearGradient id="antigravityGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-        <stop offset="0%" stopColor="#4285F4" />
-        <stop offset="35%" stopColor="#34A853" />
-        <stop offset="70%" stopColor="#FBBC05" />
-        <stop offset="100%" stopColor="#EA4335" />
-      </linearGradient>
-    </defs>
-    <path
-      d="M3.5 18.5C6.5 7.5 17.5 7.5 20.5 18.5"
-      stroke="url(#antigravityGrad)"
-      strokeWidth="3.2"
-      strokeLinecap="round"
-    />
   </svg>
 );
 
@@ -65,6 +46,9 @@ interface SkillCategory {
 }
 
 export default function CinematicSkills() {
+  const { theme } = useTheme();
+  const isBeach = theme === 'beach';
+
   const skillCategories: SkillCategory[] = [
     {
       category: 'FRONTEND',
@@ -86,7 +70,7 @@ export default function CinematicSkills() {
         { name: 'SQL Workbench', icon: Database, color: '#00758F' },
         { name: 'AWS', icon: FaAws, color: '#FF9900' },
         { name: 'Firebase', icon: SiFirebase, color: '#FFCA28' },
-        { name: 'REST APIs', icon: TbApi, color: '#FFFFFF' },
+        { name: 'REST APIs', icon: TbApi, color: isBeach ? '#1C6E8C' : '#FFFFFF' },
       ],
     },
     {
@@ -97,7 +81,7 @@ export default function CinematicSkills() {
         { name: 'AI Automation', icon: Bot, color: '#10A37F' },
         { name: 'WordPress', icon: FaWordpress, color: '#21759B' },
         { name: 'Elementor', icon: FaElementor, color: '#92003B' },
-        { name: 'GitHub', icon: FaGithub, color: '#FFFFFF' },
+        { name: 'GitHub', icon: FaGithub, color: isBeach ? '#1C242B' : '#FFFFFF' },
         { name: 'VS Code', icon: VscVscode, color: '#007ACC' },
         { name: 'Postman', icon: SiPostman, color: '#FF6C37' },
         { name: 'Canva', icon: Palette, color: '#00C4CC' },
@@ -108,19 +92,27 @@ export default function CinematicSkills() {
   return (
     <section
       id="skills"
-      className="relative w-full min-h-screen py-16 sm:py-24 lg:py-32 bg-[#000000] text-[#FFFFFF] flex flex-col justify-center px-4 sm:px-8 lg:px-12 border-t border-[#FFFFFF]/10 z-20"
+      className={`relative w-full min-h-screen py-16 sm:py-24 lg:py-32 flex flex-col justify-center px-4 sm:px-8 lg:px-12 border-t transition-colors duration-1000 z-20 ${
+        isBeach
+          ? 'bg-[#FAF6F0] text-[#1C242B] border-[#5C5349]/15'
+          : 'bg-[#000000] text-[#FFFFFF] border-[#FFFFFF]/10'
+      }`}
     >
       <div className="w-full max-w-[1400px] mx-auto">
         {/* Section Label */}
         <div className="flex items-center gap-3 mb-4 sm:mb-6">
-          <div className="w-2 h-2 rounded-full bg-[#FFFFFF]" />
-          <span className="font-['Inter',sans-serif] text-[12px] sm:text-[14px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[#BFBFBF]">
+          <div className={`w-2 h-2 rounded-full ${isBeach ? 'bg-[#1C6E8C]' : 'bg-[#FFFFFF]'}`} />
+          <span className={`font-['Inter',sans-serif] text-[12px] sm:text-[14px] uppercase tracking-[0.25em] sm:tracking-[0.3em] ${
+            isBeach ? 'text-[#7A4A21]' : 'text-[#BFBFBF]'
+          }`}>
             03 / WHAT I KNOW
           </span>
         </div>
 
         {/* Section Heading */}
-        <h2 className="font-['Bebas_Neue',sans-serif] font-bold text-[36px] xs:text-[48px] sm:text-[72px] lg:text-[96px] text-[#FFFFFF] tracking-[0.03em] sm:tracking-[0.05em] leading-none uppercase mb-8 sm:mb-12">
+        <h2 className={`font-['Bebas_Neue',sans-serif] font-bold text-[36px] xs:text-[48px] sm:text-[72px] lg:text-[96px] tracking-[0.03em] sm:tracking-[0.05em] leading-none uppercase mb-8 sm:mb-12 ${
+          isBeach ? 'text-[#1C242B]' : 'text-[#FFFFFF]'
+        }`}>
           WHAT I KNOW
         </h2>
 
@@ -132,27 +124,39 @@ export default function CinematicSkills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#111111]/80 border border-[#FFFFFF]/15 backdrop-blur-[20px] hover:border-[#FFFFFF]/40 transition-all duration-300 shadow-2xl flex flex-col justify-start"
+              className={`p-6 sm:p-8 rounded-2xl sm:rounded-3xl border backdrop-blur-[20px] transition-all duration-500 flex flex-col justify-start ${
+                isBeach
+                  ? 'bg-[#FFFFFF] border-[#7A4A21]/15 shadow-[0_10px_30px_rgba(90,82,74,0.08)] hover:border-[#1C6E8C]/40'
+                  : 'bg-[#111111]/80 border-[#FFFFFF]/15 shadow-2xl hover:border-[#FFFFFF]/40'
+              }`}
             >
               {/* Bebas Neue Heading with thin divider */}
-              <h3 className="font-['Bebas_Neue',sans-serif] text-[28px] font-normal tracking-[0.18em] uppercase text-[#FFFFFF] border-b border-[#FFFFFF]/[0.08] pb-[20px] mb-[28px]">
+              <h3 className={`font-['Bebas_Neue',sans-serif] text-[28px] font-normal tracking-[0.18em] uppercase border-b pb-[20px] mb-[28px] ${
+                isBeach
+                  ? 'text-[#1C6E8C] border-[#7A4A21]/15'
+                  : 'text-[#FFFFFF] border-[#FFFFFF]/[0.08]'
+              }`}>
                 {cat.category}
               </h3>
 
-              {/* Skill Chips with Uniform Height & Padding */}
+              {/* Skill Chips */}
               <div className="flex flex-wrap gap-3">
                 {cat.skills.map((skill) => {
                   const Icon = skill.icon;
                   return (
                     <div
                       key={skill.name}
-                      className="group inline-flex items-center gap-[10px] h-[48px] px-[18px] rounded-[14px] bg-[#000000] border border-[#FFFFFF]/15 text-[14px] font-medium text-[#FFFFFF] hover:border-[#FFFFFF]/25 hover:bg-[#FFFFFF]/[0.03] hover:-translate-y-1 transition-all duration-300 cursor-default shrink-0"
+                      className={`group inline-flex items-center gap-[10px] h-[48px] px-[18px] rounded-[14px] border text-[14px] font-medium transition-all duration-300 cursor-default shrink-0 ${
+                        isBeach
+                          ? 'bg-[#F3ECE1] border-[#7A4A21]/15 text-[#1C242B] hover:border-[#1C6E8C]/40 hover:bg-[#FAF6F0] hover:-translate-y-1'
+                          : 'bg-[#000000] border-[#FFFFFF]/15 text-[#FFFFFF] hover:border-[#FFFFFF]/25 hover:bg-[#FFFFFF]/[0.03] hover:-translate-y-1'
+                      }`}
                     >
                       <Icon
                         className="w-5 h-5 transition-transform duration-300 group-hover:scale-110 shrink-0"
                         style={{ color: skill.color || undefined }}
                       />
-                      <span className="text-[14px] font-medium tracking-wide group-hover:text-white transition-colors">
+                      <span className="text-[14px] font-medium tracking-wide">
                         {skill.name}
                       </span>
                     </div>
