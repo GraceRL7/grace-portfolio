@@ -48,7 +48,7 @@ export default function CinematicExperience() {
         <div className="flex items-center gap-3 mb-4 sm:mb-6">
           <div className="w-2 h-2 rounded-full bg-[#FFFFFF]" />
           <span className="font-['Inter',sans-serif] text-[12px] sm:text-[14px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[#BFBFBF]">
-            04 / CAREER & LEARNING
+            02 / WHAT I'VE DONE
           </span>
         </div>
 

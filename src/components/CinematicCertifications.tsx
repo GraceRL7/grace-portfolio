@@ -91,7 +91,7 @@ export default function CinematicCertifications() {
             >
               <div className="w-2 h-2 rounded-full bg-[#FFFFFF]" />
               <span className="font-['Inter',sans-serif] text-[12px] sm:text-[14px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[#BFBFBF]">
-                06 / CERTIFICATIONS
+                05 / MY CERTIFICATIONS
               </span>
             </motion.div>
 
@@ -102,7 +102,7 @@ export default function CinematicCertifications() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="font-['Antonio',sans-serif] text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-[0.03em] leading-none mb-3 text-[#FFFFFF]"
             >
-              CERTIFICATIONS
+              MY CERTIFICATIONS
             </motion.h2>
 
             <motion.p

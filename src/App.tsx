@@ -1,13 +1,11 @@
 import CinematicNavbar from './components/CinematicNavbar';
 import CinematicHero from './components/CinematicHero';
 import CinematicAbout from './components/CinematicAbout';
+import CinematicExperience from './components/CinematicExperience';
 import CinematicSkills from './components/CinematicSkills';
-import CinematicHobbies from './components/CinematicHobbies';
-import Achievements from './components/Achievements';
 import CinematicProjects from './components/CinematicProjects';
 import CinematicCertifications from './components/CinematicCertifications';
-import CinematicAIAutomation from './components/CinematicAIAutomation';
-import CinematicExperience from './components/CinematicExperience';
+import CinematicHobbies from './components/CinematicHobbies';
 import CinematicContact from './components/CinematicContact';
 import GraceAIAssistant from './components/GraceAIAssistant';
 
@@ -19,13 +17,11 @@ export default function App() {
       <main className="relative bg-black">
         <CinematicHero />
         <CinematicAbout />
+        <CinematicExperience />
         <CinematicSkills />
-        <CinematicHobbies />
-        <Achievements />
         <CinematicProjects />
         <CinematicCertifications />
-        <CinematicAIAutomation />
-        <CinematicExperience />
+        <CinematicHobbies />
         <CinematicContact />
       </main>
 

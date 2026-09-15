@@ -41,7 +41,7 @@ export default function CinematicAbout() {
         >
           <div className="w-2 h-2 rounded-full bg-[#FFFFFF]" />
           <span className="font-['Inter',sans-serif] text-[12px] sm:text-[14px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[#BFBFBF]">
-            01 / ABOUT ME
+            01 / WHO I AM
           </span>
         </motion.div>
 

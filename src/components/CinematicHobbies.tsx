@@ -1,174 +1,306 @@
+import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Camera, PenTool, Palette, Video, Trophy, Music, ExternalLink, Sparkles } from 'lucide-react';
-import { profile } from '../data/cinematicProfile';
+import { ChevronLeft, ChevronRight, MousePointerClick } from 'lucide-react';
+import ksfaImg from '../data/Ksfa B division.jpeg';
+import eventHeadImg from '../data/Event head at manoeuvre it fes for videography and photography3.0.jpeg';
+import winnersImg from '../data/Manoeuvre it fest overall winners 2.0.jpeg';
+import rajyaPuraskarImg from '../data/Rajya puraskar award.jpeg';
+import southZoneImg from '../data/south zone.jpeg';
 
-interface HobbyItem {
+export interface HobbyItem {
   id: string;
   title: string;
   category: string;
+  image: string;
   description: string;
-  tools: string[];
-  icon: React.ElementType;
-  link?: string;
-  gradient: string;
 }
 
-const hobbyData: HobbyItem[] = [
-  {
-    id: 'photography',
-    title: 'Photography & Content Creation',
-    category: 'Visual Storytelling',
-    description: 'Capturing aesthetic perspectives, event photography, and creative visual stories.',
-    tools: ['Camera Direction', 'Instagram', 'Visual Framing'],
-    icon: Camera,
-    link: profile.instagram,
-    gradient: 'from-purple-900/40 via-pink-900/20 to-black',
-  },
+export const HOBBIES_LIST: HobbyItem[] = [
   {
     id: 'sketching',
-    title: 'Sketching & Fine Arts',
-    category: 'Creative Arts',
+    title: 'Sketching',
+    category: 'Fine Arts & Freehand Drawing',
+    image: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=1000&auto=format&fit=crop',
     description: 'Pencil portraits, freehand illustration, and detailed artistic sketching.',
-    tools: ['Pencil Sketching', 'Digital Art', 'Illustration'],
-    icon: PenTool,
-    gradient: 'from-amber-900/40 via-yellow-900/20 to-black',
-  },
-  {
-    id: 'graphic-design',
-    title: 'Graphic Design',
-    category: 'Digital Branding',
-    description: 'Poster design, typography layouts, and marketing banners using Canva.',
-    tools: ['Canva', 'Poster Design', 'Social Media Graphics'],
-    icon: Palette,
-    gradient: 'from-cyan-900/40 via-blue-900/20 to-black',
-  },
-  {
-    id: 'video-editing',
-    title: 'Video Editing & Cinematic Edits',
-    category: 'Media Production',
-    description: 'Cinematic video compilation, audio synchronization, and reel editing using CapCut & VN.',
-    tools: ['CapCut', 'VN Video Editor', 'Reel Editing'],
-    icon: Video,
-    gradient: 'from-emerald-900/40 via-teal-900/20 to-black',
   },
   {
     id: 'football',
-    title: 'Football & Athletics',
-    category: 'Competitive Sports',
-    description: 'State club player (KSFA B Division) & Mangalore University South Zone varsity team.',
-    tools: ['KSFA B-Division', 'Varsity Football', 'Team Athletics'],
-    icon: Trophy,
-    gradient: 'from-red-900/40 via-orange-900/20 to-black',
+    title: 'Football',
+    category: 'Competitive Athletics',
+    image: ksfaImg,
+    description: 'KSFA B Division League player & South Zone Inter-University varsity representative.',
+  },
+  {
+    id: 'badminton',
+    title: 'Badminton',
+    category: 'Court Sports & Reflexes',
+    image: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?q=80&w=1000&auto=format&fit=crop',
+    description: 'Competitive singles & doubles badminton matches and fast-paced agility drills.',
+  },
+  {
+    id: 'cricket',
+    title: 'Cricket',
+    category: 'Team Strategy & Sports',
+    image: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?q=80&w=1000&auto=format&fit=crop',
+    description: 'Inter-collegiate cricket tournaments, team leadership, and strategic gameplay.',
+  },
+  {
+    id: 'gardening',
+    title: 'Gardening',
+    category: 'Nature & Plant Cultivation',
+    image: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?q=80&w=1000&auto=format&fit=crop',
+    description: 'Botanical care, organic garden cultivation, and relaxing green living spaces.',
+  },
+  {
+    id: 'designing',
+    title: 'Designing',
+    category: 'UI/UX & Brand Graphics',
+    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=1000&auto=format&fit=crop',
+    description: 'Digital posters, user interface mockups, and creative brand design systems.',
+  },
+  {
+    id: 'video-editing',
+    title: 'Video Editing',
+    category: 'Cinematic Post-Production',
+    image: eventHeadImg,
+    description: 'Event head for videography, multi-track timeline editing, color grading & audio sync.',
+  },
+  {
+    id: 'photography',
+    title: 'Photography',
+    category: 'Visual Framing & Stories',
+    image: winnersImg,
+    description: 'Award-winning photography at Milaverse 2.0 & Manoeuvre IT Fest event coverage.',
+  },
+  {
+    id: 'reels',
+    title: 'Reels / Content Creation',
+    category: 'Social Media & Media Edits',
+    image: southZoneImg,
+    description: 'Short-form video editing, aesthetic visual pacing, and creative digital storytelling.',
   },
   {
     id: 'keyboard',
-    title: 'Keyboard Playing',
+    title: 'Keyboard',
     category: 'Instrumental Music',
-    description: 'Keyboard melody arrangement, rhythm composition, and musical performance.',
-    tools: ['Keyboard Performance', 'Melody Composition', 'Musical Arrangement'],
-    icon: Music,
-    gradient: 'from-indigo-900/40 via-violet-900/20 to-black',
+    image: 'https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?q=80&w=1000&auto=format&fit=crop',
+    description: 'Keyboard melodies, chord arrangements, and live acoustic music sessions.',
+  },
+  {
+    id: 'music',
+    title: 'Music',
+    category: 'Soundscapes & Rhythm',
+    image: rajyaPuraskarImg,
+    description: 'Exploring diverse musical genres, rhythm production, and sound design inspiration.',
   },
 ];
 
 export default function CinematicHobbies() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+
+  const totalCards = HOBBIES_LIST.length;
+
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev + 1) % totalCards);
+  };
+
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev - 1 + totalCards) % totalCards);
+  };
+
   return (
     <section
+      ref={sectionRef}
       id="hobbies"
-      className="relative w-full py-16 sm:py-24 lg:py-32 bg-[#000000] text-[#FFFFFF] px-4 sm:px-8 lg:px-12 border-t border-[#FFFFFF]/10 z-20 overflow-hidden"
+      className="relative w-full min-h-screen py-20 sm:py-28 lg:py-36 bg-[#000000] text-[#FFFFFF] border-t border-[#FFFFFF]/10 z-20 overflow-hidden"
     >
-      <div className="w-full max-w-[1400px] mx-auto">
-        {/* Section Label */}
-        <div className="flex items-center gap-3 mb-4 sm:mb-6">
-          <div className="w-2 h-2 rounded-full bg-[#FFFFFF]" />
-          <span className="font-['Inter',sans-serif] text-[12px] sm:text-[14px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[#BFBFBF]">
-            05 / HOBBIES & CREATIVE PURSUITS
-          </span>
-        </div>
+      {/* Background Subtle Ambient Lighting */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-white/[0.02] blur-[160px] rounded-full pointer-events-none z-0" />
 
-        <div className="mb-8 sm:mb-14 flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6">
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12">
+        {/* SECTION LABEL & HEADING */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
           <div>
-            <h2 className="font-['Bebas_Neue',sans-serif] font-bold text-[36px] xs:text-[48px] sm:text-[72px] lg:text-[96px] text-[#FFFFFF] tracking-[0.03em] sm:tracking-[0.05em] leading-none uppercase mb-2 sm:mb-4">
-              BEYOND CODE & AUTOMATION
-            </h2>
-            <p className="font-['Inter',sans-serif] text-sm sm:text-base lg:text-lg text-[#BFBFBF] font-light max-w-2xl">
-              Creative arts, music, visual editing, and athletic passions that fuel my discipline and design thinking.
-            </p>
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="flex items-center gap-3 mb-4"
+            >
+              <div className="w-2 h-2 rounded-full bg-[#FFFFFF]" />
+              <span className="font-['Inter',sans-serif] text-[12px] sm:text-[14px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[#BFBFBF]">
+                06 / WHO I AM OUTSIDE WORK
+              </span>
+            </motion.div>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="font-['Antonio',sans-serif] text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-[0.03em] leading-none mb-3 text-[#FFFFFF]"
+            >
+              WHO I AM OUTSIDE WORK
+            </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="font-['Inter',sans-serif] text-base sm:text-xl font-light tracking-wide text-[#CCCCCC]"
+            >
+              Creative arts, music, visual editing, and athletic passions.
+            </motion.p>
+          </div>
+
+          {/* Carousel Navigation Controls */}
+          <div className="flex items-center gap-3 self-start md:self-auto">
+            <button
+              onClick={handlePrev}
+              aria-label="Previous hobby"
+              className="w-11 h-11 rounded-full bg-black/80 border border-white/20 text-white flex items-center justify-center backdrop-blur-md shadow-xl hover:bg-white hover:text-black hover:border-white transition-all duration-300 focus-visible:outline-none"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={handleNext}
+              aria-label="Next hobby"
+              className="w-11 h-11 rounded-full bg-black/80 border border-white/20 text-white flex items-center justify-center backdrop-blur-md shadow-xl hover:bg-white hover:text-black hover:border-white transition-all duration-300 focus-visible:outline-none"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
           </div>
         </div>
 
-        {/* 6 Grid Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {hobbyData.map((hobby) => {
-            const Icon = hobby.icon;
-            const cardContent = (
-              <motion.div
-                key={hobby.id}
-                whileHover={{ y: -6 }}
-                transition={{ duration: 0.3 }}
-                className={`group relative p-7 rounded-3xl bg-gradient-to-br ${hobby.gradient} border border-white/15 backdrop-blur-[20px] hover:border-white/50 transition-all duration-300 h-full flex flex-col justify-between overflow-hidden shadow-xl`}
-              >
-                {/* Background Glow */}
-                <div className="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-white/5 blur-2xl group-hover:bg-white/10 transition-colors pointer-events-none" />
+        {/* 3D CIRCULAR SCROLL & WHEEL CAROUSEL STAGE */}
+        <div className="relative w-full h-[500px] sm:h-[580px] lg:h-[620px] flex items-center justify-center perspective-[1200px] overflow-hidden rounded-3xl bg-gradient-to-b from-[#09090b]/80 via-[#050505]/90 to-[#000000] border border-white/10 p-4">
+          
+          {/* Subtle Ambient Radial Ring */}
+          <div className="absolute w-[450px] h-[450px] sm:w-[600px] sm:h-[600px] rounded-full border border-white/[0.08] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
 
-                <div>
-                  <div className="flex items-center justify-between mb-5">
-                    <div className="p-3 rounded-2xl bg-black/60 border border-white/15 text-white group-hover:scale-110 transition-transform">
-                      <Icon className="w-6 h-6" />
-                    </div>
+          {/* CARDS DISPLAY CONTAINER */}
+          <div className="relative w-full h-full flex items-center justify-center">
+            {HOBBIES_LIST.map((hobby, index) => {
+              // Calculate relative offset distance from current active index
+              let diff = (index - activeIndex + totalCards) % totalCards;
+              if (diff > totalCards / 2) diff -= totalCards;
 
-                    <span className="font-mono text-[10px] uppercase tracking-widest text-[#BFBFBF] bg-black/60 px-3 py-1 rounded-full border border-white/10">
+              // Compute 3D circular transformation variables
+              const isActive = diff === 0;
+              const isVisible = Math.abs(diff) <= 3; // Show 7 cards around active center
+              
+              const rotateY = diff * 22; // degree rotation
+              const translateX = diff * 180; // px spacing
+              const translateZ = isActive ? 120 : -Math.abs(diff) * 140; // depth offset
+              const scale = isActive ? 1.08 : Math.max(0.7, 1 - Math.abs(diff) * 0.12);
+              const opacity = isVisible ? (isActive ? 1 : Math.max(0.25, 1 - Math.abs(diff) * 0.28)) : 0;
+              const isGrayscale = !isActive;
+
+              if (!isVisible) return null;
+
+              return (
+                <motion.div
+                  key={hobby.id}
+                  onClick={() => setActiveIndex(index)}
+                  initial={false}
+                  animate={{
+                    x: translateX,
+                    z: translateZ,
+                    rotateY: rotateY,
+                    scale: scale,
+                    opacity: opacity,
+                  }}
+                  transition={{
+                    type: 'spring',
+                    stiffness: 260,
+                    damping: 26,
+                  }}
+                  style={{
+                    transformStyle: 'preserve-3d',
+                  }}
+                  className={`absolute w-[220px] xs:w-[250px] sm:w-[300px] lg:w-[340px] aspect-[4/5] rounded-2xl p-4 sm:p-5 flex flex-col justify-between cursor-pointer select-none transition-all duration-500 bg-[#121215]/90 backdrop-blur-xl border ${
+                    isActive
+                      ? 'border-white/60 shadow-[0_20px_50px_rgba(255,255,255,0.18)] z-30'
+                      : 'border-white/15 hover:border-white/40 shadow-[0_10px_30px_rgba(0,0,0,0.8)] z-10'
+                  }`}
+                >
+                  {/* Metallic 3D Subtle Inner Edge */}
+                  <div className="absolute inset-0 rounded-2xl border border-white/10 pointer-events-none" />
+
+                  {/* CARD PREVIEW IMAGE */}
+                  <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-[#050505] border border-white/10 mb-3">
+                    <img
+                      src={hobby.image}
+                      alt={hobby.title}
+                      loading="lazy"
+                      className={`w-full h-full object-cover transition-all duration-700 ${
+                        isGrayscale ? 'filter grayscale opacity-75' : 'filter-none opacity-100 scale-105'
+                      }`}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
+                    <span className="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md bg-black/80 border border-white/20 text-[10px] font-mono tracking-widest text-white/90 uppercase">
                       {hobby.category}
                     </span>
                   </div>
 
-                  <h3 className="font-['Bebas_Neue',sans-serif] text-2xl sm:text-3xl tracking-wider text-white mb-2 leading-tight group-hover:text-[#E0E0E0] transition-colors">
-                    {hobby.title}
-                  </h3>
-
-                  <p className="font-['Inter',sans-serif] text-xs sm:text-sm text-white/80 font-light leading-relaxed mb-6">
-                    {hobby.description}
-                  </p>
-                </div>
-
-                <div className="space-y-4 pt-4 border-t border-white/10">
-                  <div className="flex flex-wrap gap-1.5">
-                    {hobby.tools.map((t) => (
-                      <span
-                        key={t}
-                        className="text-[10px] font-mono text-white/90 px-2.5 py-1 rounded-md bg-black/70 border border-white/10"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-
-                  {hobby.link && (
-                    <div className="flex items-center gap-1.5 text-xs font-mono uppercase tracking-widest text-emerald-400 font-semibold pt-1 group-hover:underline">
-                      <span>Visit Instagram (@grace_captures__)</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
+                  {/* CARD DETAILS */}
+                  <div className="flex flex-col justify-between flex-grow pt-1">
+                    <div>
+                      <h3 className="font-['Antonio',sans-serif] text-xl sm:text-2xl font-bold uppercase tracking-wide text-white mb-1">
+                        {hobby.title}
+                      </h3>
+                      <p className="font-['Inter',sans-serif] text-xs text-white/70 line-clamp-2 leading-relaxed">
+                        {hobby.description}
+                      </p>
                     </div>
-                  )}
-                </div>
-              </motion.div>
-            );
 
-            if (hobby.link) {
-              return (
-                <a
-                  key={hobby.id}
-                  href={hobby.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block h-full"
-                >
-                  {cardContent}
-                </a>
+                    <div className="mt-3 pt-2 border-t border-white/10 flex items-center justify-between font-mono text-[10px] text-white/50 uppercase tracking-wider">
+                      <span>{String(index + 1).padStart(2, '0')} / {String(totalCards).padStart(2, '0')}</span>
+                      {isActive && <span className="text-white font-semibold flex items-center gap-1"><MousePointerClick size={12} /> Active</span>}
+                    </div>
+                  </div>
+                </motion.div>
               );
-            }
+            })}
+          </div>
 
-            return <div key={hobby.id} className="h-full">{cardContent}</div>;
-          })}
+          {/* ACTIVE CAPTION DISPLAY AT BOTTOM OF CAROUSEL STAGE */}
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-40 text-center pointer-events-none">
+            <motion.p
+              key={HOBBIES_LIST[activeIndex].id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="font-['Handlee',cursive] font-serif italic text-xl sm:text-2xl text-white tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]"
+            >
+              "{HOBBIES_LIST[activeIndex].title}"
+            </motion.p>
+          </div>
+        </div>
+
+        {/* BOTTOM SECTION FOOTER BAR */}
+        <div className="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-white/50">
+          <div className="flex items-center gap-4">
+            <span className="text-white font-bold tracking-widest">
+              {String(activeIndex + 1).padStart(2, '0')}
+            </span>
+            <div className="w-28 sm:w-44 h-[2px] bg-white/15 relative overflow-hidden rounded-full">
+              <div
+                className="h-full bg-white transition-all duration-300 rounded-full"
+                style={{
+                  width: `${((activeIndex + 1) / totalCards) * 100}%`,
+                }}
+              />
+            </div>
+            <span>{String(totalCards).padStart(2, '0')}</span>
+          </div>
+
+          <div className="flex items-center gap-6 tracking-widest uppercase text-[11px]">
+            <span className="text-white/70">11 HOBBIES & CREATIVE PURSUITS</span>
+          </div>
         </div>
       </div>
     </section>

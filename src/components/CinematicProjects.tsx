@@ -1,7 +1,11 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Github, Globe } from 'lucide-react';
+import { ArrowUpRight, Github, Globe, Cpu, Workflow, Bot, MailCheck, Database, Zap } from 'lucide-react';
 
 export default function CinematicProjects() {
+  const [activeTab, setActiveTab] = useState<'projects' | 'automation'>('projects');
+  const [autoTab, setAutoTab] = useState<'chatbot' | 'contact'>('chatbot');
+
   const projects = [
     {
       title: 'El Mundo Sports',
@@ -65,6 +69,29 @@ export default function CinematicProjects() {
     },
   ];
 
+  const automationWorkflows = {
+    chatbot: {
+      title: 'Grace AI Chatbot Architecture',
+      subtitle: 'Real-time conversational agent powered by n8n webhooks & Gemini LLM',
+      nodes: [
+        { title: 'Portfolio Visitor', desc: 'User inputs query in luxury chat UI', icon: Bot, badge: 'Frontend' },
+        { title: 'n8n Webhook', desc: 'Secure POST payload dispatcher & routing', icon: Workflow, badge: 'Integration' },
+        { title: 'Gemini AI Engine', desc: 'Context-aware portfolio prompt processing', icon: Cpu, badge: 'LLM AI' },
+        { title: 'Structured Output', desc: 'Instant streaming text response to UI', icon: Zap, badge: 'Response' },
+      ],
+    },
+    contact: {
+      title: 'Automated Lead & Contact Pipeline',
+      subtitle: 'End-to-end webhook processing for zero-delay visitor engagement',
+      nodes: [
+        { title: 'Contact Submission', desc: 'Visitor submits message on portfolio', icon: MailCheck, badge: 'Form Trigger' },
+        { title: 'n8n Webhook Engine', desc: 'Validates & parses payload variables', icon: Workflow, badge: 'Orchestrator' },
+        { title: 'Google Sheets DB', desc: 'Appends lead data to persistent database', icon: Database, badge: 'Storage' },
+        { title: 'Email & Auto-Reply', desc: 'Dispatches admin alert & personalized response', icon: Zap, badge: 'Automation' },
+      ],
+    },
+  };
+
   return (
     <section
       id="projects"
@@ -75,102 +102,208 @@ export default function CinematicProjects() {
         <div className="flex items-center gap-3 mb-4 sm:mb-6">
           <div className="w-2 h-2 rounded-full bg-[#FFFFFF]" />
           <span className="font-['Inter',sans-serif] text-[12px] sm:text-[14px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[#BFBFBF]">
-            03 / FEATURED PROJECTS
+            04 / WHAT I'VE BUILT
           </span>
         </div>
 
-        <h2 className="font-['Bebas_Neue',sans-serif] font-bold text-[36px] xs:text-[48px] sm:text-[72px] lg:text-[96px] text-[#FFFFFF] tracking-[0.03em] sm:tracking-[0.05em] leading-none uppercase mb-8 sm:mb-12">
-          FEATURED PROJECTS
-        </h2>
+        {/* Section Heading & Subtabs */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-8 sm:mb-12 gap-6">
+          <div>
+            <h2 className="font-['Bebas_Neue',sans-serif] font-bold text-[36px] xs:text-[48px] sm:text-[72px] lg:text-[96px] text-[#FFFFFF] tracking-[0.03em] sm:tracking-[0.05em] leading-none uppercase mb-2">
+              WHAT I'VE BUILT
+            </h2>
+            <p className="font-['Inter',sans-serif] text-sm sm:text-base text-[#BFBFBF] font-light max-w-xl">
+              Web applications, live production portals, and autonomous AI workflow engines.
+            </p>
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {projects.map((proj) => (
-            <motion.div
-              key={proj.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="group p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#111111]/70 border border-[#FFFFFF]/15 backdrop-blur-[20px] hover:border-[#FFFFFF]/50 transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between"
+          {/* Subtabs for Projects vs AI Automation */}
+          <div className="flex items-center gap-2 p-1.5 rounded-full bg-[#111111] border border-white/15 self-start lg:self-auto">
+            <button
+              onClick={() => setActiveTab('projects')}
+              className={`px-5 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider transition-all duration-300 ${
+                activeTab === 'projects'
+                  ? 'bg-white text-black font-semibold shadow-lg'
+                  : 'text-white/60 hover:text-white'
+              }`}
             >
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <span className="font-mono text-[11px] uppercase tracking-widest text-[#BFBFBF] bg-black/60 px-3 py-1 rounded-full border border-white/10">
-                    {proj.badge}
-                  </span>
-
-                  <div className="flex items-center gap-2">
-                    {proj.liveUrl && (
-                      <a
-                        href={proj.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 rounded-full border border-white/20 text-[#BFBFBF] hover:text-white hover:border-white transition-all"
-                        title="Visit Live Website"
-                      >
-                        <Globe className="w-4 h-4" />
-                      </a>
-                    )}
-
-                    {proj.githubUrl && (
-                      <a
-                        href={proj.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 rounded-full border border-white/20 text-[#BFBFBF] hover:text-white hover:border-white transition-all"
-                        title="View GitHub Repository"
-                      >
-                        <Github className="w-4 h-4" />
-                      </a>
-                    )}
-                  </div>
-                </div>
-
-                <h3 className="font-['Bebas_Neue',sans-serif] text-[34px] tracking-[0.05em] text-[#FFFFFF] mb-3 group-hover:text-[#BFBFBF] transition-colors">
-                  {proj.title}
-                </h3>
-
-                <p className="font-['Inter',sans-serif] text-xs sm:text-sm text-[#BFBFBF] font-light leading-relaxed mb-6">
-                  {proj.description}
-                </p>
-              </div>
-
-              <div className="space-y-4 pt-4 border-t border-[#FFFFFF]/10">
-                <div className="flex flex-wrap gap-2">
-                  {proj.tags.map((t) => (
-                    <span key={t} className="text-[10px] font-mono text-[#BFBFBF] px-2.5 py-1 rounded-md bg-[#000000] border border-white/10">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-
-                {proj.liveUrl && (
-                  <a
-                    href={proj.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-white hover:underline pt-2"
-                  >
-                    <span>Visit Live Site</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </a>
-                )}
-
-                {proj.githubUrl && (
-                  <a
-                    href={proj.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-white hover:underline pt-2"
-                  >
-                    <span>View GitHub Source</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </a>
-                )}
-              </div>
-            </motion.div>
-          ))}
+              Featured Applications
+            </button>
+            <button
+              onClick={() => setActiveTab('automation')}
+              className={`px-5 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider transition-all duration-300 ${
+                activeTab === 'automation'
+                  ? 'bg-white text-black font-semibold shadow-lg'
+                  : 'text-white/60 hover:text-white'
+              }`}
+            >
+              AI Automation Architecture
+            </button>
+          </div>
         </div>
+
+        {/* PROJECTS TAB */}
+        {activeTab === 'projects' && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {projects.map((proj) => (
+              <motion.div
+                key={proj.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="group p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#111111]/70 border border-[#FFFFFF]/15 backdrop-blur-[20px] hover:border-[#FFFFFF]/50 transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="font-mono text-[11px] uppercase tracking-widest text-[#BFBFBF] bg-black/60 px-3 py-1 rounded-full border border-white/10">
+                      {proj.badge}
+                    </span>
+
+                    <div className="flex items-center gap-2">
+                      {proj.liveUrl && (
+                        <a
+                          href={proj.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-2 rounded-full border border-white/20 text-[#BFBFBF] hover:text-white hover:border-white transition-all"
+                          title="Visit Live Website"
+                        >
+                          <Globe className="w-4 h-4" />
+                        </a>
+                      )}
+
+                      {proj.githubUrl && (
+                        <a
+                          href={proj.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-2 rounded-full border border-white/20 text-[#BFBFBF] hover:text-white hover:border-white transition-all"
+                          title="View GitHub Repository"
+                        >
+                          <Github className="w-4 h-4" />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+
+                  <h3 className="font-['Bebas_Neue',sans-serif] text-[34px] tracking-[0.05em] text-[#FFFFFF] mb-3 group-hover:text-[#BFBFBF] transition-colors">
+                    {proj.title}
+                  </h3>
+
+                  <p className="font-['Inter',sans-serif] text-xs sm:text-sm text-[#BFBFBF] font-light leading-relaxed mb-6">
+                    {proj.description}
+                  </p>
+                </div>
+
+                <div className="space-y-4 pt-4 border-t border-[#FFFFFF]/10">
+                  <div className="flex flex-wrap gap-2">
+                    {proj.tags.map((t) => (
+                      <span key={t} className="text-[10px] font-mono text-[#BFBFBF] px-2.5 py-1 rounded-md bg-[#000000] border border-white/10">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+
+                  {proj.liveUrl && (
+                    <a
+                      href={proj.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-white hover:underline pt-2"
+                    >
+                      <span>Visit Live Site</span>
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </a>
+                  )}
+
+                  {proj.githubUrl && (
+                    <a
+                      href={proj.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-white hover:underline pt-2"
+                    >
+                      <span>View GitHub Source</span>
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </a>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
+
+        {/* AI AUTOMATION ARCHITECTURE TAB */}
+        {activeTab === 'automation' && (
+          <div className="space-y-12">
+            <div className="p-6 sm:p-10 rounded-3xl bg-[#111111]/80 border border-white/15 backdrop-blur-xl">
+              <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
+                <div>
+                  <h3 className="font-['Bebas_Neue',sans-serif] text-3xl sm:text-4xl tracking-wider text-white">
+                    {automationWorkflows[autoTab].title}
+                  </h3>
+                  <p className="text-sm font-['Inter',sans-serif] text-white/60">
+                    {automationWorkflows[autoTab].subtitle}
+                  </p>
+                </div>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setAutoTab('chatbot')}
+                    className={`px-4 py-2 rounded-xl text-xs font-mono border transition-all ${
+                      autoTab === 'chatbot' ? 'bg-white text-black border-white' : 'border-white/20 text-white/60'
+                    }`}
+                  >
+                    Grace AI Bot
+                  </button>
+                  <button
+                    onClick={() => setAutoTab('contact')}
+                    className={`px-4 py-2 rounded-xl text-xs font-mono border transition-all ${
+                      autoTab === 'contact' ? 'bg-white text-black border-white' : 'border-white/20 text-white/60'
+                    }`}
+                  >
+                    Contact Pipeline
+                  </button>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {automationWorkflows[autoTab].nodes.map((node, i) => {
+                  const Icon = node.icon;
+                  return (
+                    <motion.div
+                      key={node.title}
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: i * 0.1 }}
+                      className="p-5 rounded-2xl bg-black/80 border border-white/10 flex flex-col justify-between"
+                    >
+                      <div>
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="p-2.5 rounded-xl bg-white/10 border border-white/20 text-white">
+                            <Icon className="w-5 h-5" />
+                          </div>
+                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-white/80">
+                            {node.badge}
+                          </span>
+                        </div>
+                        <h4 className="font-['Inter',sans-serif] font-bold text-white text-base mb-1">
+                          {node.title}
+                        </h4>
+                        <p className="text-xs text-white/60 leading-relaxed font-['Inter',sans-serif]">
+                          {node.desc}
+                        </p>
+                      </div>
+                      <div className="mt-4 pt-3 border-t border-white/10 text-[11px] font-mono text-white/40">
+                        STEP 0{i + 1}
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

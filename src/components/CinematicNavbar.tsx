@@ -12,7 +12,7 @@ export default function CinematicNavbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
 
-      const sections = ['hero', 'about', 'skills', 'hobbies', 'achievements', 'projects', 'certifications', 'automation', 'experience', 'contact'];
+      const sections = ['hero', 'about', 'experience', 'skills', 'projects', 'certifications', 'hobbies', 'contact'];
       const scrollPos = window.scrollY + 200;
 
       for (const section of sections) {
@@ -35,11 +35,11 @@ export default function CinematicNavbar() {
   const navLinks = [
     { name: 'HOME', href: '#hero', id: 'hero' },
     { name: 'ABOUT', href: '#about', id: 'about' },
+    { name: 'EXPERIENCE', href: '#experience', id: 'experience' },
     { name: 'SKILLS', href: '#skills', id: 'skills' },
     { name: 'PROJECTS', href: '#projects', id: 'projects' },
     { name: 'CERTIFICATIONS', href: '#certifications', id: 'certifications' },
-    { name: 'AI AUTOMATION', href: '#automation', id: 'automation' },
-    { name: 'EXPERIENCE', href: '#experience', id: 'experience' },
+    { name: 'HOBBIES', href: '#hobbies', id: 'hobbies' },
     { name: 'CONTACT', href: '#contact', id: 'contact' },
   ];
 

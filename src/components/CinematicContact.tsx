@@ -78,14 +78,14 @@ export default function CinematicContact() {
         <div className="flex items-center gap-3 mb-4 sm:mb-6">
           <div className="w-2 h-2 rounded-full bg-[#FFFFFF]" />
           <span className="font-['Inter',sans-serif] text-[12px] sm:text-[14px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[#BFBFBF]">
-            06 / CONTACT & AUTOMATION
+            07 / CONTACT ME
           </span>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           <div className="lg:col-span-6 space-y-4 sm:space-y-6">
             <h2 className="font-['Bebas_Neue',sans-serif] font-bold text-[36px] xs:text-[48px] sm:text-[72px] lg:text-[96px] text-[#FFFFFF] tracking-[0.03em] sm:tracking-[0.05em] leading-none uppercase">
-              LET'S WORK TOGETHER
+              CONTACT ME
             </h2>
 
             <p className="font-['Inter',sans-serif] text-sm sm:text-base text-[#BFBFBF] font-light leading-relaxed max-w-md">
