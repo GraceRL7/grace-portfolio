@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useMotionValueEvent, useSpring } from 'framer-motion';
-import { Mouse } from 'lucide-react';
+import { Mouse, ChevronLeft, ChevronRight } from 'lucide-react';
 import ksfaImg from '../data/Ksfa B division.jpeg';
 import eventHeadImg from '../data/Event head at manoeuvre it fes for videography and photography3.0.jpeg';
 import winnersImg from '../data/Manoeuvre it fest overall winners 2.0.jpeg';
@@ -169,8 +169,39 @@ export default function CinematicHobbies() {
           </p>
         </div>
 
-        {/* CIRCULAR STAGE CAROUSEL */}
+        {/* CIRCULAR STAGE CAROUSEL WITH ULTRA-THIN SIDE NAVIGATION ARROWS */}
         <div className="relative w-full flex-grow flex items-center justify-center my-2 sm:my-4 overflow-hidden">
+          
+          {/* Ultra-thin Left Side Navigation Arrow */}
+          <button
+            onClick={() => {
+              if (containerRef.current) {
+                const stepScroll = containerRef.current.clientHeight / (total - 1);
+                const targetY = containerRef.current.offsetTop + Math.max(0, activeIndex - 1) * stepScroll;
+                window.scrollTo({ top: targetY, behavior: 'smooth' });
+              }
+            }}
+            aria-label="Previous Hobby"
+            className="absolute left-2 sm:left-6 top-[40%] -translate-y-1/2 z-40 p-2 sm:p-3 text-white/30 hover:text-white/90 transition-colors focus-visible:outline-none group"
+          >
+            <ChevronLeft strokeWidth={1} className="w-8 h-8 sm:w-11 sm:h-11 group-hover:scale-110 transition-transform" />
+          </button>
+
+          {/* Ultra-thin Right Side Navigation Arrow */}
+          <button
+            onClick={() => {
+              if (containerRef.current) {
+                const stepScroll = containerRef.current.clientHeight / (total - 1);
+                const targetY = containerRef.current.offsetTop + Math.min(total - 1, activeIndex + 1) * stepScroll;
+                window.scrollTo({ top: targetY, behavior: 'smooth' });
+              }
+            }}
+            aria-label="Next Hobby"
+            className="absolute right-2 sm:right-6 top-[40%] -translate-y-1/2 z-40 p-2 sm:p-3 text-white/30 hover:text-white/90 transition-colors focus-visible:outline-none group"
+          >
+            <ChevronRight strokeWidth={1} className="w-8 h-8 sm:w-11 sm:h-11 group-hover:scale-110 transition-transform" />
+          </button>
+
           {HOBBIES_LIST.map((hobby, index) => {
             // Transform for card position based on smooth scroll index
             // Angle offset relative to current smoothProgress index
