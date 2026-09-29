@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, Linkedin, Instagram, Send, Workflow, CheckCircle2, AlertCircle, ArrowRight } from 'lucide-react';
+import { Mail, Linkedin, Instagram, Github, Send, Workflow, CheckCircle2, AlertCircle, ArrowRight } from 'lucide-react';
 import { profile } from '../data/cinematicProfile';
 import { useTheme } from '../context/ThemeContext';
 
@@ -99,76 +99,63 @@ export default function CinematicContact() {
               CONTACT ME
             </h2>
 
-            <p className={`font-['Inter',sans-serif] text-sm sm:text-base font-light leading-relaxed max-w-md ${
-              isBeach ? 'text-[#5C5349]' : 'text-[#BFBFBF]'
-            }`}>
-              Available for AI automation architecture, full-stack web applications, and digital engineering inquiries.
-            </p>
 
-            {/* Workflow Pipeline Diagram Card */}
-            <div className={`p-6 rounded-2xl border space-y-3 ${
-              isBeach
-                ? 'bg-[#F3ECE1] border-[#7A4A21]/20'
-                : 'bg-[#0D0D0D] border-white/10'
-            }`}>
-              <div className={`flex items-center gap-2 text-xs font-mono uppercase tracking-wider ${
-                isBeach ? 'text-[#1C6E8C]' : 'text-emerald-400'
-              }`}>
-                <Workflow size={14} />
-                <span>Contact Workflow Engine</span>
-              </div>
-              <div className={`flex items-center gap-2 text-[11px] font-mono flex-wrap ${
-                isBeach ? 'text-[#5C5349]' : 'text-white/60'
-              }`}>
-                <span>Contact Form</span>
-                <ArrowRight size={12} className={isBeach ? 'text-[#7A4A21]/40' : 'text-white/30'} />
-                <span>n8n Webhook</span>
-                <ArrowRight size={12} className={isBeach ? 'text-[#7A4A21]/40' : 'text-white/30'} />
-                <span>Google Sheets</span>
-                <ArrowRight size={12} className={isBeach ? 'text-[#7A4A21]/40' : 'text-white/30'} />
-                <span>Auto-Reply Email</span>
-              </div>
-            </div>
 
-            <div className="flex flex-wrap gap-4 pt-2">
+
+
+            <div className="flex items-center gap-3 pt-2">
               <a
-                href={`mailto:${profile.email}`}
-                className={`flex items-center gap-3 px-6 py-3 rounded-full border transition-all duration-300 font-['Inter',sans-serif] text-xs font-semibold tracking-widest uppercase ${
+                href={profile.github}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="GitHub"
+                className={`w-10 h-10 rounded-full border bg-transparent flex items-center justify-center transition-all duration-300 transform hover:scale-110 ${
                   isBeach
-                    ? 'border-[#7A4A21]/30 bg-transparent text-[#1C242B] hover:bg-[#1C6E8C] hover:text-white hover:border-[#1C6E8C]'
-                    : 'border-[#FFFFFF]/30 bg-transparent text-[#FFFFFF] hover:bg-[#FFFFFF] hover:text-[#000000]'
+                    ? 'border-[#00838F]/30 text-[#00838F] hover:bg-[#00ACC1] hover:text-[#FFFFFF] hover:border-[#00ACC1]'
+                    : 'border-[#FFFFFF]/30 text-[#BFBFBF] hover:bg-[#FFFFFF] hover:text-[#000000] hover:border-[#FFFFFF]'
                 }`}
               >
-                <Mail size={16} />
-                <span>EMAIL ME</span>
+                <Github size={16} />
               </a>
 
               <a
                 href={profile.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className={`flex items-center gap-3 px-6 py-3 rounded-full border transition-all duration-300 font-['Inter',sans-serif] text-xs font-semibold tracking-widest uppercase ${
+                aria-label="LinkedIn"
+                className={`w-10 h-10 rounded-full border bg-transparent flex items-center justify-center transition-all duration-300 transform hover:scale-110 ${
                   isBeach
-                    ? 'border-[#7A4A21]/30 bg-transparent text-[#1C242B] hover:bg-[#1C6E8C] hover:text-white hover:border-[#1C6E8C]'
-                    : 'border-[#FFFFFF]/30 bg-transparent text-[#FFFFFF] hover:bg-[#FFFFFF] hover:text-[#000000]'
+                    ? 'border-[#00838F]/30 text-[#00838F] hover:bg-[#00ACC1] hover:text-[#FFFFFF] hover:border-[#00ACC1]'
+                    : 'border-[#FFFFFF]/30 text-[#BFBFBF] hover:bg-[#FFFFFF] hover:text-[#000000] hover:border-[#FFFFFF]'
                 }`}
               >
                 <Linkedin size={16} />
-                <span>LINKEDIN</span>
+              </a>
+
+              <a
+                href={`mailto:${profile.email}`}
+                aria-label="Gmail"
+                className={`w-10 h-10 rounded-full border bg-transparent flex items-center justify-center transition-all duration-300 transform hover:scale-110 ${
+                  isBeach
+                    ? 'border-[#00838F]/30 text-[#00838F] hover:bg-[#00ACC1] hover:text-[#FFFFFF] hover:border-[#00ACC1]'
+                    : 'border-[#FFFFFF]/30 text-[#BFBFBF] hover:bg-[#FFFFFF] hover:text-[#000000] hover:border-[#FFFFFF]'
+                }`}
+              >
+                <Mail size={16} />
               </a>
 
               <a
                 href={profile.instagram}
                 target="_blank"
                 rel="noreferrer"
-                className={`flex items-center gap-3 px-6 py-3 rounded-full border transition-all duration-300 font-['Inter',sans-serif] text-xs font-semibold tracking-widest uppercase ${
+                aria-label="Instagram"
+                className={`w-10 h-10 rounded-full border bg-transparent flex items-center justify-center transition-all duration-300 transform hover:scale-110 ${
                   isBeach
-                    ? 'border-[#7A4A21]/30 bg-transparent text-[#1C242B] hover:bg-[#1C6E8C] hover:text-white hover:border-[#1C6E8C]'
-                    : 'border-[#FFFFFF]/30 bg-transparent text-[#FFFFFF] hover:bg-[#FFFFFF] hover:text-[#000000]'
+                    ? 'border-[#00838F]/30 text-[#00838F] hover:bg-[#00ACC1] hover:text-[#FFFFFF] hover:border-[#00ACC1]'
+                    : 'border-[#FFFFFF]/30 text-[#BFBFBF] hover:bg-[#FFFFFF] hover:text-[#000000] hover:border-[#FFFFFF]'
                 }`}
               >
                 <Instagram size={16} />
-                <span>INSTAGRAM</span>
               </a>
             </div>
           </div>
@@ -239,14 +226,14 @@ export default function CinematicContact() {
               <button
                 type="submit"
                 disabled={status === 'submitting'}
-                className="galaxy-btn w-full !py-3.5 group cursor-pointer"
+                className={`w-full h-12 rounded-xl font-['Inter',sans-serif] font-bold text-xs sm:text-sm tracking-[0.15em] uppercase transition-all duration-300 transform hover:scale-[1.01] active:scale-95 shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 ${
+                  isBeach
+                    ? 'bg-[#00838F] text-white hover:bg-[#00ACC1] border border-[#00838F] shadow-[0_4px_20px_rgba(0,131,143,0.25)]'
+                    : 'bg-white text-black hover:bg-neutral-200 border border-white shadow-[0_0_25px_rgba(255,255,255,0.25)]'
+                }`}
               >
-                <span className="galaxy-spark" />
-                <span className="galaxy-backdrop" />
-                <span className="galaxy-text">
-                  <span>{status === 'submitting' ? 'SENDING...' : 'SEND MESSAGE ↗'}</span>
-                  <Send size={14} />
-                </span>
+                <span>{status === 'submitting' ? 'SENDING...' : 'SEND MESSAGE'}</span>
+                <Send size={14} className="shrink-0" />
               </button>
 
               {statusMsg && (
