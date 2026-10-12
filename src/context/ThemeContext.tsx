@@ -1,10 +1,12 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 export type ThemeMode = 'night' | 'beach';
+export type TransitionDirection = 'night-to-beach' | 'beach-to-night';
 
 interface ThemeContextType {
   theme: ThemeMode;
   isWaving: boolean;
+  transitionDirection: TransitionDirection;
   toggleTheme: () => void;
   setTheme: (theme: ThemeMode) => void;
 }
@@ -23,6 +25,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   });
 
   const [isWaving, setIsWaving] = useState(false);
+  const [transitionDirection, setTransitionDirection] = useState<TransitionDirection>('night-to-beach');
 
   useEffect(() => {
     const root = document.documentElement;
@@ -34,6 +37,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   const toggleTheme = () => {
     if (isWaving) return;
+    setTransitionDirection(theme === 'night' ? 'night-to-beach' : 'beach-to-night');
     setIsWaving(true);
 
     // Delay the theme state switch by 350ms so the ocean waves sweep down first
@@ -49,6 +53,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   const setTheme = (newTheme: ThemeMode) => {
     if (newTheme === theme) return;
+    setTransitionDirection(theme === 'night' ? 'night-to-beach' : 'beach-to-night');
     setIsWaving(true);
     setTimeout(() => {
       setThemeState(newTheme);
@@ -59,7 +64,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, isWaving, toggleTheme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, isWaving, transitionDirection, toggleTheme, setTheme }}>
       {children}
     </ThemeContext.Provider>
   );

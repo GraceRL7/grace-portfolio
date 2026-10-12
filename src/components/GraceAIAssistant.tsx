@@ -231,7 +231,7 @@ export default function GraceAIAssistant() {
         } else if (q.includes('football') || q.includes('sport') || q.includes('athlete') || q.includes('puraskar') || q.includes('achievement')) {
           botResponseText = "Grace is a high-performance state & university athlete:\n\n• **Rajya Puraskar Award** recipient under Bharat Scouts & Guides\n• **South Zone Inter-University Football** representative for Mangalore University\n• **KSFA B-Division League** player for El Mundo FC\n• **Overall Champions** at Manoeuvre 2.0 IT Fest (2025)\n• **Co-Convenor** for SHELLS 2026 National IT Fest";
         } else if (q.includes('contact') || q.includes('email') || q.includes('hire') || q.includes('reach')) {
-          botResponseText = "You can reach Grace directly:\n\n📧 **Email:** graceworkspace777@gmail.com\n💼 **LinkedIn:** linkedin.com/in/grace-reshal-lewis-5b5178290\n📍 **Location:** Bengaluru, Karnataka\n\nOr scroll to the Contact section to submit an automated query form!";
+          botResponseText = "You can reach Grace directly:\n\n📧 **Email:** graceworkspace777@gmail.com\n💼 **LinkedIn:** linkedin.com/in/grace-reshal-lewis\n📍 **Location:** Bengaluru, Karnataka\n\nOr scroll to the Contact section to submit an automated query form!";
         } else {
           botResponseText = "Grace AI is here! Grace is a Web Developer & AI Automation Engineer skilled in React, TypeScript, n8n, and WordPress. Feel free to ask about her projects, skills, achievements, or contact details!";
         }

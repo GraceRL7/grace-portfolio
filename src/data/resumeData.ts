@@ -7,8 +7,8 @@ export const profile = {
   location: 'Bengaluru, Karnataka',
   phone: '+91 63660 49251',
   email: 'graceworkspace777@gmail.com',
-  linkedin: 'https://www.linkedin.com/in/grace-reshal-lewis-5b5178290/',
-  linkedinLabel: 'linkedin.com/in/grace-reshal-lewis-5b5178290',
+  linkedin: 'https://www.linkedin.com/in/grace-reshal-lewis/',
+  linkedinLabel: 'linkedin.com/in/grace-reshal-lewis',
   github: 'https://github.com/', // update with real handle
   instagram: 'https://www.instagram.com/grace_captures__?igsh=MWM5YzhzNjhoeWNlcg%3D%3D&utm_source=qr',
   instagramLabel: 'instagram.com/grace_captures__',
@@ -200,7 +200,7 @@ export const skills = {
   languages: ['Java', 'Python', 'SQL', 'TypeScript', 'JavaScript'],
   frontend: ['ReactJS', 'Tailwind CSS', 'HTML', 'CSS', 'Elementor', 'WordPress'],
   backend: ['Firebase', 'REST APIs', 'MySQL', 'PHP'],
-  tools: ['GitHub', 'VS Code', 'Postman', 'Canva'],
+  tools: ['GitHub', 'VS Code', 'Postman', 'Canva', 'Outlook', 'Google Ads', 'Google Analytics', 'SEMrush', 'All in One SEO', 'Easil', 'CapCut', 'Edits', 'VN', 'Videography'],
   soft: [
     'Strong interpersonal skills',
     'Adaptability',

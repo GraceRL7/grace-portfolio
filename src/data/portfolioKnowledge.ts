@@ -4,7 +4,7 @@ export const portfolioKnowledge = {
     title: 'Frontend Developer • AI Automation • Web Experiences',
     location: 'Bengaluru, Karnataka',
     email: 'graceworkspace777@gmail.com',
-    linkedin: 'https://www.linkedin.com/in/grace-reshal-lewis-5b5178290/',
+    linkedin: 'https://www.linkedin.com/in/grace-reshal-lewis/',
     summary:
       "Frontend-focused web developer turning ideas into clean, creative, and meaningful experiences. Skilled in React, TypeScript, WordPress, AI automation, and responsive UI design.",
   },
@@ -54,7 +54,7 @@ export const portfolioKnowledge = {
   skills: {
     frontend: ['React', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3', 'Tailwind CSS'],
     backend: ['PHP', 'Python', 'MySQL', 'SQL Workbench', 'AWS', 'Firebase', 'REST APIs'],
-    tools: ['Claude', 'n8n', 'AI Automation', 'WordPress', 'Elementor', 'GitHub', 'VS Code', 'Postman', 'Canva'],
+    tools: ['Claude', 'n8n', 'AI Automation', 'WordPress', 'Elementor', 'GitHub', 'VS Code', 'Postman', 'Canva', 'Outlook', 'Google Ads', 'Google Analytics', 'SEMrush', 'All in One SEO', 'Easil', 'CapCut', 'Edits', 'VN', 'Videography'],
   },
   experience: [
     {

@@ -21,7 +21,7 @@ import {
 } from 'react-icons/si';
 import { TbApi } from 'react-icons/tb';
 import { VscVscode } from 'react-icons/vsc';
-import { Sparkles, Bot, Palette, Database } from 'lucide-react';
+import { Sparkles, Bot, Palette, Database, Mail, TrendingUp, BarChart2, Search, FileSearch, Video, Film, Camera } from 'lucide-react';
 import { IconType } from 'react-icons';
 import { useTheme } from '../context/ThemeContext';
 
@@ -85,6 +85,16 @@ export default function CinematicSkills() {
         { name: 'VS Code', icon: VscVscode, color: '#007ACC' },
         { name: 'Postman', icon: SiPostman, color: '#FF6C37' },
         { name: 'Canva', icon: Palette, color: '#00C4CC' },
+        { name: 'Outlook', icon: Mail, color: '#0078D4' },
+        { name: 'Google Ads', icon: TrendingUp, color: '#FBBC04' },
+        { name: 'Google Analytics', icon: BarChart2, color: '#E37400' },
+        { name: 'SEMrush', icon: Search, color: '#FF6B35' },
+        { name: 'All in One SEO', icon: FileSearch, color: '#1DB954' },
+        { name: 'Easil', icon: Sparkles, color: '#FF4081' },
+        { name: 'CapCut', icon: Video, color: '#000000' },
+        { name: 'Edits', icon: Film, color: '#9B59B6' },
+        { name: 'VN', icon: Film, color: '#1ABC9C' },
+        { name: 'Videography', icon: Camera, color: '#E74C3C' },
       ],
     },
   ];

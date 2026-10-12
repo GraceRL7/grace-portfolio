@@ -66,27 +66,35 @@ export default function CinematicAbout() {
             <p className={`font-['Inter',sans-serif] text-base sm:text-lg lg:text-xl font-semibold leading-relaxed ${
               isBeach ? 'text-[#1C242B]' : 'text-[#FFFFFF]'
             }`}>
-              Hey, I'm Grace.
+              Hey, I'm Grace 👋
             </p>
             <p className={`font-['Inter',sans-serif] text-sm sm:text-base lg:text-lg font-normal leading-relaxed ${
               isBeach ? 'text-[#5C5349]' : 'text-[#BFBFBF]'
             }`}>
-              I don't like doing things the usual way.
+              Need someone who can take your brand to the next level? I'm all in. 🚀
             </p>
             <p className={`font-['Inter',sans-serif] text-sm sm:text-base lg:text-lg font-normal leading-relaxed ${
               isBeach ? 'text-[#5C5349]' : 'text-[#BFBFBF]'
             }`}>
-              I'm a frontend-focused web developer who enjoys turning ideas into experiences that are clean, creative, and meaningful. Whether I'm building a website, developing a web application, or experimenting with AI automation, I'm always looking for ways to make things smarter, better, and a little more unique.
+              I'm an all-in-one digital creative blending <strong className={isBeach ? 'text-[#1C242B]' : 'text-white'}>frontend development, vibe coding, digital marketing, and content creation</strong> to turn ideas into brands and digital experiences that stand out.
             </p>
+            <div className={`space-y-2 font-['Inter',sans-serif] text-sm sm:text-base lg:text-lg font-normal leading-relaxed ${
+              isBeach ? 'text-[#5C5349]' : 'text-[#BFBFBF]'
+            }`}>
+              <p>💻 <strong className={isBeach ? 'text-[#1C242B]' : 'text-white'}>I build</strong> — modern, responsive websites and web apps using frontend technologies and AI-powered vibe coding.</p>
+              <p>📈 <strong className={isBeach ? 'text-[#1C242B]' : 'text-white'}>I grow</strong> — brands through SEO, social media strategy, content planning, and performance analytics.</p>
+              <p>🎬 <strong className={isBeach ? 'text-[#1C242B]' : 'text-white'}>I create</strong> — scroll-stopping reels, engaging visuals, and content that gets people talking.</p>
+              <p>🤖 <strong className={isBeach ? 'text-[#1C242B]' : 'text-white'}>I innovate</strong> — with AI tools, workflow automation, and smarter ways to bring ideas to life.</p>
+            </div>
             <p className={`font-['Inter',sans-serif] text-sm sm:text-base lg:text-lg font-normal leading-relaxed ${
               isBeach ? 'text-[#5C5349]' : 'text-[#BFBFBF]'
             }`}>
-              I love blending creativity with technology, exploring new tools, and bringing ideas to life through thoughtful design and interactive experiences.
+              From building websites and managing digital presence to creating content and tracking what actually works, I bring creativity and tech together under one roof.
             </p>
             <p className={`font-['Inter',sans-serif] text-sm sm:text-base lg:text-lg font-medium italic leading-relaxed pt-2 ${
               isBeach ? 'text-[#1C6E8C]' : 'text-[#FFFFFF]/90'
             }`}>
-              For me, great digital products aren't just functional — they're memorable.
+              One creative mind. Multiple skill sets. One goal: making your brand impossible to ignore. ✨
             </p>
           </div>
         </motion.div>

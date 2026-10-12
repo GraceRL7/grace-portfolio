@@ -6,7 +6,7 @@ export const profile = {
   portrait: '/assets/grace-portrait.png',
   resumeFile: '/assets/Grace_Reshal_Lewis_Resume.pdf',
   email: 'graceworkspace777@gmail.com',
-  linkedin: 'https://www.linkedin.com/in/grace-reshal-lewis-5b5178290/',
+  linkedin: 'https://www.linkedin.com/in/grace-reshal-lewis/',
   github: 'https://github.com/',
   instagram: 'https://www.instagram.com/gracerlewis?stkn=MTAweGoza2JsdDQwYQ%3D%3D&utm_source=qr',
   location: 'Bengaluru, Karnataka',
