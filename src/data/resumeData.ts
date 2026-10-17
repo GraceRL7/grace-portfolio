@@ -200,7 +200,7 @@ export const skills = {
   languages: ['Java', 'Python', 'SQL', 'TypeScript', 'JavaScript'],
   frontend: ['ReactJS', 'Tailwind CSS', 'HTML', 'CSS', 'Elementor', 'WordPress'],
   backend: ['Firebase', 'REST APIs', 'MySQL', 'PHP'],
-  tools: ['GitHub', 'VS Code', 'Postman', 'Canva', 'Outlook', 'Google Ads', 'Google Analytics', 'SEMrush', 'All in One SEO', 'Easil', 'CapCut', 'Edits', 'VN', 'Videography'],
+  tools: ['GitHub', 'VS Code', 'Postman', 'Canva', 'Outlook', 'Word', 'PowerPoint', 'Excel', 'Google Ads', 'Meta Ads', 'Google Analytics', 'SEMrush', 'All in One SEO', 'Easil', 'CapCut', 'Edits', 'VN', 'Videography'],
   soft: [
     'Strong interpersonal skills',
     'Adaptability',

@@ -66,12 +66,12 @@ export default function CinematicAbout() {
             <p className={`font-['Inter',sans-serif] text-base sm:text-lg lg:text-xl font-semibold leading-relaxed ${
               isBeach ? 'text-[#1C242B]' : 'text-[#FFFFFF]'
             }`}>
-              Hey, I'm Grace 👋
+              Hey, I'm Grace
             </p>
             <p className={`font-['Inter',sans-serif] text-sm sm:text-base lg:text-lg font-normal leading-relaxed ${
               isBeach ? 'text-[#5C5349]' : 'text-[#BFBFBF]'
             }`}>
-              Need someone who can take your brand to the next level? I'm all in. 🚀
+              Need someone who can take your brand to the next level? I'm all in.
             </p>
             <p className={`font-['Inter',sans-serif] text-sm sm:text-base lg:text-lg font-normal leading-relaxed ${
               isBeach ? 'text-[#5C5349]' : 'text-[#BFBFBF]'
@@ -81,10 +81,10 @@ export default function CinematicAbout() {
             <div className={`space-y-2 font-['Inter',sans-serif] text-sm sm:text-base lg:text-lg font-normal leading-relaxed ${
               isBeach ? 'text-[#5C5349]' : 'text-[#BFBFBF]'
             }`}>
-              <p>💻 <strong className={isBeach ? 'text-[#1C242B]' : 'text-white'}>I build</strong> — modern, responsive websites and web apps using frontend technologies and AI-powered vibe coding.</p>
-              <p>📈 <strong className={isBeach ? 'text-[#1C242B]' : 'text-white'}>I grow</strong> — brands through SEO, social media strategy, content planning, and performance analytics.</p>
-              <p>🎬 <strong className={isBeach ? 'text-[#1C242B]' : 'text-white'}>I create</strong> — scroll-stopping reels, engaging visuals, and content that gets people talking.</p>
-              <p>🤖 <strong className={isBeach ? 'text-[#1C242B]' : 'text-white'}>I innovate</strong> — with AI tools, workflow automation, and smarter ways to bring ideas to life.</p>
+              <p><strong className={isBeach ? 'text-[#1C242B]' : 'text-white'}>I build</strong> — modern, responsive websites and web apps using frontend technologies and AI-powered vibe coding.</p>
+              <p><strong className={isBeach ? 'text-[#1C242B]' : 'text-white'}>I grow</strong> — brands through SEO, social media strategy, content planning, and performance analytics.</p>
+              <p><strong className={isBeach ? 'text-[#1C242B]' : 'text-white'}>I create</strong> — scroll-stopping reels, engaging visuals, and content that gets people talking.</p>
+              <p><strong className={isBeach ? 'text-[#1C242B]' : 'text-white'}>I innovate</strong> — with AI tools, workflow automation, and smarter ways to bring ideas to life.</p>
             </div>
             <p className={`font-['Inter',sans-serif] text-sm sm:text-base lg:text-lg font-normal leading-relaxed ${
               isBeach ? 'text-[#5C5349]' : 'text-[#BFBFBF]'
@@ -94,7 +94,7 @@ export default function CinematicAbout() {
             <p className={`font-['Inter',sans-serif] text-sm sm:text-base lg:text-lg font-medium italic leading-relaxed pt-2 ${
               isBeach ? 'text-[#1C6E8C]' : 'text-[#FFFFFF]/90'
             }`}>
-              One creative mind. Multiple skill sets. One goal: making your brand impossible to ignore. ✨
+              One creative mind. Multiple skill sets. One goal: making your brand impossible to ignore.
             </p>
           </div>
         </motion.div>

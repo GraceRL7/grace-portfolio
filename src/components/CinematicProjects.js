@@ -1,0 +1,159 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { ArrowUpRight, Github, Globe, Cpu, Workflow, Bot, MailCheck, Database, Zap } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
+export default function CinematicProjects() {
+    const { theme } = useTheme();
+    const isBeach = theme === 'beach';
+    const [activeTab, setActiveTab] = useState('projects');
+    const [autoTab, setAutoTab] = useState('chatbot');
+    const instagramLinks = [
+        { name: 'Grace Lewis Personal', url: 'https://www.instagram.com/gracerlewis?stkn=MTAweGoza2JsdDQwYQ%3D%3D&utm_source=qr', handle: '@gracerlewis', badge: 'Personal' },
+        { name: 'Grace Captures', url: 'https://www.instagram.com/grace_captures__?stkn=MWM5YzhzNjhoeWNlcg%3D%3D&utm_source=qr', handle: '@grace_captures__', badge: 'Full-Time (2024-2026)' },
+        { name: 'KJU KJIT', url: 'https://www.instagram.com/kju_kjit?stkn=MW9na2szOHcxZDg2bQ==', handle: '@kju_kjit', badge: 'Full-Time (2024-2026)' },
+        { name: 'SHELLS 2026', url: 'https://www.instagram.com/shells.2026?stkn=MXZ0dTZ4Y2w0NWM1Yg==', handle: '@shells.2026', badge: 'Event Coverage' },
+        { name: 'VFA Manipal', url: 'https://www.instagram.com/vfa_manipal?stkn=MW81Z2ZuN2wxNzNycQ==', handle: '@vfa_manipal', badge: 'Event Coverage' },
+        { name: 'Udupi District Football Association', url: 'https://www.instagram.com/udupi_district_football_a?stkn=MXhiMGNqM3Ridmw1ZA==', handle: '@udupi_district_football_a', badge: 'Event Coverage' },
+        { name: 'ICYM Sasthan', url: 'https://www.instagram.com/icym__sasthan?stkn=MWglZWJ1djNoZXFicg==', handle: '@icym__sasthan', badge: 'Event Media' },
+        { name: 'Nithyadar Kripa Food Products', url: 'https://www.instagram.com/nithyadar_kripa_food_products?stkn=d3QzeW9pcnA3c2xz&utm_source=qr', handle: '@nithyadar_kripa_food_products', badge: 'Brand Campaign' },
+    ];
+    const projects = [
+        {
+            title: 'El Mundo Sports',
+            category: 'Live Commercial Website',
+            description: 'Official sports organization website designed, built & launched for El Mundo Sports using WordPress & Elementor. Features career portals, custom forms, SEO & interactive media.',
+            tags: ['WordPress', 'Elementor', 'SEO', 'PHP', 'Forminator'],
+            liveUrl: 'https://elmundosports.in/',
+            githubUrl: null,
+            badge: 'Live Website (WordPress)',
+        },
+        {
+            title: 'Vidhyardhi School',
+            category: 'Live Educational Portal',
+            description: 'Modern educational institution website engineered with ReactJS & Tailwind CSS, featuring responsive layouts, school admissions portal, and clean UI navigation.',
+            tags: ['ReactJS', 'Tailwind CSS', 'JavaScript', 'HTML5'],
+            liveUrl: 'https://vidhyardhischoolnellore.com/',
+            githubUrl: null,
+            badge: 'Live Website (ReactJS)',
+        },
+        {
+            title: 'Victoria Football Academy',
+            category: 'BCA Main Project',
+            description: 'PHP & MySQL-based web application for managing football academy trial registrations, featuring user authentication, application review panel, and query chatbot.',
+            tags: ['PHP', 'MySQL', 'JavaScript', 'HTML5', 'CSS3'],
+            liveUrl: null,
+            githubUrl: null,
+            badge: 'BCA Main Project',
+        },
+        {
+            title: 'HomiFi',
+            category: 'PG Management System',
+            description: 'Role-based accommodation web application built with ReactJS & Firebase for users, PG owners, and admins with verified listings and secure authentication.',
+            tags: ['ReactJS', 'Firebase', 'Tailwind CSS', 'JavaScript'],
+            liveUrl: null,
+            githubUrl: 'https://github.com/GraceRL7/homifi_web',
+            badge: 'Web App (GitHub)',
+        },
+        {
+            title: 'Sportify',
+            category: 'Sports Trials System',
+            description: 'Web platform for digitizing sports trial registrations, athlete scheduling, coach evaluation submissions, and trial result tracking.',
+            tags: ['ReactJS', 'Firebase', 'Tailwind CSS', 'REST API'],
+            liveUrl: null,
+            githubUrl: 'https://github.com/GraceRL7/Sportify',
+            badge: 'Web App (GitHub)',
+        },
+        {
+            title: 'Svasthya Fresh',
+            category: 'Full-Stack Management',
+            description: 'Real-time administrative backend dashboard handling live e-commerce inventory tracking, order workflows, customer support, and payment analytics.',
+            tags: ['React', 'TypeScript', 'Tailwind CSS', 'REST API'],
+            liveUrl: 'http://3.111.157.226/svasthya/admin-side/',
+            githubUrl: null,
+            badge: 'Live Admin Portal',
+        },
+    ];
+    const automationWorkflows = {
+        chatbot: {
+            title: 'Grace AI Chatbot Architecture',
+            subtitle: 'Real-time conversational agent powered by n8n webhooks & Gemini LLM',
+            nodes: [
+                { title: 'Portfolio Visitor', desc: 'User inputs query in luxury chat UI', icon: Bot, badge: 'Frontend' },
+                { title: 'n8n Webhook', desc: 'Secure POST payload dispatcher & routing', icon: Workflow, badge: 'Integration' },
+                { title: 'Gemini AI Engine', desc: 'Context-aware portfolio prompt processing', icon: Cpu, badge: 'LLM AI' },
+                { title: 'Structured Output', desc: 'Instant streaming text response to UI', icon: Zap, badge: 'Response' },
+            ],
+        },
+        contact: {
+            title: 'Automated Lead & Contact Pipeline',
+            subtitle: 'End-to-end webhook processing for zero-delay visitor engagement',
+            nodes: [
+                { title: 'Contact Submission', desc: 'Visitor submits message on portfolio', icon: MailCheck, badge: 'Form Trigger' },
+                { title: 'n8n Webhook Engine', desc: 'Validates & parses payload variables', icon: Workflow, badge: 'Orchestrator' },
+                { title: 'Google Sheets DB', desc: 'Appends lead data to persistent database', icon: Database, badge: 'Storage' },
+                { title: 'Email & Auto-Reply', desc: 'Dispatches admin alert & personalized response', icon: Zap, badge: 'Automation' },
+            ],
+        },
+    };
+    return (_jsx("section", { id: "projects", className: `relative w-full min-h-screen py-16 sm:py-24 lg:py-32 flex flex-col justify-center px-4 sm:px-8 lg:px-12 border-t transition-colors duration-1000 z-20 ${isBeach
+            ? 'bg-[#FAF6F0] text-[#1C242B] border-[#5C5349]/15'
+            : 'bg-[#000000] text-[#FFFFFF] border-[#FFFFFF]/10'}`, children: _jsxs("div", { className: "w-full max-w-[1400px] mx-auto", children: [_jsxs("div", { className: "flex items-center gap-3 mb-4 sm:mb-6", children: [_jsx("div", { className: `w-2 h-2 rounded-full ${isBeach ? 'bg-[#1C6E8C]' : 'bg-[#FFFFFF]'}` }), _jsx("span", { className: `font-['Inter',sans-serif] text-[12px] sm:text-[14px] uppercase tracking-[0.25em] sm:tracking-[0.3em] ${isBeach ? 'text-[#7A4A21]' : 'text-[#BFBFBF]'}`, children: "04 / WHAT I'VE BUILT" })] }), _jsxs("div", { className: "flex flex-col lg:flex-row lg:items-end justify-between mb-8 sm:mb-12 gap-6", children: [_jsxs("div", { children: [_jsx("h2", { className: `font-['Bebas_Neue',sans-serif] font-bold text-[36px] xs:text-[48px] sm:text-[72px] lg:text-[96px] tracking-[0.03em] sm:tracking-[0.05em] leading-none uppercase mb-2 ${isBeach ? 'text-[#1C242B]' : 'text-[#FFFFFF]'}`, children: "WHAT I'VE BUILT" }), _jsx("p", { className: `font-['Inter',sans-serif] text-sm sm:text-base font-light max-w-xl ${isBeach ? 'text-[#5C5349]' : 'text-[#BFBFBF]'}`, children: "Web applications, live production portals, and autonomous AI workflow engines." })] }), _jsxs("div", { className: `flex flex-wrap items-center gap-1.5 p-1.5 rounded-xl sm:rounded-full border transition-colors self-start lg:self-auto max-w-full ${isBeach
+                                ? 'bg-[#F3ECE1] border-[#7A4A21]/20'
+                                : 'bg-[#111111] border-white/15'}`, children: [_jsx("button", { onClick: () => setActiveTab('projects'), className: `px-3.5 sm:px-4 py-1.5 rounded-lg sm:rounded-full font-mono text-[10px] sm:text-[11px] uppercase tracking-wider transition-all duration-300 cursor-pointer ${activeTab === 'projects'
+                                        ? isBeach
+                                            ? 'bg-[#1C6E8C] text-white font-bold shadow-md'
+                                            : 'bg-white text-black font-semibold shadow-sm'
+                                        : isBeach
+                                            ? 'text-[#5C5349] hover:text-[#1C242B]'
+                                            : 'text-white/60 hover:text-white'}`, children: "Featured Applications" }), _jsx("button", { onClick: () => setActiveTab('automation'), className: `px-3.5 sm:px-4 py-1.5 rounded-lg sm:rounded-full font-mono text-[10px] sm:text-[11px] uppercase tracking-wider transition-all duration-300 cursor-pointer ${activeTab === 'automation'
+                                        ? isBeach
+                                            ? 'bg-[#1C6E8C] text-white font-bold shadow-md'
+                                            : 'bg-white text-black font-semibold shadow-sm'
+                                        : isBeach
+                                            ? 'text-[#5C5349] hover:text-[#1C242B]'
+                                            : 'text-white/60 hover:text-white'}`, children: "AI Automation Architecture" }), _jsx("button", { onClick: () => setActiveTab('social'), className: `px-3.5 sm:px-4 py-1.5 rounded-lg sm:rounded-full font-mono text-[10px] sm:text-[11px] uppercase tracking-wider transition-all duration-300 cursor-pointer ${activeTab === 'social'
+                                        ? isBeach
+                                            ? 'bg-[#1C6E8C] text-white font-bold shadow-md'
+                                            : 'bg-white text-black font-semibold shadow-sm'
+                                        : isBeach
+                                            ? 'text-[#5C5349] hover:text-[#1C242B]'
+                                            : 'text-white/60 hover:text-white'}`, children: "Digital Marketing & Social Media" })] })] }), activeTab === 'projects' && (_jsx("div", { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8", children: projects.map((proj) => (_jsxs(motion.div, { initial: { opacity: 0, y: 20 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true }, transition: { duration: 0.6 }, className: `group p-6 sm:p-8 rounded-2xl sm:rounded-3xl border backdrop-blur-[20px] transition-all duration-500 hover:-translate-y-2 flex flex-col justify-between ${isBeach
+                            ? 'bg-[#FFFFFF] border-[#7A4A21]/15 shadow-[0_10px_30px_rgba(90,82,74,0.08)] hover:border-[#1C6E8C]/50 hover:shadow-[0_15px_40px_rgba(28,110,140,0.15)]'
+                            : 'bg-[#111111]/70 border-[#FFFFFF]/15 shadow-2xl hover:border-[#FFFFFF]/50'}`, children: [_jsxs("div", { children: [_jsxs("div", { className: "flex items-center justify-between mb-4", children: [_jsx("span", { className: `font-mono text-[11px] uppercase tracking-widest px-3 py-1 rounded-full border ${isBeach
+                                                    ? 'bg-[#F3ECE1] border-[#7A4A21]/20 text-[#7A4A21]'
+                                                    : 'bg-black/60 border-white/10 text-[#BFBFBF]'}`, children: proj.badge }), _jsxs("div", { className: "flex items-center gap-2", children: [proj.liveUrl && (_jsx("a", { href: proj.liveUrl, target: "_blank", rel: "noopener noreferrer", className: `p-2 rounded-full border transition-all ${isBeach
+                                                            ? 'border-[#7A4A21]/20 text-[#5C5349] hover:text-[#1C6E8C] hover:border-[#1C6E8C]'
+                                                            : 'border-white/20 text-[#BFBFBF] hover:text-white hover:border-white'}`, title: "Visit Live Website", children: _jsx(Globe, { className: "w-4 h-4" }) })), proj.githubUrl && (_jsx("a", { href: proj.githubUrl, target: "_blank", rel: "noopener noreferrer", className: `p-2 rounded-full border transition-all ${isBeach
+                                                            ? 'border-[#7A4A21]/20 text-[#5C5349] hover:text-[#1C6E8C] hover:border-[#1C6E8C]'
+                                                            : 'border-white/20 text-[#BFBFBF] hover:text-white hover:border-white'}`, title: "View GitHub Repository", children: _jsx(Github, { className: "w-4 h-4" }) }))] })] }), _jsx("h3", { className: `font-['Bebas_Neue',sans-serif] text-[34px] tracking-[0.05em] mb-3 transition-colors ${isBeach ? 'text-[#1C242B] group-hover:text-[#1C6E8C]' : 'text-[#FFFFFF] group-hover:text-[#BFBFBF]'}`, children: proj.title }), _jsx("p", { className: `font-['Inter',sans-serif] text-xs sm:text-sm font-light leading-relaxed mb-6 ${isBeach ? 'text-[#5C5349]' : 'text-[#BFBFBF]'}`, children: proj.description })] }), _jsxs("div", { className: `space-y-4 pt-4 border-t ${isBeach ? 'border-[#7A4A21]/15' : 'border-[#FFFFFF]/10'}`, children: [_jsx("div", { className: "flex flex-wrap gap-2", children: proj.tags.map((t) => (_jsx("span", { className: `text-[10px] font-mono px-2.5 py-1 rounded-md border ${isBeach
+                                                ? 'bg-[#F3ECE1] border-[#7A4A21]/15 text-[#5C5349]'
+                                                : 'bg-[#000000] border-white/10 text-[#BFBFBF]'}`, children: t }, t))) }), proj.liveUrl && (_jsxs("a", { href: proj.liveUrl, target: "_blank", rel: "noopener noreferrer", className: `inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest hover:underline pt-2 ${isBeach ? 'text-[#1C6E8C]' : 'text-white'}`, children: [_jsx("span", { children: "Visit Live Site" }), _jsx(ArrowUpRight, { className: "w-3.5 h-3.5" })] })), proj.githubUrl && (_jsxs("a", { href: proj.githubUrl, target: "_blank", rel: "noopener noreferrer", className: `inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest hover:underline pt-2 ${isBeach ? 'text-[#1C6E8C]' : 'text-white'}`, children: [_jsx("span", { children: "View GitHub Source" }), _jsx(ArrowUpRight, { className: "w-3.5 h-3.5" })] }))] })] }, proj.title))) })), activeTab === 'automation' && (_jsx("div", { className: "space-y-12", children: _jsxs("div", { className: `p-6 sm:p-10 rounded-3xl border backdrop-blur-xl transition-colors ${isBeach
+                            ? 'bg-[#FFFFFF] border-[#7A4A21]/15 shadow-[0_10px_30px_rgba(90,82,74,0.08)]'
+                            : 'bg-[#111111]/80 border-white/15'}`, children: [_jsxs("div", { className: "flex items-center justify-between mb-8 flex-wrap gap-4", children: [_jsxs("div", { children: [_jsx("h3", { className: `font-['Bebas_Neue',sans-serif] text-3xl sm:text-4xl tracking-wider ${isBeach ? 'text-[#1C242B]' : 'text-white'}`, children: automationWorkflows[autoTab].title }), _jsx("p", { className: `text-sm font-['Inter',sans-serif] ${isBeach ? 'text-[#5C5349]' : 'text-white/60'}`, children: automationWorkflows[autoTab].subtitle })] }), _jsxs("div", { className: "flex gap-2", children: [_jsx("button", { onClick: () => setAutoTab('chatbot'), className: `px-4 py-2 rounded-xl text-xs font-mono border transition-all cursor-pointer ${autoTab === 'chatbot'
+                                                    ? isBeach
+                                                        ? 'bg-[#1C6E8C] text-white border-[#1C6E8C]'
+                                                        : 'bg-white text-black border-white'
+                                                    : isBeach
+                                                        ? 'border-[#7A4A21]/20 text-[#5C5349]'
+                                                        : 'border-white/20 text-white/60'}`, children: "Grace AI Bot" }), _jsx("button", { onClick: () => setAutoTab('contact'), className: `px-4 py-2 rounded-xl text-xs font-mono border transition-all cursor-pointer ${autoTab === 'contact'
+                                                    ? isBeach
+                                                        ? 'bg-[#1C6E8C] text-white border-[#1C6E8C]'
+                                                        : 'bg-white text-black border-white'
+                                                    : isBeach
+                                                        ? 'border-[#7A4A21]/20 text-[#5C5349]'
+                                                        : 'border-white/20 text-white/60'}`, children: "Contact Pipeline" })] })] }), _jsx("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6", children: automationWorkflows[autoTab].nodes.map((node, i) => {
+                                    const Icon = node.icon;
+                                    return (_jsxs(motion.div, { initial: { opacity: 0, y: 15 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.4, delay: i * 0.1 }, className: `p-5 rounded-2xl border flex flex-col justify-between ${isBeach
+                                            ? 'bg-[#FAF6F0] border-[#7A4A21]/15'
+                                            : 'bg-black/80 border-white/10'}`, children: [_jsxs("div", { children: [_jsxs("div", { className: "flex items-center justify-between mb-3", children: [_jsx("div", { className: `p-2.5 rounded-xl border ${isBeach ? 'bg-[#1C6E8C]/10 border-[#1C6E8C]/20 text-[#1C6E8C]' : 'bg-white/10 border-white/20 text-white'}`, children: _jsx(Icon, { className: "w-5 h-5" }) }), _jsx("span", { className: `text-[10px] font-mono px-2 py-0.5 rounded ${isBeach ? 'bg-[#1C6E8C]/15 text-[#1C6E8C]' : 'bg-white/10 text-white/80'}`, children: node.badge })] }), _jsx("h4", { className: `font-['Inter',sans-serif] font-bold text-base mb-1 ${isBeach ? 'text-[#1C242B]' : 'text-white'}`, children: node.title }), _jsx("p", { className: `text-xs leading-relaxed font-['Inter',sans-serif] ${isBeach ? 'text-[#5C5349]' : 'text-white/60'}`, children: node.desc })] }), _jsxs("div", { className: `mt-4 pt-3 border-t text-[11px] font-mono ${isBeach ? 'border-[#7A4A21]/15 text-[#7A4A21]' : 'border-white/10 text-white/40'}`, children: ["STEP 0", i + 1] })] }, node.title));
+                                }) })] }) })), activeTab === 'social' && (_jsxs("div", { className: "space-y-8 sm:space-y-12", children: [_jsxs("div", { className: "grid grid-cols-1 md:grid-cols-3 gap-6", children: [_jsxs("div", { className: `p-6 rounded-3xl border backdrop-blur-xl ${isBeach
+                                        ? 'bg-[#FFFFFF] border-[#7A4A21]/15 shadow-[0_10px_30px_rgba(90,82,74,0.08)]'
+                                        : 'bg-[#111111]/80 border-white/15'}`, children: [_jsx("span", { className: `text-xs font-mono uppercase tracking-widest ${isBeach ? 'text-[#7A4A21]' : 'text-white/50'}`, children: "Total Views Generated" }), _jsx("h3", { className: `font-['Bebas_Neue',sans-serif] text-5xl sm:text-6xl mt-2 ${isBeach ? 'text-[#1C6E8C]' : 'text-white'}`, children: "441K+" }), _jsx("p", { className: `text-xs mt-1 font-['Inter',sans-serif] ${isBeach ? 'text-[#5C5349]' : 'text-white/60'}`, children: "Across Grace Captures & client reels content" })] }), _jsxs("div", { className: `p-6 rounded-3xl border backdrop-blur-xl ${isBeach
+                                        ? 'bg-[#FFFFFF] border-[#7A4A21]/15 shadow-[0_10px_30px_rgba(90,82,74,0.08)]'
+                                        : 'bg-[#111111]/80 border-white/15'}`, children: [_jsx("span", { className: `text-xs font-mono uppercase tracking-widest ${isBeach ? 'text-[#7A4A21]' : 'text-white/50'}`, children: "SEO Search Impressions" }), _jsx("h3", { className: `font-['Bebas_Neue',sans-serif] text-5xl sm:text-6xl mt-2 ${isBeach ? 'text-[#1C6E8C]' : 'text-white'}`, children: "48K+" }), _jsx("p", { className: `text-xs mt-1 font-['Inter',sans-serif] ${isBeach ? 'text-[#5C5349]' : 'text-white/60'}`, children: "El Mundo Sports Google Search Console" })] }), _jsxs("div", { className: `p-6 rounded-3xl border backdrop-blur-xl ${isBeach
+                                        ? 'bg-[#FFFFFF] border-[#7A4A21]/15 shadow-[0_10px_30px_rgba(90,82,74,0.08)]'
+                                        : 'bg-[#111111]/80 border-white/15'}`, children: [_jsx("span", { className: `text-xs font-mono uppercase tracking-widest ${isBeach ? 'text-[#7A4A21]' : 'text-white/50'}`, children: "Profile Activity" }), _jsx("h3", { className: `font-['Bebas_Neue',sans-serif] text-5xl sm:text-6xl mt-2 ${isBeach ? 'text-[#1C6E8C]' : 'text-white'}`, children: "+38.2%" }), _jsx("p", { className: `text-xs mt-1 font-['Inter',sans-serif] ${isBeach ? 'text-[#5C5349]' : 'text-white/60'}`, children: "Increase in profile visits & actions" })] })] }), _jsxs("div", { children: [_jsx("h3", { className: `font-['Bebas_Neue',sans-serif] text-3xl sm:text-4xl tracking-wider mb-4 ${isBeach ? 'text-[#1C242B]' : 'text-white'}`, children: "MANAGED INSTAGRAM & BRAND CHANNELS" }), _jsx("p", { className: `text-sm font-['Inter',sans-serif] mb-6 ${isBeach ? 'text-[#5C5349]' : 'text-white/60'}`, children: "Active social media management, promotional video creation, reels editing & audience growth analytics." }), _jsx("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4", children: instagramLinks.map((item) => (_jsx("a", { href: item.url, target: "_blank", rel: "noopener noreferrer", className: `group p-5 rounded-2xl border transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between ${isBeach
+                                            ? 'bg-[#FFFFFF] border-[#7A4A21]/15 hover:border-[#1C6E8C]/50 shadow-[0_6px_20px_rgba(90,82,74,0.06)]'
+                                            : 'bg-[#111111]/80 border-white/15 hover:border-white/50'}`, children: _jsxs("div", { children: [_jsxs("div", { className: "flex items-center justify-between mb-3", children: [_jsx("span", { className: `text-[10px] font-mono px-2 py-0.5 rounded ${isBeach ? 'bg-[#1C6E8C]/10 text-[#1C6E8C]' : 'bg-white/10 text-white/80'}`, children: item.badge }), _jsx(ArrowUpRight, { className: `w-4 h-4 transition-colors ${isBeach ? 'text-[#5C5349] group-hover:text-[#1C6E8C]' : 'text-white/40 group-hover:text-white'}` })] }), _jsx("h4", { className: `font-['Inter',sans-serif] font-bold text-base mb-1 ${isBeach ? 'text-[#1C242B] group-hover:text-[#1C6E8C]' : 'text-white group-hover:text-white/90'}`, children: item.name }), _jsx("p", { className: `text-xs font-mono ${isBeach ? 'text-[#5C5349]' : 'text-white/50'}`, children: item.handle })] }) }, item.handle))) })] })] }))] }) }));
+}

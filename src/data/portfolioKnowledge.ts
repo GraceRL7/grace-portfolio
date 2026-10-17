@@ -54,7 +54,7 @@ export const portfolioKnowledge = {
   skills: {
     frontend: ['React', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3', 'Tailwind CSS'],
     backend: ['PHP', 'Python', 'MySQL', 'SQL Workbench', 'AWS', 'Firebase', 'REST APIs'],
-    tools: ['Claude', 'n8n', 'AI Automation', 'WordPress', 'Elementor', 'GitHub', 'VS Code', 'Postman', 'Canva', 'Outlook', 'Google Ads', 'Google Analytics', 'SEMrush', 'All in One SEO', 'Easil', 'CapCut', 'Edits', 'VN', 'Videography'],
+    tools: ['Claude', 'n8n', 'AI Automation', 'WordPress', 'Elementor', 'GitHub', 'VS Code', 'Postman', 'Canva', 'Outlook', 'Word', 'PowerPoint', 'Excel', 'Google Ads', 'Meta Ads', 'Google Analytics', 'SEMrush', 'All in One SEO', 'Easil', 'CapCut', 'Edits', 'VN', 'Videography'],
   },
   experience: [
     {

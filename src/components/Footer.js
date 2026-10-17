@@ -1,0 +1,5 @@
+import { jsxs as _jsxs, jsx as _jsx } from "react/jsx-runtime";
+import { profile } from '../data/resumeData';
+export default function Footer() {
+    return (_jsx("footer", { className: "section-pad !py-10 border-t border-white/10", children: _jsxs("div", { className: "mx-auto max-w-7xl flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-ink-faint", children: [_jsxs("p", { children: ["\u00A9 ", new Date().getFullYear(), " ", profile.name, ". Built with React, Three.js & liquid glass."] }), _jsxs("div", { className: "flex items-center gap-6", children: [_jsx("a", { href: profile.linkedin, target: "_blank", rel: "noreferrer", className: "hover:text-accent transition-colors", children: "LinkedIn" }), _jsx("a", { href: profile.github, target: "_blank", rel: "noreferrer", className: "hover:text-accent transition-colors", children: "GitHub" }), _jsx("a", { href: profile.instagram, target: "_blank", rel: "noreferrer", className: "hover:text-accent transition-colors", children: "Instagram (@grace_captures__)" }), _jsx("a", { href: `mailto:${profile.email}`, className: "hover:text-accent transition-colors", children: "Email" })] })] }) }));
+}

@@ -21,7 +21,7 @@ import {
 } from 'react-icons/si';
 import { TbApi } from 'react-icons/tb';
 import { VscVscode } from 'react-icons/vsc';
-import { Sparkles, Bot, Palette, Database, Mail, TrendingUp, BarChart2, Search, FileSearch, Video, Film, Camera } from 'lucide-react';
+import { Sparkles, Bot, Palette, Database, Mail, TrendingUp, BarChart2, Search, FileSearch, Video, Film, Camera, Share2, FileText, MonitorPlay, Table } from 'lucide-react';
 import { IconType } from 'react-icons';
 import { useTheme } from '../context/ThemeContext';
 
@@ -86,7 +86,11 @@ export default function CinematicSkills() {
         { name: 'Postman', icon: SiPostman, color: '#FF6C37' },
         { name: 'Canva', icon: Palette, color: '#00C4CC' },
         { name: 'Outlook', icon: Mail, color: '#0078D4' },
+        { name: 'Word', icon: FileText, color: '#2B579A' },
+        { name: 'PowerPoint', icon: MonitorPlay, color: '#D24726' },
+        { name: 'Excel', icon: Table, color: '#217346' },
         { name: 'Google Ads', icon: TrendingUp, color: '#FBBC04' },
+        { name: 'Meta Ads', icon: Share2, color: '#0081FB' },
         { name: 'Google Analytics', icon: BarChart2, color: '#E37400' },
         { name: 'SEMrush', icon: Search, color: '#FF6B35' },
         { name: 'All in One SEO', icon: FileSearch, color: '#1DB954' },
